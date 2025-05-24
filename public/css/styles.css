@@ -21,26 +21,19 @@ h2 {
 }
 .sf-app {
     position: relative;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: 
-        linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%),
-        url('/ims/logo.png') center 120px/340px no-repeat;
     font-family: 'Montserrat', 'Arial', sans-serif;
-    color: #222;
     position: relative;
 }
 
-@media (max-width: 700px) {
-    .sf-app {
-        background: 
-            linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%),
-            url('/ims/logo.png') center 80px/60vw no-repeat;
-    }
+body {
+    background: #fcb69f;
+    color: #222;
 }
+
 
 .sf-logo {
     position: absolute;
@@ -53,6 +46,12 @@ h2 {
     pointer-events: none; /* allow clicks through the logo */
     user-select: none;
 }
+.sf-logo-inline {
+    display: block;
+    margin: 2em auto 0 auto;
+    width: 80%;
+}
+
 /* Remove the .sf-logo styles and <img> from your HTML */
 .sf-nav {
     margin: 2em 0 1em 0;
