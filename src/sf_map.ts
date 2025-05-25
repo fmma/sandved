@@ -7,9 +7,7 @@ export class sf_map extends LitElement {
 
     render() {
         return html`
-            <h3>Kort</h3>
-            
-            <p>Her kommer kortet over festivalspladsen.</p>
+            <img src="${import.meta.env.BASE_URL}ims/kort.png" alt="Festivalkort" class="sf-map" />
         `;
     }
 }

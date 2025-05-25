@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "vite build --base https://snesl.dk/sandved/ && scp -r build/* fmadsen@foadell:/home/fmadsen/www_root/domains/snesl.dk/sandved/"
+    "release": "vite build --base https://vedverdensende.dk/ && scp -r build/* fmadsen@foadell:/home/fmadsen/www_root/domains/vedverdensende.dk/"
   },
   "author": "",
   "license": "ISC",

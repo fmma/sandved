@@ -7,15 +7,14 @@ export class sf_about extends LitElement {
 
     render() {
         return html`
-            <h3>Om Festivalen</h3>
-            <p>Ved Verdens Ende er en musikfestival der afholdes i Sandved. Festivalen byder på en bred vifte af musikgenrer og aktiviteter for alle aldre.</p>
-            <p>Der er fokus på fællesskab, musik og gode oplevelser, hvor der er plads til børn og barnlige sjæle.</p>
-            <p>Alle deltagere er med til at skabe en uforglemmelig oplevelse. Vi laver mad sammen, vi laver sjove aktiviter, vi spiller musik, og vi hygger os sammen i ét stort fællesskab.</p>
-            <p>Festivalen er lige startet i år - 2025. Vi er stolte af at kunne præsentere et fantastisk lineup af kunstnere og bands.</p>
-            <p>Festivalen finder sted i uge 30. </p>
-            <p>Vi glæder os til at se dig!</p>
+            <div class="sf-content">
+                <h3>Om Festivalen</h3>
+                <p>Vi håber I vil komme og være med til at lave en fantastisk sommerfestival for børn og voksne i Sandved. Sif og Michael bor på et stort landsted med masser af plads til musik, aktiviteter, telte, sjov og ballade. Vi strikker et fedt program sammen, så alle aldre og typer kan få de mest hyggelige dage sammen.</p>
 
-            <img src="${import.meta.env.BASE_URL}ims/logo.png" alt="Festival Logo" class="sf-logo-inline" />
+                <p> Der kommer til at være musikscene, pool, bålsted og hyggeligt samvær. Vi opfordrer alle til at bidrage med indslag og ideer. Vores håb er nogle skønne dage med højt til loftet og solskin i fantastisk selskab med hyggelige og sjove aktiviteter. Så kom og slå teltet op og nyd 4 dage i de bedste omgivelser.</p>
+
+                <img src="${import.meta.env.BASE_URL}ims/logo.png" alt="Festival Logo" class="sf-logo-inline" />
+            </div>
         `;
     }
 }

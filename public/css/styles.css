@@ -1,5 +1,5 @@
 
-h1 {
+h1{
     font-size: 3rem;
     margin: 0.5em 0 0.2em 0;
     letter-spacing: 0.05em;
@@ -13,6 +13,15 @@ h2 {
     color: #1b998b;
     letter-spacing: 0.03em;
     text-shadow: 1px 1px 6px #fff5;
+    z-index: 1;
+}
+h3 {
+
+    font-size: 1.5rem;
+    margin: 0.5em 0 0.2em 0;
+    color: black;
+    letter-spacing: 0.04em;
+    text-shadow: 1px 1px 4px #fff5;
     z-index: 1;
 }
 @media (max-width: 600px) {
@@ -50,6 +59,15 @@ body {
     display: block;
     margin: 2em auto 0 auto;
     width: 80%;
+}
+.sf-map {
+    display: block;
+    margin: 1em auto 0 auto;
+    width: 90%;
+    z-index: 1;
+    position: relative;
+    border-radius: 1.5em;
+    box-shadow: 0 4px 24px #0001;
 }
 
 /* Remove the .sf-logo styles and <img> from your HTML */
@@ -109,6 +127,11 @@ body {
     font-size: 20px;
 }
 
+.sf-scene {
+    display: contents;
+    font-weight: bold;;
+}
+
 /* ...existing code... */
 .sf-content {
     margin-top: 2em;
@@ -117,12 +140,12 @@ body {
     border-radius: 1.5em;
     box-shadow: 0 4px 24px #0001;
     max-width: 600px;
-    width: 80%;
     min-height: 200px;
     font-size: 1.15em;
     color: #222;
     transition: box-shadow 0.2s;
     z-index: 1;
+    position: relative;
 }
 .sf-content h3 {
     margin-top: 0;

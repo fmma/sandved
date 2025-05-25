@@ -7,9 +7,11 @@ export class sf_activity extends LitElement {
 
     render() {
         return html`
-            <h3>Aktivitetsprogram</h3>
-        
-            <p>Her kommer aktivitetsprogrammet.</p>
+            <div class="sf-content">
+                <h3>Aktivitetsprogram</h3>
+            
+                <p>Her kommer aktivitetsprogrammet.</p>
+            </div>
         `;
     }
 }

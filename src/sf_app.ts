@@ -31,7 +31,8 @@ export class sf_app extends LitElement {
             <div class="sf-app">
                 <h1>Ved Verdens Ende</h1>
                 <img src="${import.meta.env.BASE_URL}ims/logo.png" alt="Festival Logo" class="sf-logo" />
-                <h2>Sandved Festival</h2>
+                <h2>Der Hvor Himlen Møder Jorden</h2>
+                <h3>24. juli - 27. juli 2025</h3>
                 <nav class="sf-nav">
                     <ul>
                         <li><a href="#om">Om</a></li>
@@ -42,9 +43,7 @@ export class sf_app extends LitElement {
                         <li><a href="#kontakt">Kontakt</a></li>
                     </ul>
                 </nav>
-                <div class="sf-content">
-                    ${this.renderPage()}
-                </div>
+                ${this.renderPage()}
             <hr class="sf-footer">Ved Verdens Ende Festival 2025</hr>
             </div>
         `;

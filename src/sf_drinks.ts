@@ -7,9 +7,11 @@ export class sf_drinks extends LitElement {
 
     render() {
         return html`
-            <h3>Drikkevaremenu</h3>
-            
-            <p>Her kommer drikkevaremenuen.</p>
+            <div class="sf-content">
+                <h3>Drikkevaremenu</h3>
+                
+                <p>Her kommer drikkevaremenuen.</p>
+            </div>
         `;
     }
 }
