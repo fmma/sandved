@@ -57,7 +57,7 @@ Der vil blive lagt en <a href="#tjanser">plan</a> op, hvor man kan se sine tjans
                 <a href="#praktisk">Tilbage til toppen</a>
                 <h4 id="praktisk:q5"> Hvad skal jeg lave? </h4>
                 <p>
-Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at være tovholder for en aktivitet. Der kommer en plan Nikoline: link til aktivitetsplan) over aktiviteter og optrædener. Der vil være rig mulighed for at optræde, hvis man har noget man har lyst til at vise frem, så hold jer endelig ikke tilbage! 
+Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at være tovholder for en aktivitet. Der kommer en <a href="#program">plan</a> over aktiviteter og optrædener. Der vil være rig mulighed for at optræde, hvis man har noget man har lyst til at vise frem, så hold jer endelig ikke tilbage! 
                 </p>
                 <a href="#praktisk">Tilbage til toppen</a>
                 <h4 id="praktisk:q6"> Hvad har planlægningsgruppen sørget for? </h4>
@@ -110,7 +110,7 @@ Der vil også være te, kaffe, mælk og saftevand.
                 <p>
 
 I baren kan man købe øl, sodavand, cider og vin med stregsystem til indkøbspris. 
-Barmenuen kommer op her (nikoline: link) så snart den er på plads.
+Barmenuen kommer op <a href="#drikkevaremenu">her</a> så snart den er på plads.
 
 </p>
                 <a href="#praktisk">Tilbage til toppen</a>
