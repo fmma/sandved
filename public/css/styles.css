@@ -118,6 +118,53 @@ body {
         padding: 0.7em 1em;
     }
 }
+.sf-subnav {
+    margin: 2em 0 1em 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.sf-subnav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.1em;
+    border-radius: 2em;
+    flex-direction: column;
+}
+.sf-subnav li {
+    display: flex;
+}
+.sf-subnav a {
+    display: block;
+    padding: 0.7em 1.3em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #d72660;
+    text-decoration: none;
+    border-radius: 1.5em;
+    transition: background 0.2s, color 0.2s;
+}
+.sf-subnav a:hover,
+.sf-subnav a:focus {
+    background: #d72660;
+    color: #fff;
+    outline: none;
+}
+@media (max-width: 700px) {
+    .sf-subnav ul {
+        gap: 0.5em;
+        padding: 0.5em 0;
+    }
+    .sf-subnav a {
+        font-size: 1em;
+        padding: 0.7em 1em;
+    }
+}
+
+
 
 .sf-music-program {
     align-items: center;
