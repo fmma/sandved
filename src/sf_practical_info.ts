@@ -77,7 +77,7 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
 </p>
 <p> Derudover kan vi anbefale, at man, hvis man har, medbringer:
 <ul>
-<li>Sportsmandsudklædning/træningstøj.</li>
+<li>Sportsmandsudklædning / træningstøj.</li>
 <li>Vandpistol.</li>
 <li>Lommelygte.</li>
 <li>Badetøj.</li>
