@@ -1,4 +1,3 @@
-
 h1{
     font-size: 3rem;
     margin: 0.5em 0 0.2em 0;
@@ -107,6 +106,19 @@ body {
     color: #fff;
     outline: none;
 }
+.sf-nav a.active,
+.sf-nav a:focus {
+    background: #d72660;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 2px 12px #d7266040;
+    transform: scale(1.08);
+    transition: 
+        background 0.2s, 
+        color 0.2s, 
+        box-shadow 0.2s, 
+        transform 0.2s;
+}
 @media (max-width: 700px) {
     .sf-nav ul {
         flex-direction: column;
@@ -119,7 +131,7 @@ body {
     }
 }
 .sf-subnav {
-    margin: 2em 0 1em 0;
+    margin: 0 0 0 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -203,7 +215,6 @@ body {
     font-weight: bold;;
 }
 
-/* ...existing code... */
 .sf-content {
     margin-top: 2em;
     padding: 2em 1.5em;
@@ -217,6 +228,12 @@ body {
     transition: box-shadow 0.2s;
     z-index: 1;
     position: relative;
+    animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(20px);}
+    to   { opacity: 1; transform: translateY(0);}
 }
 .sf-content h3 {
     margin-top: 0;
@@ -228,4 +245,3 @@ body {
     margin-bottom: 0;
     line-height: 1.6;
 }
-/* ...existing code... */

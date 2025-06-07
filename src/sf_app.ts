@@ -1,4 +1,3 @@
-
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './sf_about.js';
@@ -42,7 +41,7 @@ export class sf_app extends LitElement {
                     <ul>
                         <li><a id="om" href="#om">Om</a></li>
                         <li><a id="praktisk" href="#praktisk">Praktisk Info</a></li>
-                        <li><a id="kort" href="#kort">Kort</a></li>
+                        <li><a href="#kort" class="${this.page === 'kort' ? 'active' : ''}">Kort</a></li>
                         <li><a id="program" href="#program">Program</a></li>
                         <li><a id="tjanser" href="#tjanser">Tjanser</a></li>
                         <li><a id="drikkevaremenu" href="#drikkevaremenu">Drikkevaremenu</a></li>
