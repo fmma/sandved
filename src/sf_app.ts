@@ -34,7 +34,7 @@ export class sf_app extends LitElement {
         return html`
             <div class="sf-app">
                 <h1>Ved Verdens Ende</h1>
-                <img src="${import.meta.env.BASE_URL}ims/logo.png" alt="Festival Logo" class="sf-logo" />
+                <img src="https://snesl.dk/media/7f3129d99fb471685992f9bb960868e0.png" alt="Festival Logo" class="sf-logo" />
                 <h2>Der Hvor Himlen Møder Jorden</h2>
                 <h3>24. juli - 27. juli 2025</h3>
                 <nav class="sf-nav">

@@ -4,7 +4,6 @@ import { customElement } from "lit/decorators.js";
 @customElement('sf-about')
 export class sf_about extends LitElement {
     renderRoot = this;
-
     render() {
         return html`
             <div class="sf-content">
@@ -13,7 +12,7 @@ export class sf_about extends LitElement {
 
                 <p> Der kommer til at være musikscene, pool, bålsted og hyggeligt samvær. Vi opfordrer alle til at bidrage med indslag og ideer. Vores håb er nogle skønne dage med højt til loftet og solskin i fantastisk selskab med hyggelige og sjove aktiviteter. Så kom og slå teltet op og nyd 4 dage i de bedste omgivelser.</p>
 
-                <img src="${import.meta.env.BASE_URL}ims/logo.png" alt="Festival Logo" class="sf-logo-inline" />
+                <img src="https://snesl.dk/media/7f3129d99fb471685992f9bb960868e0.png" alt="Festival Logo" class="sf-logo-inline" />
             </div>
         `;
     }
