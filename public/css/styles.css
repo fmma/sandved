@@ -163,9 +163,33 @@ body {
         padding: 0.7em 1em;
     }
 }
+.sf-content h4:target {
+    background: #fff0f7;
+    color: #d72660;
+    border-radius: 0.7em;
+    box-shadow: 0 4px 24px #d7266040, 0 0 0 4px #d7266022;
+    border: 2px solid #d72660;
+    transition: 
+        background 0.2s, 
+        color 0.2s, 
+        box-shadow 0.2s, 
+        border 0.2s;
+    padding: 0.4em 0.8em;
+    position: relative;
+    z-index: 2;
+    animation: highlight-pop 0.4s cubic-bezier(.4,2,.6,1) 1;
+}
 
-
-
+@keyframes highlight-pop {
+    0% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 0 #d7266040;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 24px #d7266040, 0 0 0 4px #d7266022;
+    }
+}
 .sf-music-program {
     align-items: center;
     display: flex;
