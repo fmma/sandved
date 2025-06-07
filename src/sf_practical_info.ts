@@ -18,9 +18,9 @@ export class sf_practical_info extends LitElement {
                         <li><a href="#praktisk:q2">Hvor kan jeg parkere?</a></li>
                         <li><a href="#praktisk:q3">Hvordan ser festivalpladsen ud?</a></li>
                         <li><a href="#praktisk:q4">Hvordan bidrager jeg til festivalen?</a></li>
-                        <li><a href="#praktisk:q5">Hvad skal jeg lave</a></li>
-                        <li><a href="#praktisk:q6">Hvad har planlægningsgruppen sørget for</a></li>
-                        <li><a href="#praktisk:q7">Hvad skal jeg selv have med</a></li>
+                        <li><a href="#praktisk:q5">Hvad skal jeg lave?</a></li>
+                        <li><a href="#praktisk:q6">Hvad har planlægningsgruppen sørget for?</a></li>
+                        <li><a href="#praktisk:q7">Hvad skal jeg selv have med?</a></li>
                         <li><a href="#praktisk:q8">Hvilke faciliteter er der på festivalpladsen?</a></li>
                         <li><a href="#praktisk:q9">Hvad skal jeg spise?</a></li>
                         <li><a href="#praktisk:q10">Hvad skal jeg drikke?</a></li>
@@ -75,7 +75,7 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
 <li>Alt hvad I normalt ville have med på campingferie.</li>
 </ul>
 </p>
-<p> Derudover kan vi anbefale at man, hvis man har, medbringer:
+<p> Derudover kan vi anbefale, at man, hvis man har, medbringer:
 <ul>
 <li>Sportsmandsudklædning/træningstøj.</li>
 <li>Vandpistol.</li>
@@ -83,43 +83,41 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
 <li>Badetøj.</li>
 <li>Dolk.</li>
 </ul>
-                </p>
-                <a href="#praktisk:faq">Tilbage til toppen</a>
-                <h4 id="praktisk:q8"> Hvilke faciliteter er der på festivalpladsen? </h4>
-                <p>
-                På festivalenpladsen vil der være teltplads, toiletfaciliteter, køkken hvor vi laver maden, mulighed for indendørs hygge i dårligt vejr og mulighed for udendørs hygge. Der bliver scene med tilhørende instrumenter.
-                </p>
-                <p>
-                Der vil være fine toiletfaciliteter.
-                </p>
-                <p>
-Der er begrænsede mulighed for badning, men der vil være mulighed for et kort brusebadbad eller alternativt et dyp i poolen.
-                </p>
-                <a href="#praktisk:faq">Tilbage til toppen</a>
-                <h4 id="praktisk:q9"> Hvad skal jeg spise? </h4>
-                <p>
-                Der vil alle festivalens dage være morgenmad, frokost og aftensmad til alle. Der vil være vegetariske alternativer.
-                </p>
-                <p>
-Derudover vil der til enhver tid være mulighed for mellemmåltider.
-                </p>
-                <p>
-Der vil også være te, kaffe, mælk og saftevand.
-                </p>
-                <a href="#praktisk:faq">Tilbage til toppen</a>
-                <h4 id="praktisk:q10"> Hvad skal jeg drikke? </h4>
-                <p>
-
-I baren kan man købe øl, sodavand, cider og vin med stregsystem til indkøbspris. 
-Barmenuen kommer op <a href="#drikkevaremenu">her</a> så snart den er på plads.
-
 </p>
-                <a href="#praktisk:faq">Tilbage til toppen</a>
-                <h4 id="praktisk:q11"> Kan jeg lade min telefon op? </h4>
-                <p>
-                Ja, der vil være mulighed for at lade telefoner op i TV-stuen.
-                </p>
-                <a href="#praktisk:faq">Tilbage til toppen</a>
+<a href="#praktisk:faq">Tilbage til toppen</a>
+<h4 id="praktisk:q8">Hvilke faciliteter er der på festivalpladsen?</h4>
+<p>
+På festivalpladsen vil der være teltplads, toiletfaciliteter, køkken hvor vi laver maden, mulighed for indendørs hygge i dårligt vejr og mulighed for udendørs hygge. Der bliver scene med tilhørende instrumenter.
+</p>
+<p>
+Der vil være fine toiletfaciliteter.
+</p>
+<p>
+Der er begrænsede muligheder for badning, men der vil være mulighed for et kort brusebad eller alternativt et dyp i poolen.
+</p>
+<a href="#praktisk:faq">Tilbage til toppen</a>
+<h4 id="praktisk:q9">Hvad skal jeg spise?</h4>
+<p>
+Der vil alle festivalens dage være morgenmad, frokost og aftensmad til alle. Der vil være vegetariske alternativer.
+</p>
+<p>
+Derudover vil der til enhver tid være mulighed for mellemmåltider.
+</p>
+<p>
+Der vil også være te, kaffe, mælk og saftevand.
+</p>
+<a href="#praktisk:faq">Tilbage til toppen</a>
+<h4 id="praktisk:q10">Hvad skal jeg drikke?</h4>
+<p>
+I baren kan man købe øl, sodavand, cider og vin med stregsystem til indkøbspris. 
+Barmenuen kommer op <a href="#drikkevaremenu">her</a>, så snart den er på plads.
+</p>
+<a href="#praktisk:faq">Tilbage til toppen</a>
+<h4 id="praktisk:q11">Kan jeg lade min telefon op?</h4>
+<p>
+Ja, der vil være mulighed for at lade telefoner op i TV-stuen.
+</p>
+<a href="#praktisk:faq">Tilbage til toppen</a>
             </div>
         `;
     }
