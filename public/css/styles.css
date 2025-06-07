@@ -235,6 +235,10 @@ body {
     animation: fadein 0.5s;
 }
 
+.sf-content-program {
+    max-width: 900px !important;
+}
+
 @keyframes fadein {
     from { opacity: 0; transform: translateY(20px);}
     to   { opacity: 1; transform: translateY(0);}
@@ -254,4 +258,58 @@ html, body {
     width: 100vw;
     max-width: 100vw;
     position: relative;
+}
+.sf-program-table {
+    width: 90%;
+    width: 900px;
+    margin: 2em auto 0 auto;
+    border-collapse: collapse;
+    background: #fff8;
+    font-size: 1em;
+}
+.sf-program-table th, .sf-program-table td {
+    border: 1px solid #e0e0e0;
+    padding: 0.5em 1em;
+    text-align: left;
+}
+.sf-program-table th {
+    background: #fcb69f;
+    color: #d72660;
+    border: 1px solid #d72660 !important;
+}
+
+.sf-program-table tr:first-child th {
+    border-top: none;
+}
+.sf-program-table tr:nth-child(even) td:not(.sf-program-day) {
+    background: #ededed;
+}
+.sf-program-table .sf-program-time {
+    text-align: center;
+}
+@media (max-width: 700px) {
+    .sf-program-table {
+        display: block;
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: auto;
+        font-size: 0.95em;
+        margin: 1em 0 0 0;
+        /* Optional: for better scrolling on iOS */
+        -webkit-overflow-scrolling: touch;
+    }
+    .sf-program-table th, .sf-program-table td {
+        padding: 0.4em 0.5em;
+        font-size: 0.95em;
+        word-break: break-word;
+    }
+    .sf-program-table .sf-program-day {
+        writing-mode: vertical-rl;
+        text-align: center;
+        white-space: nowrap;
+        min-width: 32px;
+        max-width: 32px;
+        padding: 0.2em 0.1em;
+        font-size: 0.9em;
+    }
 }
