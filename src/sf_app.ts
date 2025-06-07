@@ -10,6 +10,7 @@ import './sf_food.js';
 import './sf_drinks.js';
 import './sf_tilmeld.js';
 import './sf_tjanser.js';
+import './sf_food.js';
 
 
 @customElement('sf-app')
@@ -22,35 +23,50 @@ export class sf_app extends LitElement {
 
     constructor() {
         super();
+        // Prevent browser from restoring scroll position on hash navigation
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
         window.addEventListener('hashchange', () => {
+            // Always scroll to top immediately
+            // window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+            // Then update the page state after a tick
             const new_page = this.get_page();
-            if(new_page !== this.page) {
+            if (new_page !== this.page) {
                 this.page = new_page;
             }
         });
     }
 
+    on_nav_click(e: Event) {
+        e.preventDefault();
+        const target = e.currentTarget as HTMLAnchorElement;
+        window.location.hash = target.getAttribute('href')!;
+    }
+
     render() {
         return html`
             <div class="sf-app">
-                <h1>Ved Verdens Ende</h1>
+                <h1 @click=${() => window.location.hash = ''} style="cursor:pointer;">Ved Verdens Ende</h1>
                 <img src="https://snesl.dk/media/7f3129d99fb471685992f9bb960868e0.png" alt="Festival Logo" class="sf-logo" />
                 <h2>Der Hvor Himlen Møder Jorden</h2>
                 <h3>24. juli - 27. juli 2025</h3>
                 <nav class="sf-nav">
                     <ul>
-                        <li><a id="om" href="#om">Om</a></li>
-                        <li><a id="praktisk" href="#praktisk">Praktisk Info</a></li>
-                        <li><a href="#kort" class="${this.page === 'kort' ? 'active' : ''}">Kort</a></li>
-                        <li><a id="program" href="#program">Program</a></li>
-                        <li><a id="tjanser" href="#tjanser">Tjanser</a></li>
-                        <li><a id="drikkevaremenu" href="#drikkevaremenu">Drikkevaremenu</a></li>
-                        <li><a id="tilmeld" href="#tilmeld">Pris og Tilmelding</a></li>
-                        <li><a id="kontakt" href="#kontakt">Kontakt</a></li>
+                        <li><a @click=${this.on_nav_click} href="#om">Om</a></li>
+                        <li><a @click=${this.on_nav_click} href="#praktisk">Praktisk Info</a></li>
+                        <li><a @click=${this.on_nav_click} class="${this.page === 'kort' ? 'active' : ''}">Kort</a></li>
+                        <li><a @click=${this.on_nav_click} href="#program">Program</a></li>
+                        <li><a @click=${this.on_nav_click} href="#tjanser">Tjanser</a></li>
+                        <li><a @click=${this.on_nav_click} href="#mad">Mad</a></li>
+                        <li><a @click=${this.on_nav_click} href="#drikkevaremenu">Drikkevaremenu</a></li>
+                        <li><a @click=${this.on_nav_click} href="#tilmeld">Pris og Tilmelding</a></li>
+                        <li><a @click=${this.on_nav_click} href="#kontakt">Kontakt</a></li>
                     </ul>
                 </nav>
                 ${this.renderPage()}
-            <hr class="sf-footer">Ved Verdens Ende Festival 2025</hr>
+                <hr class="sf-footer">Ved Verdens Ende Festival 2025</hr>
             </div>
         `;
     }
@@ -79,6 +95,8 @@ export class sf_app extends LitElement {
                 return html`<sf-contact></sf-contact>`;
             case 'tilmeld':
                 return html`<sf-tilmeld></sf-tilmeld>`;
+            case 'mad':
+                return html`<sf-food></sf-food>`;
             default:
                 return html`<h3>Velkommen</h3><p>Vælg en side i menuen.</p>`;
         }

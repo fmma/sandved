@@ -9,7 +9,7 @@ export class sf_food extends LitElement {
         return html`
             <div class="sf-content">
                 <h3>Mad</h3>
-                <p>Her kommer madprogrammet.</p>
+                <p>Her kommer madplanen.</p>
             </div>
         `;
     }
