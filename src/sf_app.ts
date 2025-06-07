@@ -23,18 +23,20 @@ export class sf_app extends LitElement {
 
     constructor() {
         super();
-        // Prevent browser from restoring scroll position on hash navigation
         if ('scrollRestoration' in window.history) {
             window.history.scrollRestoration = 'manual';
         }
         window.addEventListener('hashchange', () => {
-            // Always scroll to top immediately
-            // window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-
-            // Then update the page state after a tick
             const new_page = this.get_page();
             if (new_page !== this.page) {
                 this.page = new_page;
+                // Scroll to the content anchor after rendering
+                setTimeout(() => {
+                    const anchor = document.getElementById('sf-content-anchor');
+                    if (anchor) {
+                        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 0);
             }
         });
     }
@@ -46,26 +48,40 @@ export class sf_app extends LitElement {
     }
 
     render() {
+
+        const menu_items = [
+            { id: 'om', title: 'Om' },
+            { id: 'praktisk', title: 'Praktisk Info' },
+            { id: 'kort', title: 'Kort' },
+            { id: 'program', title: 'Program' },
+            { id: 'tjanser', title: 'Tjanser' },
+            { id: 'mad', title: 'Mad' },
+            { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
+            { id: 'tilmeld', title: 'Pris og Tilmelding' },
+            { id: 'kontakt', title: 'Kontakt' }
+        ];
+        const render_menu = (({id, title}: {id: string, title: string}) => {
+            const class_names = this.page === id ? "sf-active" : ""
+            return html`
+                <li><a class="${class_names}" @click=${this.on_nav_click} href="#${id}">${title}</a></li>
+            `;
+        });
+
         return html`
             <div class="sf-app">
                 <h1 @click=${() => window.location.hash = ''} style="cursor:pointer;">Ved Verdens Ende</h1>
                 <img src="https://snesl.dk/media/7f3129d99fb471685992f9bb960868e0.png" alt="Festival Logo" class="sf-logo" />
                 <h2>Der Hvor Himlen Møder Jorden</h2>
                 <h3>24. juli - 27. juli 2025</h3>
+                <div id="sf-content-anchor"></div>
                 <nav class="sf-nav">
                     <ul>
-                        <li><a @click=${this.on_nav_click} href="#om">Om</a></li>
-                        <li><a @click=${this.on_nav_click} href="#praktisk">Praktisk Info</a></li>
-                        <li><a @click=${this.on_nav_click} class="${this.page === 'kort' ? 'active' : ''}">Kort</a></li>
-                        <li><a @click=${this.on_nav_click} href="#program">Program</a></li>
-                        <li><a @click=${this.on_nav_click} href="#tjanser">Tjanser</a></li>
-                        <li><a @click=${this.on_nav_click} href="#mad">Mad</a></li>
-                        <li><a @click=${this.on_nav_click} href="#drikkevaremenu">Drikkevaremenu</a></li>
-                        <li><a @click=${this.on_nav_click} href="#tilmeld">Pris og Tilmelding</a></li>
-                        <li><a @click=${this.on_nav_click} href="#kontakt">Kontakt</a></li>
+                        ${menu_items.map(render_menu)}
                     </ul>
                 </nav>
-                ${this.renderPage()}
+                <div>
+                    ${this.renderPage()}
+                </div>
                 <hr class="sf-footer">Ved Verdens Ende Festival 2025</hr>
             </div>
         `;

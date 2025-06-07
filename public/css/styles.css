@@ -110,7 +110,7 @@ body {
     color: #fff;
     outline: none;
 }
-.sf-nav a.active,
+.sf-nav .sf-active,
 .sf-nav a:focus {
     background: #d72660;
     color: #fff;
