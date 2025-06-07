@@ -7,14 +7,11 @@ export class sf_program extends LitElement {
 
     render() {
         return html`
-            <div class="sf-content sf-content-program">
                 <div class="sf-music-program">
-                    <h3>Program</h3>
                     <table class="sf-program-table">
                         <thead>
                             <tr>
-                                <th>Dag</th>
-                                <th>Tid</th>
+                                <th colspan="2"></th>
                                 <th>Aktivitet</th>
                             </tr>
                         </thead>
@@ -74,7 +71,6 @@ export class sf_program extends LitElement {
                         </tbody>
                     </table>
                 </div>
-            </div>
         `;
     }
 }

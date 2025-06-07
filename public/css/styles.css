@@ -207,11 +207,10 @@ body {
     }
 }
 .sf-music-program {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
     font-size: 20px;
+    z-index: 1;
+    position: relative;
+    width: 100%; /* Add this */
 }
 
 .sf-scene {
@@ -233,10 +232,6 @@ body {
     z-index: 1;
     position: relative;
     animation: fadein 0.5s;
-}
-
-.sf-content-program {
-    max-width: 900px !important;
 }
 
 @keyframes fadein {
@@ -261,11 +256,14 @@ html, body {
 }
 .sf-program-table {
     width: 90%;
-    width: 900px;
+    width: 700px;
     margin: 2em auto 0 auto;
     border-collapse: collapse;
-    background: #fff8;
+    background: #fff;
     font-size: 1em;
+    border: 3px solid #d72660; /* Stylish, sharp border */
+    border-radius: 0;           /* No rounded corners */
+    box-shadow: 0 4px 24px #d7266015;
 }
 .sf-program-table th, .sf-program-table td {
     border: 1px solid #e0e0e0;
@@ -289,7 +287,6 @@ html, body {
 }
 @media (max-width: 700px) {
     .sf-program-table {
-        display: block;
         width: 100vw;
         max-width: 100vw;
         overflow-x: auto;
