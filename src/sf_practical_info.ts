@@ -70,7 +70,7 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
                 <p>
                 I skal medbringe:
                 <ul>
-<li>Egne telte.</li>
+<li>Egne telte. Såfremt man ønsker at komme i campingvogn, skal man allerede nu kontakte planlægninsgruppen, da der er begrænset mulighed for parkering af campingvogne.</li>
 <li>Alt hvad I skal bruge til at sove.</li>
 <li>Alt hvad I normalt ville have med på campingferie.</li>
 </ul>

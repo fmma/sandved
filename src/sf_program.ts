@@ -11,8 +11,7 @@ export class sf_program extends LitElement {
                     <table class="sf-program-table">
                         <thead>
                             <tr>
-                                <th colspan="2"></th>
-                                <th>Aktivitet</th>
+                                <th colspan="3" class="sf-title">Ved Verdens Ende 2025</th>
                             </tr>
                         </thead>
                         <tbody>
