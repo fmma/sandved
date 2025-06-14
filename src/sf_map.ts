@@ -12,7 +12,9 @@ export class sf_map extends LitElement {
         //     <img src="${import.meta.env.BASE_URL}ims/kort.png" alt="Festivalkort" class="sf-map" />
         // `;
         return html`
-            <img src="https://snesl.dk/media/${this.kort}" alt="Festivalkort" class="sf-map" />
+            <div class="sf-content-special">
+                <img src="https://snesl.dk/media/${this.kort}" alt="Festivalkort" class="sf-map" />
+            </div>
         `;
     }
 }

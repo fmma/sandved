@@ -11,6 +11,7 @@ import './sf_drinks.js';
 import './sf_tilmeld.js';
 import './sf_tjanser.js';
 import './sf_food.js';
+import './sf_merch.js';
 
 
 @customElement('sf-app')
@@ -58,7 +59,8 @@ export class sf_app extends LitElement {
             { id: 'mad', title: 'Mad' },
             { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
             { id: 'tilmeld', title: 'Pris og Tilmelding' },
-            { id: 'kontakt', title: 'Kontakt' }
+            { id: 'kontakt', title: 'Kontakt' },
+            { id: 'merch', title: 'Merch' }
         ];
         const render_menu = (({id, title}: {id: string, title: string}) => {
             const class_names = this.page === id ? "sf-active" : ""
@@ -79,9 +81,7 @@ export class sf_app extends LitElement {
                         ${menu_items.map(render_menu)}
                     </ul>
                 </nav>
-                <div>
                     ${this.renderPage()}
-                </div>
                 <hr class="sf-footer">Ved Verdens Ende Festival 2025</hr>
             </div>
         `;
@@ -98,9 +98,20 @@ export class sf_app extends LitElement {
             case 'om':
                 return html`<sf-about></sf-about>`;
             case 'kort':
-                return html`<sf-map></sf-map>`;
+                return html`
+                    <div class="sf-content">
+                        <p><em>Festivalen afholdes fra 24.-27. juli 2025 på Møllevej 44 i Sandved.</em></p>
+                    </div>
+                    <sf-map></sf-map>
+                `;
             case 'program':
-                return html`<sf-program></sf-program>`;
+                return html`
+                    <div class="sf-content">
+                        <p>Her kan du se festivalens program.</p>
+                        <p>Programmet er under udvikling, så der kan komme ændringer.</p>
+                    </div>
+                    <sf-program></sf-program>
+                `;
             case 'tjanser':
                 return html`<sf-tjanser></sf-tjanser>`;
             case 'praktisk':
@@ -113,6 +124,8 @@ export class sf_app extends LitElement {
                 return html`<sf-tilmeld></sf-tilmeld>`;
             case 'mad':
                 return html`<sf-food></sf-food>`;
+            case 'merch':
+                return html`<sf-merch></sf-merch>`;
             default:
                 return html`<h3>Velkommen</h3><p>Vælg en side i menuen.</p>`;
         }

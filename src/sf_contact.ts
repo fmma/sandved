@@ -8,7 +8,7 @@ export class sf_contact extends LitElement {
     contact = [
         { n: 'Frederik', tlf: '20724383', email: 'frederik.meisner@gmail.com' },
         { n: 'Nikoline', tlf: '51927986', email: 'nikoline.petersen@live.com' },
-        { n: 'Sif', tlf: '', email: '' },
+        { n: 'Sif', tlf: '', email: 'wogsteen@gmail.com' },
         { n: 'Michael', tlf: '', email: '' },
         { n: 'Janne', tlf: '31228832', email: 'janne_meisner@hotmail.com' },
         { n: 'Morten', tlf: '', email: '' },
@@ -25,6 +25,7 @@ export class sf_contact extends LitElement {
         return html`
             <div class="sf-content">
                 <h3>Kontakt</h3>
+                <p><em>Festivalen afholdes fra 24.-27. juli 2025 på Møllevej 44 i Sandved.</em></p>
                 <p>Har du spørgsmål eller kommentarer, så kontakt os venligst.</p>
                 <ul>
                     ${this.render_contacts()}

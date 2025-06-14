@@ -91,6 +91,16 @@ body {
     border-radius: 2em;
     box-shadow: 0 2px 12px #0001;
 }
+@media screen and (min-width: 700px) {
+    .sf-nav ul {
+        flex-direction: row;
+        gap: 0.5em;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+}
 .sf-nav li {
     display: flex;
 }
@@ -215,7 +225,22 @@ body {
 
 .sf-scene {
     display: contents;
-    font-weight: bold;;
+    font-weight: bold;
+}
+.sf-activity {
+    color: #fff;
+    background: linear-gradient(90deg, #d72660 40%, #fcb69f 100%);
+    padding: 0.1em 0.5em;
+    border-radius: 0.4em;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 8px #d7266033;
+    text-shadow: 0 1px 4px #d7266044;
+    transition: background 0.3s, color 0.3s;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Merriweather', 'Times New Roman', Times, serif;
 }
 
 .sf-content {
@@ -228,6 +253,17 @@ body {
     min-height: 200px;
     font-size: 1.15em;
     color: #222;
+    transition: box-shadow 0.2s;
+    z-index: 1;
+    position: relative;
+    animation: fadein 0.5s;
+}
+
+.sf-content-special {
+    margin-top: 2em;
+    padding: 2em 1.5em;
+    min-height: 200px;
+    font-size: 1.15em;
     transition: box-shadow 0.2s;
     z-index: 1;
     position: relative;
@@ -287,6 +323,12 @@ html, body {
 }
 .sf-program-table .sf-title {
     text-align: center;
+}
+.sf-program-table tr > .sf-program-day:first-child {
+    border-top: 4px solid #d72660;
+}
+.sf-program-table tr > .sf-program-day:first-child ~ td {
+    border-top: 4px solid #d72660;
 }
 @media (max-width: 700px) {
     .sf-program-table {
