@@ -40,9 +40,9 @@ export class sf_program extends LitElement {
       day: 'Lørdag', schedule: [
         { time: '08:00 - 09:30', activity: 'Morgenmad' },
         { time: '09:30 - 09:45', activity: 'Flaghejsning 🇩🇰' },
-        { time: '10:00 - 11:30', activity: 'OL (I)', type: 'activity' },
+        { time: '10:00 - 11:30', activity: 'OL Formiddag', type: 'activity' },
         { time: '12:00 - 13:00', activity: 'Frokost' },
-        { time: '13:30 - 15:30', activity: 'OL (II)', type: 'activity' },
+        { time: '13:30 - 15:30', activity: 'OL Eftermiddag', type: 'activity' },
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
         { time: '19:00 - 20:30', activity: 'The Super Mario Bros. Movie', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥' },
