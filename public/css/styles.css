@@ -315,7 +315,7 @@ html, body {
 .sf-program-table tr:first-child th {
     border-top: none;
 }
-.sf-program-table tr:nth-child(even) td:not(.sf-program-day) {
+.sf-program-table tr:nth-child(even) td:not(.sf-program-day):not(.sf-activity-td):not(.sf-task-td) {
     background: #ededed;
 }
 .sf-program-table .sf-program-time {
@@ -326,9 +326,18 @@ html, body {
 }
 .sf-program-table tr > .sf-program-day:first-child {
     border-top: 4px solid #d72660;
+    border-right: 2px solid #d72660;
 }
 .sf-program-table tr > .sf-program-day:first-child ~ td {
     border-top: 4px solid #d72660;
+}
+
+.sf-program-table tr > .sf-activity-td:first-child {
+    border-top: 2px solid #d72660;
+
+}
+.sf-program-table tr > .sf-activity-td:first-child ~ td {
+    border-top: 2px solid #d72660;
 }
 @media (max-width: 700px) {
     .sf-program-table {

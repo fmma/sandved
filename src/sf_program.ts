@@ -53,10 +53,11 @@ export class sf_program extends LitElement {
     },
     {
       day: 'Søndag', schedule: [
+        { time: 'Hele dagen', activity: 'Oprydning', type: 'activity' },
         { time: '08:00 - 09:30', activity: 'Morgenmad' },
         { time: '09:30 - 09:45', activity: 'Flaghejsning 🇩🇰' },
-        { time: '10:00 - 11:30', activity: 'Oprydning', type: 'activity' },
         { time: '12:00 - 13:00', activity: 'Rejsefrokost' },
+        { time: 'Eftermiddag', activity: 'Flag ned of farvel 🇩🇰👋' },
       ]
     },
   ]

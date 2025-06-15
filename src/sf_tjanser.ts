@@ -29,7 +29,7 @@ export class sf_about extends LitElement {
             day: 'Torsdag',
             schedule: [
                 {
-                    activity: 'Frokost',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave frokost',
                         task_time: '11:00',
@@ -37,7 +37,7 @@ export class sf_about extends LitElement {
                             'Benjamin', 'Pernille'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter frokost',
                         task_time: '13:00',
                         participants: [
                             'Morten', 'Jesper', 'Christian'
@@ -47,7 +47,7 @@ export class sf_about extends LitElement {
                 {
                     activity: 'Festival Kickstart',
                     tasks: [{
-                        task_name: 'Snitte Snobrød',
+                        task_name: 'Snitte pinde til snobrød',
                         task_time: '13:00',
                         participants: [
                             'Vincent', 'Nickolei',
@@ -63,7 +63,7 @@ export class sf_about extends LitElement {
                         task_name: 'Lave bannere',
                         task_time: '13:00',
                         participants: [
-                            'Joan', 'Duus',
+                            'Joan', 'Jannie',
                         ]
                     }, {
                         task_name: 'Snobrødsdej',
@@ -81,15 +81,15 @@ export class sf_about extends LitElement {
                 },
 
                 {
-                    activity: 'Aftensmad',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave aftensmad',
                         task_time: '16:00',
                         participants: [
-                            'Michael', 'Rasmus', 'Anne S', 'Sif'
+                            'Michael', 'Rasmus', 'Anne S', 'Morten B'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter aftensmad',
                         task_time: '19:00',
                         participants: [
                             'Nikoline', 'Nickolei', 'Aske',
@@ -97,37 +97,37 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'Bålhygge',
+                    activity: '',
                     tasks: [{
                         task_name: 'Bålhygge',
                         task_time: '19:00',
                         participants: [
-                            'Jesper', 'Nickolei',
+                            'Jesper', 'Michael',
                         ]
                     }]
                 },
                 {
-                    activity: 'Børnefilm',
+                    activity: '',
                     tasks: [{
                         task_name: 'Børnefilm',
                         task_time: '19:00',
                         participants: [
-                            'Pernille', 'Nikoline'
+                            'Pernille', 'Morten'
                         ]
                     }]
                 },
                 {
-                    activity: 'Musikquiz',
+                    activity: '',
                     tasks: [{
                         task_name: 'Musikquiz',
                         task_time: '21:00',
                         participants: [
-                            'Morten',
+                            'Morten B',
                         ]
                     }]
                 },
                 {
-                    activity: 'Koncert',
+                    activity: '',
                     tasks: [{
                         task_name: 'Koncert',
                         task_time: '22:00',
@@ -143,7 +143,7 @@ export class sf_about extends LitElement {
             day: 'Fredag',
             schedule: [
                 {
-                    activity: 'Lejroprydning',
+                    activity: '',
                     tasks: [
                         {
                             task_name: 'Lejroprydning',
@@ -154,7 +154,7 @@ export class sf_about extends LitElement {
                 },
 
                 {
-                    activity: 'Toiletter',
+                    activity: '',
                     tasks: [
                         {
                             task_name: 'Toiletter',
@@ -165,18 +165,18 @@ export class sf_about extends LitElement {
                 },
 
                 {
-                    activity: 'Morgenmad',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave morgenmad',
                         task_time: '07:00',
                         participants: [
-                            'Benjamin', 'Pernille'
+                            'Anne S', 'Trine'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter morgenmad',
                         task_time: '09:30',
                         participants: [
-                            'Morten', 'Jesper', 'Christian'
+                            'Benjamin', 'Vincent'
                         ]
                     }
                     ]
@@ -211,7 +211,7 @@ export class sf_about extends LitElement {
                     ]
                 },
                 {
-                    activity: 'Frokost',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave frokost',
                         task_time: '11:00',
@@ -219,7 +219,7 @@ export class sf_about extends LitElement {
                             'Nickolei', 'Morten'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter frokost',
                         task_time: '13:00',
                         participants: [
                             'Joan', 'Sif', 'Lara'
@@ -232,7 +232,7 @@ export class sf_about extends LitElement {
                         task_name: 'Vandpistoler og balloner',
                         task_time: '13:00',
                         participants: [
-                            'Vincent', 'Michael'
+                            'Vincent', 'Janne'
                         ]
                     },{
                         task_name: 'Glidebande',
@@ -244,14 +244,14 @@ export class sf_about extends LitElement {
                         task_name: 'Sæbebobler',
                         task_time: '13:00',
                         participants: [
-                            'Janne', 'Rasmus'
+                            'Jannie', 'Rasmus'
                         ]
                     }
                 ]
                 },
 
                 {
-                    activity: 'Aftensmad',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave aftensmad',
                         task_time: '16:00',
@@ -259,7 +259,7 @@ export class sf_about extends LitElement {
                             'Michael', 'Maja', 'Frederik', 'Jesper'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter aftensmad',
                         task_time: '19:00',
                         participants: [
                             'Janne', 'James', 'Sigurd',
@@ -267,17 +267,17 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'Bålhygge',
+                    activity: '',
                     tasks: [{
                         task_name: 'Bålhygge',
                         task_time: '19:00',
                         participants: [
-                            'Janne', 'Nickolei',
+                            'Joan', 'Nickolei',
                         ]
                     }]
                 },
                 {
-                    activity: 'Børnefilm',
+                    activity: '',
                     tasks: [{
                         task_name: 'Børnefilm',
                         task_time: '19:00',
@@ -287,7 +287,7 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'Koncert',
+                    activity: '',
                     tasks: [{
                         task_name: 'Koncert',
                         task_time: '21:00',
@@ -303,7 +303,7 @@ export class sf_about extends LitElement {
             day: 'Lørdag',
             schedule: [
                 {
-                    activity: 'Lejroprydning',
+                    activity: '',
                     tasks: [
                         {
                             task_name: 'Lejroprydning',
@@ -314,7 +314,7 @@ export class sf_about extends LitElement {
                 },
 
                 {
-                    activity: 'Toiletter',
+                    activity: '',
                     tasks: [
                         {
                             task_name: 'Toiletter',
@@ -325,7 +325,7 @@ export class sf_about extends LitElement {
                 },
 
                 {
-                    activity: 'Morgenmad',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave morgenmad',
                         task_time: '07:00',
@@ -333,7 +333,7 @@ export class sf_about extends LitElement {
                             'Jannie', 'Janne'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter morgenmad',
                         task_time: '09:30',
                         participants: [
                             'Rasmus', 'Maja',
@@ -342,7 +342,7 @@ export class sf_about extends LitElement {
                     ]
                 },
                 {
-                    activity: 'OL (I)',
+                    activity: 'OL formiddag',
                     tasks: [{
                         task_name: 'Tovtrækning',
                         task_time: '9:30',
@@ -353,7 +353,7 @@ export class sf_about extends LitElement {
                         task_name: 'Human-bowling glidebane',
                         task_time: '9:30',
                         participants: [
-                            'Morten B', 'Benjamin'
+                            'Jannie', 'Benjamin'
                         ]
                     },{
                         task_name: 'Kongespil',
@@ -365,7 +365,7 @@ export class sf_about extends LitElement {
                     ]
                 },
                 {
-                    activity: 'Frokost',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave frokost',
                         task_time: '11:00',
@@ -373,7 +373,7 @@ export class sf_about extends LitElement {
                             'Morten B', 'Jesper'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter frokost',
                         task_time: '13:00',
                         participants: [
                             'Sif', 'Nickolei', 'Frigg'
@@ -381,7 +381,7 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'OL (II)',
+                    activity: 'OL eftermiddag',
                     tasks: [{
                         task_name: 'Synkronsvømning',
                         task_time: '13:00',
@@ -395,12 +395,6 @@ export class sf_about extends LitElement {
                             'Tina', 'Maja'
                         ]
                     },{
-                        task_name: 'Pap-mache-dyr',
-                        task_time: '13:00',
-                        participants: [
-                            '??'
-                        ]
-                    },{
                         task_name: 'Band for øvede',
                         task_time: '13:00',
                         participants: [
@@ -411,15 +405,15 @@ export class sf_about extends LitElement {
                 },
 
                 {
-                    activity: 'Aftensmad',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave aftensmad',
                         task_time: '16:00',
                         participants: [
-                            'Michael', 'Mathias', 'Frederik', 'Benjamin', 'Kasper M', 'Pernille'
+                            'Michael', 'Mathias', 'Benjamin', 'Kasper M', 'Pernille'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter aftensmad',
                         task_time: '19:00',
                         participants: [
                             'Tina', 'Sif', 'Gro',
@@ -427,7 +421,7 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'Bålhygge',
+                    activity: '',
                     tasks: [{
                         task_name: 'Bålhygge',
                         task_time: '19:00',
@@ -437,7 +431,7 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'Børnefilm',
+                    activity: '',
                     tasks: [{
                         task_name: 'Børnefilm',
                         task_time: '19:00',
@@ -447,7 +441,7 @@ export class sf_about extends LitElement {
                     }]
                 },
                 {
-                    activity: 'Koncert',
+                    activity: '',
                     tasks: [{
                         task_name: 'Begynderband',
                         task_time: '21:00',
@@ -469,7 +463,7 @@ export class sf_about extends LitElement {
             day: 'Søndag',
             schedule: [
                 {
-                    activity: 'Morgenmad',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave morgenmad',
                         task_time: '07:00',
@@ -477,7 +471,7 @@ export class sf_about extends LitElement {
                             'Vincent', 'Frederik'
                         ]
                     }, {
-                        task_name: 'Oprydning',
+                        task_name: 'Oprydning efter morgenmad',
                         task_time: '09:30',
                         participants: [
                             'Trine', 'Jannie',
@@ -486,7 +480,7 @@ export class sf_about extends LitElement {
                     ]
                 },
                 {
-                    activity: 'Rejsefrokost',
+                    activity: '',
                     tasks: [{
                         task_name: 'Lave frokost',
                         task_time: '11:00',
@@ -506,19 +500,18 @@ export class sf_about extends LitElement {
             </td>`
             : '';
         const activity_td = task_index == 0 && participant_index === 0
-            ? html`<td rowspan="${tasks.flatMap(t => t.participants.flatMap(_ => 1)).reduce((a, b) => a + b)}">${activity}</td>`
+            ? html`<td class="sf-activity-td" rowspan="${tasks.flatMap(t => t.participants.flatMap(_ => 1)).reduce((a, b) => a + b)}">${activity}</td>`
             : '';
         const task_name_td = participant_index === 0
             ? html`
-                <td rowspan="${participants.length}">${task_time}</td>
-                <td rowspan="${participants.length}">${task_name}</td>
+                <td class="sf-task-td" rowspan="${participants.length}">${task_time}</td>
+                <td class="sf-task-td" rowspan="${participants.length}">${task_name}</td>
             `
             : '';
         const participant_td = html`<td>${participant}</td>`;
 
         return html`<tr class="sf-program-row">
             ${day_td}
-            ${activity_td}
             ${task_name_td}
             ${participant_td}
         </tr>`;
