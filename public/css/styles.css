@@ -265,7 +265,6 @@ sf-program, sf-merch, sf-map, sf-tjanser {
 
 .sf-content-special {
     margin-top: 2em;
-    padding: 2em 1.5em;
     min-height: 200px;
     font-size: 1.15em;
     transition: box-shadow 0.2s;
@@ -374,12 +373,12 @@ html, body {
 .search-input {
     flex: 1;
     font-size: 1.5em;
-    padding: 0.5em 1em;
     border: 2px solid #d72660;
     border-radius: 0.5em;
     outline: none;
     box-shadow: 0 2px 12px #d7266040;
     transition: border 0.2s, box-shadow 0.2s;
+    width: 80%;
 }
 
 .search-input:focus {

@@ -57,7 +57,7 @@ export class sf_program extends LitElement {
         { time: '08:00 - 09:30', activity: 'Morgenmad' },
         { time: '09:30 - 09:45', activity: 'Flaghejsning 🇩🇰' },
         { time: '12:00 - 13:00', activity: 'Rejsefrokost' },
-        { time: 'Eftermiddag', activity: 'Flag ned of farvel 🇩🇰👋' },
+        { time: 'Eftermiddag', activity: 'Flag ned og farvel 🇩🇰👋' },
       ]
     },
   ]

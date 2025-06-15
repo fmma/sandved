@@ -14,19 +14,15 @@ export class sf_merch extends LitElement {
     im_merch_t_shirt_m = '480c0eb0e220ef3cf0f8d0865e57c40b.png'  // merch_t_shirt_m.png
     im_sms = '206bd1e87efb53c6b6c60b99f3d443ff.png' // sms.png
     im_merch_hoodie_zipper = '0cedd07b5e4da64a5ea4707c6c3ff4f6.png'
+
     
     render() {
         return html`
 
 
-            <div class="sf-content-special">
-
-    ${this._render_merch_table()}
-
-<p><em> * Priserne er vejledende og kan ændre sig afhængigt af det samlede antal bestillinger.</em></p>
-            </div>
                     <div class="sf-content">
                     <h4 id="merch:top"> Merch </h4>
+                    <img alt="" src="https://snesl.dk/media/${this.im_merch_t_shirt_m}" style="width: 100%;" title=""> 
 
                     <p> Vi har lavet en lille, eksklusiv kollektion af T-shirts, hættetrøjer, kasketter og muleposer - alt sammen med vores helt eget Ved Verdens Ende-logo, som vi er utroligt stolte af.</p>
 
@@ -36,6 +32,7 @@ export class sf_merch extends LitElement {
                 <nav class="sf-subnav">
                     <ul>
                         <li><a href="#merch:q1">🧵 Sådan foregår det</a></li>
+                        <li><a href="#merch:merch">Oversigt over merchandise</a></li>
                         <li><a href="#merch:q2">⏰ Sidste frist for bestilling</a></li>
                         <li><a href="#merch:q4">ℹ️ Hvorfor er priserne cirka-priser?</a></li>
                     </ul>
@@ -49,9 +46,23 @@ export class sf_merch extends LitElement {
 <li><p> 💰 Du skal <strong>først betale</strong>, når vi sender en “opkrævning” - og <strong>først når bestillingen bliver sendt afsted</strong>.</p></li>
 <li><p> 📦 Du får din bestilling udleveret ved ankomst til festivalen - nemt og hyggeligt.</p></li>
 </ul>
+                    <img alt="" src="https://snesl.dk/media/${this.im_sms}" style="width: 100%;" title="">
 
 
 <a href="#merch:top">Tilbage til toppen</a>
+
+</div>
+
+
+            <div class="sf-content-special">
+        
+    ${this._render_merch_table()}
+
+<p><em> * Priserne er vejledende og kan ændre sig afhængigt af det samlede antal bestillinger.</em></p>
+            </div>
+
+
+                    <div class="sf-content">
 <h4 id="merch:q2"> ⏰ Sidste frist for bestilling </h4>
 <p><strong>Mandag d. 8. juli kl. 12.00</strong></p>
 <p>Herefter sender vi den samlede bestilling afsted.</p>
@@ -67,6 +78,11 @@ export class sf_merch extends LitElement {
 </div>
 
 
+
+
+
+
+
         `;
     }
 
@@ -76,7 +92,7 @@ export class sf_merch extends LitElement {
         <thead>
         <tr>
             <th colspan="2" rowspan="1">
-                <p><span class="sf-activity">Merch</span></p>
+                <p><span class="sf-activity" id="merch:merch">Merch</span></p>
             </th>
             <th colspan="1" rowspan="1">
                 <p><span>Ca. pris *</span></p>

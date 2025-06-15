@@ -5,7 +5,7 @@ import { customElement } from "lit/decorators.js";
 export class sf_map extends LitElement {
     renderRoot = this;
 
-    kort = '44fea9256cd7d7f6c482ec637adf35f5.png';
+    kort = '344140da0c079c53574317950687517e.png';
 
     render() {
         // return html`

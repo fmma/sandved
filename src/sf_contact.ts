@@ -11,7 +11,7 @@ export class sf_contact extends LitElement {
         { n: 'Sif', tlf: '51893589', email: 'wogsteen@gmail.com' },
         { n: 'Michael', tlf: '53581406', email: 'pumbas71@hotmail.com' },
         { n: 'Janne', tlf: '31228832', email: 'janne_meisner@hotmail.com' },
-        { n: 'Morten', tlf: '31169995', email: '' },
+        { n: 'Morten', tlf: '31169995', email: 'bazze8@hotmail.com' },
     ]
 
     render_contacts() {
