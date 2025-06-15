@@ -40,7 +40,7 @@ export class sf_about extends LitElement {
                         task_name: 'Oprydning efter frokost',
                         task_time: '13:00',
                         participants: [
-                            'Morten', 'Jesper', 'Christian'
+                            'Morten LN', 'Jesper', 'Christian'
                         ]
                     }]
                 },
@@ -112,7 +112,7 @@ export class sf_about extends LitElement {
                         task_name: 'Børnefilm',
                         task_time: '19:00',
                         participants: [
-                            'Pernille', 'Morten'
+                            'Pernille', 'Morten LN'
                         ]
                     }]
                 },
@@ -174,7 +174,7 @@ export class sf_about extends LitElement {
                         ]
                     }, {
                         task_name: 'Oprydning efter morgenmad',
-                        task_time: '09:30',
+                        task_time: '9:30',
                         participants: [
                             'Benjamin', 'Vincent'
                         ]
@@ -216,7 +216,7 @@ export class sf_about extends LitElement {
                         task_name: 'Lave frokost',
                         task_time: '11:00',
                         participants: [
-                            'Nickolei', 'Morten'
+                            'Nickolei', 'Morten LN'
                         ]
                     }, {
                         task_name: 'Oprydning efter frokost',
@@ -282,7 +282,7 @@ export class sf_about extends LitElement {
                         task_name: 'Børnefilm',
                         task_time: '19:00',
                         participants: [
-                            'Maja', 'Morten'
+                            'Maja', 'Morten LN'
                         ]
                     }]
                 },
@@ -334,7 +334,7 @@ export class sf_about extends LitElement {
                         ]
                     }, {
                         task_name: 'Oprydning efter morgenmad',
-                        task_time: '09:30',
+                        task_time: '9:30',
                         participants: [
                             'Rasmus', 'Maja',
                         ]
@@ -472,7 +472,7 @@ export class sf_about extends LitElement {
                         ]
                     }, {
                         task_name: 'Oprydning efter morgenmad',
-                        task_time: '09:30',
+                        task_time: '9:30',
                         participants: [
                             'Trine', 'Jannie',
                         ]
@@ -499,20 +499,20 @@ export class sf_about extends LitElement {
 
     render_row(day: string, activity: string, schedule_index: number, task_name: string, task_time: string, task_index: number, participant: string, participant_index: number, schedule: Schedule, tasks: Tasks, participants: string[]) {
         const day_td = schedule_index === 0 && task_index === 0 && participant_index === 0
-            ? html`<td class="sf-program-day" rowspan="${schedule.flatMap(s => s.tasks.flatMap(t => t.participants.flatMap(_ => 1))).reduce((a, b) => a + b)}">
+            ? html`<td class="sf-program-day .sf-shrink-td" rowspan="${schedule.flatMap(s => s.tasks.flatMap(t => t.participants.flatMap(_ => 1))).reduce((a, b) => a + b)}">
                 <span class="sf-program-day">${day}</span>
             </td>`
             : '';
-        const activity_td = task_index == 0 && participant_index === 0
-            ? html`<td class="sf-activity-td" rowspan="${tasks.flatMap(t => t.participants.flatMap(_ => 1)).reduce((a, b) => a + b)}">${activity}</td>`
-            : '';
+        // const activity_td = task_index == 0 && participant_index === 0
+        //     ? html`<td class="sf-activity-td" rowspan="${tasks.flatMap(t => t.participants.flatMap(_ => 1)).reduce((a, b) => a + b)}">${activity}</td>`
+        //     : '';
         const task_name_td = participant_index === 0
             ? html`
-                <td class="sf-task-td" rowspan="${participants.length}">${task_time}</td>
+                <td class="sf-task-td sf-shrink-td" rowspan="${participants.length}">${task_time.split(' ').map((l, i) => i > 0 ? html`<br>${l}` : html`${l}` )}</td>
                 <td class="sf-task-td" rowspan="${participants.length}">${task_name}</td>
             `
             : '';
-        const participant_td = html`<td>${participant}</td>`;
+        const participant_td = html`<td class="sf-shrink-td">${participant}</td>`;
 
         return html`<tr class="sf-program-row">
             ${day_td}
@@ -573,7 +573,7 @@ export class sf_about extends LitElement {
             <div class="sf-content-special">
 
                 <p><label for="search-input-id">Vælg dit navn eller skriv navnet på en opgave:</label></p>
-                <input list="browsers" name="search-input-id" id="search-input-id" class="search-input" @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} type="text" placeholder="Søg i tjanser" class="sf-search-input" />
+                <input type="search" list="browsers" name="search-input-id" id="search-input-id" class="search-input" @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} type="text" placeholder="Søg i tjanser" class="sf-search-input" />
 
 
 <datalist id="browsers">
@@ -582,7 +582,7 @@ ${this._participants().map(p => html`<option value="${p}"></option>`)}
                 <table class="sf-program-table">
                     <thead>
                         <tr>
-                            <th colspan="5" class="sf-title">Ved Verdens Ende 2025</th>
+                            <th colspan="4" class="sf-title">Ved Verdens Ende 2025</th>
                         </tr>
                     </thead>
                     <tbody>
