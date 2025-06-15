@@ -93,6 +93,11 @@ export class sf_program extends LitElement {
     `;
     };
     return html`
+
+            <div class="sf-content">
+                <p>Her kan du se festivalens program.</p>
+                <p>Programmet er under udvikling, så der kan komme ændringer.</p>
+            </div>
             <div class="sf-content-special">
                 <table class="sf-program-table">
                     <thead>

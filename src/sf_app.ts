@@ -54,13 +54,13 @@ export class sf_app extends LitElement {
             { id: 'om', title: 'Om' },
             { id: 'praktisk', title: 'Praktisk Info' },
             { id: 'kort', title: 'Kort' },
+            { id: 'merch', title: 'Merch' },
             { id: 'program', title: 'Program' },
             { id: 'tjanser', title: 'Tjanser' },
             { id: 'mad', title: 'Mad' },
             { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
             { id: 'tilmeld', title: 'Pris og Tilmelding' },
             { id: 'kontakt', title: 'Kontakt' },
-            { id: 'merch', title: 'Merch' }
         ];
         const render_menu = (({id, title}: {id: string, title: string}) => {
             const class_names = this.page === id ? "sf-active" : ""
@@ -99,19 +99,10 @@ export class sf_app extends LitElement {
                 return html`<sf-about></sf-about>`;
             case 'kort':
                 return html`
-                    <div class="sf-content">
-                        <p><em>Festivalen afholdes fra 24.-27. juli 2025 på Møllevej 44 i Sandved.</em></p>
-                    </div>
                     <sf-map></sf-map>
                 `;
             case 'program':
-                return html`
-                    <div class="sf-content">
-                        <p>Her kan du se festivalens program.</p>
-                        <p>Programmet er under udvikling, så der kan komme ændringer.</p>
-                    </div>
-                    <sf-program></sf-program>
-                `;
+                return html`<sf-program></sf-program>`;
             case 'tjanser':
                 return html`<sf-tjanser></sf-tjanser>`;
             case 'praktisk':
@@ -126,92 +117,6 @@ export class sf_app extends LitElement {
                 return html`<sf-food></sf-food>`;
             case 'merch':
                 return html`
-
-                    <div class="sf-content">
-                                <h3>Merch</h3>
-
-                    <p> Vi har lavet en lille, eksklusiv kollektion af T-shirts, hættetrøjer, kasketter og muleposer - alt sammen med vores helt eget Ved Verdens Ende-logo, som vi er utroligt stolte af.</p>
-
-                    <p> Ved at bære det, er du med til at bære fællesskabet videre 🌞🌈 </p>
-                    <p> Det er ikke en webshop - men en kærligt håndteret bestillingsliste. Du bestiller direkte hos Sif, og vi udleverer alt merch ved ankomst til festivalen. </p>
-                <h4 id="merch:top"> Overblik </h4>
-                <nav class="sf-subnav">
-                    <ul>
-                        <li><a href="#merch:merchandise">Gå til merchandise</a></li>
-                        <li><a href="#merch:q1">🧵 Sådan foregår det</a></li>
-                        <li><a href="#merch:q2">⏰ Sidste frist for bestilling</a></li>
-                        <li><a href="#merch:q3">🛍️ Forventede priser på merchandise (ca.-priser)</a></li>
-                        <li><a href="#merch:q4">ℹ️ Hvorfor er priserne cirka-priser?</a></li>
-                    </ul>
-                </nav>
-
-<h4 id="merch:q1"> 🧵 Sådan foregår det </h4>
-<ul>
-<li><p> 📝 <strong>Bestilling sker direkte til Sif</strong> - send en besked via <strong>Messenger</strong> eller <strong>SMS</strong>.</p></li>
-<li><p>  Skriv, hvad du gerne vil bestille (antal og størrelser - se <a href="https://www.teamshirts.dk">teamshirts.dk</a> for modeller).</p></li>
-<li><p> 📬 Du modtager en <strong>personlig</strong> bekræftelse, så du ved, din bestilling er modtaget.</p></li>
-<li><p> 💰 Du skal <strong>først betale</strong>, når vi sender en “opkrævning” - og <strong>først når bestillingen bliver sendt afsted</strong>.</p></li>
-<li><p> 📦 Du får din bestilling udleveret ved ankomst til festivalen - nemt og hyggeligt.</p></li>
-</ul>
-
-
-<a href="#merch:top">Tilbage til toppen</a>
-<h4 id="merch:q2"> ⏰ Sidste frist for bestilling </h4>
-<p><strong>Mandag d. 8. juli kl. 12.00</strong></p>
-<p>Herefter sender vi den samlede bestilling afsted.</p>
-
-
-<a href="#merch:top">Tilbage til toppen</a>
-<h4 id="merch:q3">🛍️ Forventede priser på merchandise (ca.-priser)</h4>
-<table class="sf-merch-table">
-<thead>
-<tr>
-<th>Produkt</th>
-<th>Forventet pris*</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>T-shirt - Herre</td>
-<td>ca. 106 kr</td>
-</tr>
-<tr>
-<td>T-shirt - Kvinde</td>
-<td>ca. 90 kr</td>
-</tr>
-<tr>
-<td>T-shirt - Lille Barn (str. 2-8)</td>
-<td>ca. 81 kr</td>
-</tr>
-<tr>
-<td>T-shirt - Stor Barn (str. 10-12)</td>
-<td>ca. 81 kr</td>
-</tr>
-<tr>
-<td>Hættetrøje</td>
-<td>ca. 154 kr</td>
-</tr>
-<tr>
-<td>Kasket</td>
-<td>ca. 85 kr</td>
-</tr>
-<tr>
-<td>Mulepose</td>
-<td>ca. 70 kr</td>
-</tr>
-</tbody>
-</table>
-
-<p><em> * Priserne er vejledende og kan ændre sig afhængigt af det samlede antal bestillinger.</em></p>
-
-<a href="#merch:top">Tilbage til toppen</a>
-<h4 id="merch:q4">ℹ️ Hvorfor er priserne cirka-priser?</h4>
-<p>Vi bestiller vores merch gennem teamshirts.dk, hvor prisen afhænger af hvor mange produkter vi bestiller samlet. Jo flere bestillinger - jo større rabat.</p>
-<p>🧡 Vi i arbejdsgruppen har allerede lagt en stor bestilling, så vi forventer at nå mængderabat - og har derfor regnet disse ca.-priser ud fra en samlet bestilling på 35 produkter.</p>
-<p>Du skal ikke betale noget med det samme - du modtager først en personlig bekræftelse, og derefter en opkrævning, når den endelige pris er kendt.</p>
-
-<a href="#merch:top">Tilbage til toppen</a>                    
-</div>
                     <sf-merch></sf-merch>
                 `;
             default:

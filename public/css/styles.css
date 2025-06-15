@@ -259,6 +259,10 @@ body {
     animation: fadein 0.5s;
 }
 
+sf-program, sf-merch, sf-map, sf-tjanser {
+    display: contents;
+}
+
 .sf-content-special {
     margin-top: 2em;
     padding: 2em 1.5em;
@@ -363,4 +367,22 @@ html, body {
         padding: 0.2em 0.1em;
         font-size: 0.9em;
     }
+}
+
+
+
+.search-input {
+    flex: 1;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    border: 2px solid #d72660;
+    border-radius: 0.5em;
+    outline: none;
+    box-shadow: 0 2px 12px #d7266040;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+    border-color: #fcb69f;
+    box-shadow: 0 4px 24px #d7266040;
 }

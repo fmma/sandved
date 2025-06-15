@@ -493,6 +493,10 @@ export class sf_about extends LitElement {
         }
     ]
 
+    private _participants() {
+        return [...new Set(this.program.flatMap(x => x.schedule.flatMap(y => y.tasks.flatMap(z => z.participants))))];
+    }
+
     render_row(day: string, activity: string, schedule_index: number, task_name: string, task_time: string, task_index: number, participant: string, participant_index: number, schedule: Schedule, tasks: Tasks, participants: string[]) {
         const day_td = schedule_index === 0 && task_index === 0 && participant_index === 0
             ? html`<td class="sf-program-day" rowspan="${schedule.flatMap(s => s.tasks.flatMap(t => t.participants.flatMap(_ => 1))).reduce((a, b) => a + b)}">
@@ -561,8 +565,20 @@ export class sf_about extends LitElement {
         );
 
         return html`
+            <div class="sf-content">
+                <p> Her er oversigten over alle deltagertjanser - en vagtplan om man vil. Skriv dit navn i søgefeltet for at se hvad dine tjanser er.</p>
+                <p> Tjanserne er under udarbejdelse, og der kan forekomme ændringer. </p>
+                <p> Kontakt Nikoline hvis der er ønsker om ændringer. </p>
+            </div>
             <div class="sf-content-special">
-                <input @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} type="text" placeholder="Søg i tjanser" class="sf-search-input" />
+
+                <p><label for="search-input-id">Vælg dit navn eller skriv navnet på en opgave:</label></p>
+                <input list="browsers" name="search-input-id" id="search-input-id" class="search-input" @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} type="text" placeholder="Søg i tjanser" class="sf-search-input" />
+
+
+<datalist id="browsers">
+${this._participants().map(p => html`<option value="${p}"></option>`)}
+</datalist>
                 <table class="sf-program-table">
                     <thead>
                         <tr>

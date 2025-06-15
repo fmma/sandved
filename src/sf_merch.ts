@@ -16,6 +16,95 @@ export class sf_merch extends LitElement {
     
     render() {
         return html`
+
+
+                    <div class="sf-content">
+                                <h3>Merch</h3>
+
+                    <p> Vi har lavet en lille, eksklusiv kollektion af T-shirts, hættetrøjer, kasketter og muleposer - alt sammen med vores helt eget Ved Verdens Ende-logo, som vi er utroligt stolte af.</p>
+
+                    <p> Ved at bære det, er du med til at bære fællesskabet videre 🌞🌈 </p>
+                    <p> Det er ikke en webshop - men en kærligt håndteret bestillingsliste. Du bestiller direkte hos Sif, og vi udleverer alt merch ved ankomst til festivalen. </p>
+                <h4 id="merch:top"> Overblik </h4>
+                <nav class="sf-subnav">
+                    <ul>
+                        <li><a href="#merch:merchandise">Gå til merchandise</a></li>
+                        <li><a href="#merch:q1">🧵 Sådan foregår det</a></li>
+                        <li><a href="#merch:q2">⏰ Sidste frist for bestilling</a></li>
+                        <li><a href="#merch:q3">🛍️ Forventede priser på merchandise (ca.-priser)</a></li>
+                        <li><a href="#merch:q4">ℹ️ Hvorfor er priserne cirka-priser?</a></li>
+                    </ul>
+                </nav>
+
+<h4 id="merch:q1"> 🧵 Sådan foregår det </h4>
+<ul>
+<li><p> 📝 <strong>Bestilling sker direkte til Sif</strong> - send en besked via <strong>Messenger</strong> eller <strong>SMS</strong>.</p></li>
+<li><p>  Skriv, hvad du gerne vil bestille (antal og størrelser - se <a href="https://www.teamshirts.dk">teamshirts.dk</a> for modeller).</p></li>
+<li><p> 📬 Du modtager en <strong>personlig</strong> bekræftelse, så du ved, din bestilling er modtaget.</p></li>
+<li><p> 💰 Du skal <strong>først betale</strong>, når vi sender en “opkrævning” - og <strong>først når bestillingen bliver sendt afsted</strong>.</p></li>
+<li><p> 📦 Du får din bestilling udleveret ved ankomst til festivalen - nemt og hyggeligt.</p></li>
+</ul>
+
+
+<a href="#merch:top">Tilbage til toppen</a>
+<h4 id="merch:q2"> ⏰ Sidste frist for bestilling </h4>
+<p><strong>Mandag d. 8. juli kl. 12.00</strong></p>
+<p>Herefter sender vi den samlede bestilling afsted.</p>
+
+
+<a href="#merch:top">Tilbage til toppen</a>
+<h4 id="merch:q3">🛍️ Forventede priser på merchandise (ca.-priser)</h4>
+<table class="sf-merch-table">
+<thead>
+<tr>
+<th>Produkt</th>
+<th>Forventet pris*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-shirt - Herre</td>
+<td>ca. 106 kr</td>
+</tr>
+<tr>
+<td>T-shirt - Kvinde</td>
+<td>ca. 90 kr</td>
+</tr>
+<tr>
+<td>T-shirt - Lille Barn (str. 2-8)</td>
+<td>ca. 81 kr</td>
+</tr>
+<tr>
+<td>T-shirt - Stor Barn (str. 10-12)</td>
+<td>ca. 81 kr</td>
+</tr>
+<tr>
+<td>Hættetrøje</td>
+<td>ca. 154 kr</td>
+</tr>
+<tr>
+<td>Kasket</td>
+<td>ca. 85 kr</td>
+</tr>
+<tr>
+<td>Mulepose</td>
+<td>ca. 70 kr</td>
+</tr>
+</tbody>
+</table>
+
+<p><em> * Priserne er vejledende og kan ændre sig afhængigt af det samlede antal bestillinger.</em></p>
+
+<a href="#merch:top">Tilbage til toppen</a>
+<h4 id="merch:q4">ℹ️ Hvorfor er priserne cirka-priser?</h4>
+<p>Vi bestiller vores merch gennem teamshirts.dk, hvor prisen afhænger af hvor mange produkter vi bestiller samlet. Jo flere bestillinger - jo større rabat.</p>
+<p>🧡 Vi i arbejdsgruppen har allerede lagt en stor bestilling, så vi forventer at nå mængderabat - og har derfor regnet disse ca.-priser ud fra en samlet bestilling på 35 produkter.</p>
+<p>Du skal ikke betale noget med det samme - du modtager først en personlig bekræftelse, og derefter en opkrævning, når den endelige pris er kendt.</p>
+
+<a href="#merch:top">Tilbage til toppen</a>                    
+</div>
+
+
             <div class="sf-content-special">
 
     <h4 id="merch:merchandise">Merch</h4>
@@ -51,7 +140,7 @@ export class sf_merch extends LitElement {
             <td colspan="1" rowspan="1">
                 <p><span>Herre premium T-shirt</span></p>
                 <p><span><a
-                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/herre-premium-t-shirt/2?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519450319&amp;usg=AOvVaw271PbsR3rwuw3dKAZ7Sf7B">link<-</span>
+                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/herre-premium-t-shirt/2?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519450319&amp;usg=AOvVaw271PbsR3rwuw3dKAZ7Sf7B">link</a></span>
                 </p>
                 <p><span></span></p>
             </td>
@@ -76,7 +165,7 @@ export class sf_merch extends LitElement {
             <td colspan="1" rowspan="1">
                 <p><span>Damer glidan heavy t-shirt</span></p>
                 <p><span><a
-                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/damer-gildan-heavy-t-shirt/2%23price&amp;sa=D&amp;source=editors&amp;ust=1749976519451246&amp;usg=AOvVaw35liKaAMeS5HeHC7wJrr4o">link<-</span>
+                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/damer-gildan-heavy-t-shirt/2%23price&amp;sa=D&amp;source=editors&amp;ust=1749976519451246&amp;usg=AOvVaw35liKaAMeS5HeHC7wJrr4o">link</a></span>
                 </p>
                 <p><span></span></p>
                 <p><span></span></p>
@@ -101,7 +190,7 @@ export class sf_merch extends LitElement {
             </td>
             <td colspan="1" rowspan="1">
                 <p><span>Børne premium T-shirt </span><span><a
-                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/borne-premium-t-shirt/348%23price&amp;sa=D&amp;source=editors&amp;ust=1749976519452179&amp;usg=AOvVaw3Lrq3oiaB6moZ2bY2ix9eQ">link<-</span>
+                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/borne-premium-t-shirt/348%23price&amp;sa=D&amp;source=editors&amp;ust=1749976519452179&amp;usg=AOvVaw3Lrq3oiaB6moZ2bY2ix9eQ">link</a></span>
                 </p>
                 <p><span></span></p>
             </td>
@@ -125,7 +214,7 @@ export class sf_merch extends LitElement {
             </td>
             <td colspan="1" rowspan="1">
                 <p><span>Teenager premium T-shirt</span></p>
-                <p><span><a href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/teenager-premium-t-shirt/2?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519453139&amp;usg=AOvVaw2jGVTUBO9pqJ7Yw3rrLyxt">link<-</span>
+                <p><span><a href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/teenager-premium-t-shirt/2?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519453139&amp;usg=AOvVaw2jGVTUBO9pqJ7Yw3rrLyxt">link</a></span>
                 </p>
                 <p><span></span></p>
             </td>
@@ -150,7 +239,7 @@ export class sf_merch extends LitElement {
             <td colspan="1" rowspan="1">
                 <p><span>Hættetrøje unisex</span></p>
                 <p><span><a
-                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/hattetroje-unisex/2?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519454498&amp;usg=AOvVaw0llf_2Pe-_Z-vQNHL6YyCw">link<-</span>
+                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/hattetroje-unisex/2?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519454498&amp;usg=AOvVaw0llf_2Pe-_Z-vQNHL6YyCw">link</a></span>
                 </p>
                 <p><span></span></p>
             </td>
@@ -175,7 +264,7 @@ export class sf_merch extends LitElement {
             <td colspan="1" rowspan="1">
                 <p><span>Snapbak Cap</span></p>
                 <p><span><a
-                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/snapback-cap/14?embroidery%3Dfalse%23price&amp;sa=D&amp;source=editors&amp;ust=1749976519455389&amp;usg=AOvVaw3j1gO6uLn_60ujfux_8S_A">link<-</span>
+                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/snapback-cap/14?embroidery%3Dfalse%23price&amp;sa=D&amp;source=editors&amp;ust=1749976519455389&amp;usg=AOvVaw3j1gO6uLn_60ujfux_8S_A">link</a></span>
                 </p>
                 <p><span></span></p>
             </td>
@@ -200,7 +289,7 @@ export class sf_merch extends LitElement {
             <td colspan="1" rowspan="1">
                 <p><span>Mulepose</span></p>
                 <p><span><a
-                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/mulepose/360?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519456254&amp;usg=AOvVaw0Xma8-8DYIwbKQkhHLo2OZ">link<-</span>
+                            href="https://www.google.com/url?q=https://www.teamshirts.dk/produkt/mulepose/360?embroidery%3Dfalse&amp;sa=D&amp;source=editors&amp;ust=1749976519456254&amp;usg=AOvVaw0Xma8-8DYIwbKQkhHLo2OZ">link</a></span>
                 </p>
                 <p><span></span></p>
             </td>
