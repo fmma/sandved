@@ -16,10 +16,10 @@ export class sf_program extends LitElement {
         { time: '12:00 - 13:00', activity: 'Frokost' },
         { time: '13:30 - 15:30', activity: 'Festival Kickstart', type: 'activity' },
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
-        { time: '19:00 - 20:30', activity: 'Coco', loc: 'TV-stuen' },
+        { time: '19:00 - 20:30', activity: 'Min Nabo Totoro', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥' },
         { time: '21:00 - 22:00', activity: 'Musikquiz', loc: this.store_scene },
-        { time: '22:00 - 23:00', activity: 'Nikoline', loc: this.store_scene },
+        { time: '22:00 - 23:00', activity: 'Jam Session', loc: this.store_scene },
       ]
     },
 
@@ -31,7 +31,7 @@ export class sf_program extends LitElement {
         { time: '12:00 - 13:00', activity: 'Frokost' },
         { time: '13:30 - 15:30', activity: 'Våd Eftermiddag', type: 'activity' },
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
-        { time: '19:00 - 20:30', activity: 'My Neighbor Totoro', loc: 'TV-stuen' },
+        { time: '19:00 - 20:30', activity: 'Coco', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥'},
         { time: '21:00 - 23:00', activity: 'Michaels Band', loc: this.store_scene },
       ]
@@ -44,7 +44,7 @@ export class sf_program extends LitElement {
         { time: '12:00 - 13:00', activity: 'Frokost' },
         { time: '13:30 - 15:30', activity: 'OL Eftermiddag', type: 'activity' },
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
-        { time: '19:00 - 20:30', activity: 'The Super Mario Bros. Movie', loc: 'TV-stuen' },
+        { time: '19:00 - 20:30', activity: 'Super Mario Bros. Filmen', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥' },
         { time: '21:00 - 22:00', activity: 'Begynderband', loc: this.store_scene },
         { time: '22:00 - 23:00', activity: 'Festivalsband', loc: this.store_scene },

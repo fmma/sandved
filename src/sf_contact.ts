@@ -14,6 +14,8 @@ export class sf_contact extends LitElement {
         { n: 'Morten', tlf: '31169995', email: 'bazze8@hotmail.com' },
     ]
 
+    im_highway_sign = '5a423b285b69157619ee20c55ebf18fb.png'
+
     render_contacts() {
         return this.contact.map(c =>
             html`
@@ -30,6 +32,8 @@ export class sf_contact extends LitElement {
                 <ul>
                     ${this.render_contacts()}
                 </ul>
+
+                    <img alt="" src="https://snesl.dk/media/${this.im_highway_sign}" style="width: 100%;" title=""> 
             </div>
         `;
     }

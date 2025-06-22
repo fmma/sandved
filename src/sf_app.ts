@@ -12,6 +12,7 @@ import './sf_tilmeld.js';
 import './sf_tjanser.js';
 import './sf_food.js';
 import './sf_merch.js';
+import './sf_film.js';
 
 
 @customElement('sf-app')
@@ -56,6 +57,7 @@ export class sf_app extends LitElement {
             { id: 'kort', title: 'Kort' },
             { id: 'merch', title: 'Merch' },
             { id: 'program', title: 'Program' },
+            { id: 'film', title: 'Film' },
             { id: 'tjanser', title: 'Tjanser' },
             { id: 'mad', title: 'Mad' },
             { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
@@ -103,6 +105,8 @@ export class sf_app extends LitElement {
                 `;
             case 'program':
                 return html`<sf-program></sf-program>`;
+            case 'film':
+                return html`<sf-film></sf-film>`;
             case 'tjanser':
                 return html`<sf-tjanser></sf-tjanser>`;
             case 'praktisk':

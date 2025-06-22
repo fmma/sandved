@@ -129,10 +129,10 @@ export class sf_about extends LitElement {
                 {
                     activity: '',
                     tasks: [{
-                        task_name: 'Koncert',
+                        task_name: 'Jam Session',
                         task_time: '22:00',
                         participants: [
-                            'Nikoline'
+                            'Nikoline', 'Frederik'
                         ]
                     }]
                 }
@@ -512,7 +512,10 @@ export class sf_about extends LitElement {
                 <td class="sf-task-td" rowspan="${participants.length}">${task_name}</td>
             `
             : '';
-        const participant_td = html`<td class="sf-shrink-td">${participant}</td>`;
+        const participant_span = this._query && participant.toLocaleLowerCase().includes(this._query.toLocaleLowerCase())
+            ? html`<span class="sf-search-hit">${participant}<span>`
+            : participant
+        const participant_td = html`<td class="sf-shrink-td">${participant_span}</td>`;
 
         return html`<tr class="sf-program-row">
             ${day_td}
