@@ -413,3 +413,52 @@ input[type="search"]::-webkit-search-cancel-button {
   background-size: 14px;
 
 }
+
+@keyframes popup-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+.sf_popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+    max-width: 90vw;
+    max-height: 90vh;           /* Prevent popup from exceeding viewport height */
+    overflow-y: auto;           /* Enable vertical scrolling if content is too tall */
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0 8px 32px #d7266040, 0 0 0 4px #d7266022;
+    border: 3px solid #d72660;
+    z-index: 1000;
+    border-radius: 1em;
+    padding: 2em 1.5em 1.5em 1.5em;
+    text-align: left;
+    animation: fadein 0.3s;
+    animation: popup-in 0.35s cubic-bezier(.4,2,.6,1);
+}
+.close-btn {
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #d72660;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    z-index: 1001;
+    transition: color 0.2s;
+}
+.close-btn:hover,
+.close-btn:focus {
+    color: #1b998b;
+    outline: none;
+}
