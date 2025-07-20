@@ -10,11 +10,11 @@ export class sf_program extends LitElement {
   program = [
     {
       day: 'Torsdag', schedule: [
-        { time: '08:00 - 09:30', activity: 'Morgenmad' },
-        { time: '09:30 - 09:45', activity: 'Flaghejsning 🇩🇰' },
+        { time: '09:00', activity: 'Ankomst og teltopsætning' },
         { time: '10:00 - 11:30', activity: 'Mal Din Kop', type: 'activity' },
         { time: '12:00 - 13:00', activity: 'Frokost' },
         { time: '13:30 - 15:30', activity: 'Festival Kickstart', type: 'activity' },
+        { time: '15:30 - 16:00', activity: 'Kage'},
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
         { time: '19:00 - 20:30', activity: 'Min Nabo Totoro', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥' },
@@ -30,6 +30,7 @@ export class sf_program extends LitElement {
         { time: '10:00 - 11:30', activity: 'Musisk Formiddag', type: 'activity' },
         { time: '12:00 - 13:00', activity: 'Frokost' },
         { time: '13:30 - 15:30', activity: 'Våd Eftermiddag', type: 'activity' },
+        { time: '15:30 - 16:00', activity: 'Kage'},
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
         { time: '19:00 - 20:30', activity: 'Coco', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥'},
@@ -43,6 +44,7 @@ export class sf_program extends LitElement {
         { time: '10:00 - 11:30', activity: 'OL Formiddag', type: 'activity' },
         { time: '12:00 - 13:00', activity: 'Frokost' },
         { time: '13:30 - 15:30', activity: 'OL Eftermiddag', type: 'activity' },
+        { time: '15:30 - 16:00', activity: 'Kage'},
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
         { time: '19:00 - 20:30', activity: 'Super Mario Bros. Filmen', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥' },

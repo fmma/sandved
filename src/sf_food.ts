@@ -17,6 +17,8 @@ export class sf_food extends LitElement {
 
 <p><strong>Frokostbuffeten</strong> består af rugbrød, brød fra morgenmaden, smør, ost, kødpålæg, surt, remoulade, mayo, vegetarpålæg, ristet løg, rester fra aftensmaden, frugt og grønt.</p>
 
+        <p><strong>Eftermiddag:</strong> kage.</p>
+
     <p><strong>Aftensmaden</strong> består af dagens ret som er...</p>
     <ul>
         <li><strong>Torsdag:</strong> Chili con carne.</li>
@@ -26,6 +28,8 @@ export class sf_food extends LitElement {
     <p>
         Til alle aftensmadbuffeter er der ris og pasta, forskellige varianter af grøntsager, vegetarret og friskbagt foccacia.
     </p>
+    <p><strong>Natmad:</strong> Ved eventuelle sene aftener, har vi mulighed for at varme lidt kage, pizzaer eller foccacie. </p>
+
     <p> Der vil være mulighed for <strong>mellemmåltider</strong> til de mindste eller særligt trængende i form af brød, pålæg og frugt. </p>
     <p style="font-size:2em;">😁</p>
             </div>

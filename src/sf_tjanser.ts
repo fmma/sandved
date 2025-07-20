@@ -116,7 +116,7 @@ export class sf_about extends LitElement {
                         task_name: 'Lave aftensmad',
                         task_time: '16:00',
                         participants: [
-                            'Michael', 'Rasmus', 'Anne S', 'Morten B'
+                            'Michael', 'Rasmus', 'Anne S', 'Theresa'
                         ],
                         render_card: [render_aftensmad, "aftensmad"]
                     }, {
@@ -259,7 +259,7 @@ export class sf_about extends LitElement {
                         task_name: 'Oprydning efter frokost',
                         task_time: '13:00',
                         participants: [
-                            'Joan', 'Sif', 'Lara'
+                            'Joan', 'Theresa', 'Lara'
                         ],
                         render_card: [render_frokost_opr, "frokost-opryd"]
                     }]
@@ -270,7 +270,7 @@ export class sf_about extends LitElement {
                         task_name: 'Vandpistoler og balloner',
                         task_time: '13:00',
                         participants: [
-                            'Vincent', 'Janne'
+                            'Vincent', 'Theresa'
                         ],
                         render_card: [render_vand, "vand"]
                     }, {
@@ -396,7 +396,7 @@ export class sf_about extends LitElement {
                         task_name: 'Tovtrækning',
                         task_time: '9:30',
                         participants: [
-                            'Nikoline', 'Sif'
+                            'Theresa', 'Sif'
                         ],
                         render_card: [render_tovtraek, "tov"]
                     }, {

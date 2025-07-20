@@ -16,6 +16,7 @@ export class sf_practical_info extends LitElement {
                     <ul>
                         <li><a href="#praktisk:q1">Hvornår skal jeg komme?</a></li>
                         <li><a href="#praktisk:q2">Hvor kan jeg parkere?</a></li>
+                        <li><a href="#praktisk:offentlig"> Kan man komme dertil med offentlig transport? </a></li>
                         <li><a href="#praktisk:q3">Hvordan ser festivalpladsen ud?</a></li>
                         <li><a href="#praktisk:q4">Hvordan bidrager jeg til festivalen?</a></li>
                         <li><a href="#praktisk:q5">Hvad skal jeg lave?</a></li>
@@ -42,8 +43,31 @@ Festivalpladsen åbner d. 24. kl 9, hvor man kan sætte telt op og begynde at ko
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q2"> Hvor kan jeg parkere? </h4>
                 <p>
-                Info skrives her.
+                Da der er begrænsede parkeringsmuligheder på grunden, er det nødvendigt, at man læsser sine ting af, og efterfølgende parkerer sin bil på en plads i nærheden.
                 </p>
+                <p>
+                Bilerne skal parkeres på
+                </p>
+                <p>
+                <em>
+                Møllevej 52
+                </em>
+                <p>
+Der vil være mulighed for at blive kørt tilbage til festivalen, når man skal hen med sin bil.
+                </p>
+                <img src="https://snesl.dk/media/0f09298878a6bad564503e3ddbc87e22.jpg" alt="Festival Logo" class="sf-logo-inline" />
+                
+                <a href="#praktisk:faq">Tilbage til toppen</a>
+                <h4 id="praktisk:offentlig"> Kan man komme dertil med offentlig transport? </h4>
+                <p>
+    Offentlig transport er lidt svært til Verdens Ende.
+    </p>
+    <p>
+    Alle dage vil det være muligt at blive kørt til/fra busstationen i Spjellerup frem til klokken 11. I skal bare give os besked dagen i forvejen, så vi kan koordinere, hvis der er flere der skal hentes eller afsted.
+    </p><p>
+    Efter kl 11 kan vi desværre ikke hente eller bringe længere. Men det er muligt at gå eller tage en taxa.
+</p>
+
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q3"> Hvordan ser festivalpladsen ud? </h4>
                 <p>
