@@ -334,7 +334,7 @@ export class sf_about extends LitElement {
                 {
                     activity: '',
                     tasks: [{
-                        task_name: 'Koncert: Vagabond',
+                        task_name: 'Koncert: Arm the Homeless',
                         task_time: '21:00',
                         participants: [
                             'Michael'
@@ -557,7 +557,11 @@ export class sf_about extends LitElement {
     ]
 
     private _participants() {
-        return [...new Set(this.program.flatMap(x => x.schedule.flatMap(y => y.tasks.flatMap(z => z.participants))))];
+        return [
+            ...new Set(this.program.flatMap(x => x.schedule.flatMap(y => y.tasks.flatMap(z => z.participants)))),
+            ...new Set(this.program.flatMap(x => x.schedule.flatMap(y => y.tasks.map(z => z.task_name)))),
+            ...new Set(this.program.map(x => x.day))
+        ];
     }
 
     render_row(day: string, activity: string, schedule_index: number, task_name: string, task_time: string, task_index: number, participant: string, participant_index: number, schedule: Schedule, tasks: Tasks, participants: string[], render_card?: [() => unknown, string]) {

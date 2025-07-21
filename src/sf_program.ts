@@ -34,7 +34,7 @@ export class sf_program extends LitElement {
         { time: '18:00 - 19:00', activity: 'Aftensmad' },
         { time: '19:00 - 20:30', activity: 'Coco', loc: 'TV-stuen' },
         { time: '19:00 - 20:30', activity: 'Bålhygge 🔥'},
-        { time: '21:00 - 23:00', activity: 'Michaels Band', loc: this.store_scene },
+        { time: '21:00 - 23:00', activity: 'Arm the Homeless', loc: this.store_scene },
       ]
     },
     {
