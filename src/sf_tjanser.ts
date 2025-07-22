@@ -57,7 +57,7 @@ export class sf_about extends LitElement {
                         task_name: 'Lave frokost',
                         task_time: '11:00',
                         participants: [
-                            'Benjamin', 'Pernille'
+                            'Sif', 'Pernille'
                         ],
                         render_card: [render_frokost, "frokost"]
                     }, {
@@ -83,7 +83,7 @@ export class sf_about extends LitElement {
                         task_name: 'Skrive festivalssangen',
                         task_time: '13:00',
                         participants: [
-                            'Anne S', 'Trine', 'Frederik'
+                            'Anne S', 'Theresa', 'Frederik'
                         ],
                         render_card: [render_skriv_sang, "skriv-sang"]
                     }, {
@@ -104,7 +104,7 @@ export class sf_about extends LitElement {
                         task_name: 'Skiltelavning',
                         task_time: '13:00',
                         participants: [
-                            'Sif', 'Rasmus', 'Benjamin'
+                            'Sif', 'Nikoline'
                         ],
                         render_card: [render_lav_skilt, "skilt"]
                     }]
