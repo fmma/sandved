@@ -54,6 +54,16 @@ export class sf_about extends LitElement {
                 {
                     activity: '',
                     tasks: [{
+                        task_name: 'Reklamemand',
+                        task_time: 'Hele dagen',
+                        participants: [
+                            'Sigurd'
+                        ]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
                         task_name: 'Lave frokost',
                         task_time: '11:00',
                         participants: [
@@ -81,28 +91,28 @@ export class sf_about extends LitElement {
                     },
                     {
                         task_name: 'Skrive festivalssangen',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Anne S', 'Theresa', 'Frederik'
                         ],
                         render_card: [render_skriv_sang, "skriv-sang"]
                     }, {
                         task_name: 'Lave bannere',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Joan', 'Jannie',
                         ],
                         render_card: [render_lav_banner, "banner"]
                     }, {
                         task_name: 'Snobrødsdej',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Morten B',
                         ],
                         render_card: [render_lav_snobroed, "snobrod"]
                     }, {
                         task_name: 'Skiltelavning',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Sif', 'Nikoline'
                         ],
@@ -177,6 +187,16 @@ export class sf_about extends LitElement {
         {
             day: 'Fredag',
             schedule: [
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Reklamemand',
+                        task_time: 'Hele dagen',
+                        participants: [
+                            'Sigurd'
+                        ]
+                    }]
+                },
                 {
                     activity: '',
                     tasks: [
@@ -268,21 +288,21 @@ export class sf_about extends LitElement {
                     activity: 'Våd Eftermiddag',
                     tasks: [{
                         task_name: 'Vandpistoler og balloner',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Vincent', 'Theresa'
                         ],
                         render_card: [render_vand, "vand"]
                     }, {
                         task_name: 'Glidebane',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'James', 'Benjamin'
                         ],
                         render_card: [render_glidebane, "glidebane"]
                     }, {
                         task_name: 'Sæbebobler',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Jannie', 'Rasmus'
                         ],
@@ -347,6 +367,16 @@ export class sf_about extends LitElement {
         {
             day: 'Lørdag',
             schedule: [
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Reklamemand',
+                        task_time: 'Hele dagen',
+                        participants: [
+                            'Sigurd'
+                        ]
+                    }]
+                },
                 {
                     activity: '',
                     tasks: [
@@ -438,21 +468,21 @@ export class sf_about extends LitElement {
                     activity: 'OL eftermiddag',
                     tasks: [{
                         task_name: 'Synkronsvømning',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Janne', 'Pernille'
                         ],
                         render_card: [render_synkron, "synkron"]
                     }, {
                         task_name: 'Petang',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Tina', 'Maja'
                         ],
                         render_card: [render_petang, "petang"]
                     }, {
                         task_name: 'Band for øvede',
-                        task_time: '13:00',
+                        task_time: '13:30',
                         participants: [
                             'Frederik'
                         ]
@@ -522,6 +552,16 @@ export class sf_about extends LitElement {
         {
             day: 'Søndag',
             schedule: [
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Reklamemand',
+                        task_time: 'Hele dagen',
+                        participants: [
+                            'Sigurd'
+                        ]
+                    }]
+                },
                 {
                     activity: '',
                     tasks: [{
