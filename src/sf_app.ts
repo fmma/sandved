@@ -13,7 +13,7 @@ import './sf_tjanser.js';
 import './sf_food.js';
 import './sf_merch.js';
 import './sf_film.js';
-
+import './sf_sang.js';
 
 @customElement('sf-app')
 export class sf_app extends LitElement {
@@ -62,6 +62,7 @@ export class sf_app extends LitElement {
             { id: 'mad', title: 'Mad' },
             { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
             { id: 'tilmeld', title: 'Pris og Tilmelding' },
+            { id: 'sang', title: 'Sang' },
             { id: 'kontakt', title: 'Kontakt' },
         ];
         const render_menu = (({id, title}: {id: string, title: string}) => {
@@ -123,6 +124,8 @@ export class sf_app extends LitElement {
                 return html`
                     <sf-merch></sf-merch>
                 `;
+            case 'sang':
+                return html`<sf-sang></sf-sang>`;
             default:
                 return html`<h3>Velkommen</h3><p>Vælg en side i menuen.</p>`;
         }
