@@ -7,8 +7,8 @@
     "dev": "vite",
     "host": "vite --host",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "vite build --base https://vedverdensende.dk/ && scp -r build/* fmadsen@foadell:/home/fmadsen/www_root/domains/vedverdensende.dk/",
-    "release-web": "vite build --base https://vedverdensende.dk/ && scp -r build/* fmadsen@foadell-web:/home/fmadsen/www_root/domains/vedverdensende.dk/"
+    "release": "vite build --base https://vedverdensende.dk/2025 && scp -r build/* fmadsen@foadell:/home/fmadsen/www_root/domains/vedverdensende.dk/2025",
+    "release-web": "vite build --base https://vedverdensende.dk/2025 && scp -r build/* fmadsen@foadell-web:/home/fmadsen/www_root/domains/vedverdensende.dk/2025"
   },
   "author": "",
   "license": "ISC",
