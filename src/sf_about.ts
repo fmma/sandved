@@ -63,7 +63,7 @@ export class sf_about extends LitElement {
                 box-shadow: 0 2px 12px #d7266040;
                 text-shadow: 2px 2px 8px #d7266040;
             ">
-                🎉 ${days} dage, ${hours} timer, ${minutes} minutter, ${seconds} sekunder til festivalen åbner 🎉
+            Tak for denne gang! Vi ses igen i 2026! 👋
             </div>
         `;
 
