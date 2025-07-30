@@ -27,7 +27,6 @@ export class sf_contact extends LitElement {
         return html`
             <div class="sf-content">
                 <h3>Kontakt</h3>
-                <p><em>Festivalen afholdes fra 24.-27. juli 2025 på Møllevej 44 i Sandved.</em></p>
                 <p>Har du spørgsmål eller kommentarer, så kontakt os venligst.</p>
                 <ul>
                     ${this.render_contacts()}

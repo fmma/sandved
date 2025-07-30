@@ -462,3 +462,165 @@ input[type="search"]::-webkit-search-cancel-button {
     color: #1b998b;
     outline: none;
 }
+
+
+/* Add to your CSS file */
+.sf-content button {
+    background: linear-gradient(90deg, #d72660 0%, #1b998b 100%);
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.6em 2em;
+    margin-top: 1em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #d7266040;
+    transition: background 0.2s, transform 0.1s;
+}
+.sf-content button:hover,
+.sf-content button:focus {
+    background: linear-gradient(90deg, #1b998b 0%, #d72660 100%);
+    transform: scale(1.04);
+    outline: none;
+}
+
+.sf-content input[type="file"] {
+    width: 100%;
+    max-width: 350px;
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 1em 0 2em 0;
+    padding: 0.5em;
+    font-size: 1.1em;
+    border: 2px solid #d72660;
+    border-radius: 0.5em;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #d7266020;
+    transition: border-color 0.2s;
+    display: block;
+}
+
+@media (max-width: 500px) {
+    .sf-content input[type="file"] {
+        max-width: 98vw;
+        font-size: 1em;
+    }
+}
+.sf-content input[type="file"]:hover,
+.sf-content input[type="file"]:focus {
+    border-color: #1b998b;
+    outline: none;
+}
+
+.sf-feedback-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2em 0;
+}
+
+.sf-feedback-list li {
+    background: #fff;
+    border: 2px solid #d72660;
+    border-radius: 0.7em;
+    margin: 1em 0;
+    padding: 1em 1.2em;
+    box-shadow: 0 2px 8px #d7266020;
+    font-size: 1.1em;
+    color: #222;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.sf-feedback-list li strong {
+    color: #d72660;
+    font-weight: bold;
+}
+
+.sf-feedback-list li:hover {
+    border-color: #1b998b;
+    box-shadow: 0 4px 16px #1b998b20;
+}
+.sf-content textarea {
+    width: 98%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0.5em 0 1.5em 0;
+    padding: 1em;
+    font-size: 1.1em;
+    border: 2px solid #d72660;
+    border-radius: 0.5em;
+    background: #fff;
+    color: #222;
+    resize: vertical;
+    box-shadow: 0 2px 8px #d7266020;
+    transition: border-color 0.2s;
+}
+
+.sf-content textarea:focus {
+    border-color: #1b998b;
+    outline: none;
+}
+
+.sf-content input[type="text"] {
+    width: 98%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0.5em 0 1em 0;
+    padding: 0.8em 1em;
+    font-size: 1.1em;
+    border: 2px solid #d72660;
+    border-radius: 0.5em;
+    background: #fff;
+    color: #222;
+    box-shadow: 0 2px 8px #d7266020;
+    transition: border-color 0.2s;
+}
+
+.sf-content input[type="text"]:focus {
+    border-color: #1b998b;
+    outline: none;
+}
+
+.sf-content label,
+.sf-content .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1em;
+    margin: 0.5em 0 1em 0;
+    gap: 0.5em;
+}
+
+.sf-content input[type="checkbox"] {
+    accent-color: #d72660;
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 0.3em;
+    margin-right: 0.4em;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 2px solid #d72660;
+    transition: border-color 0.2s;
+}
+.sf-content input[type="checkbox"]:focus {
+    outline: 2px solid #1b998b;
+    outline-offset: 2px;
+}
+
+.sf-spinner {
+    display: inline-block;
+    width: 2.5em;
+    border: 4px solid #d72660;
+    border-top: 4px solid #1b998b;
+    border-radius: 50%;
+    animation: sf-spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin: 0.5em 0;
+}
+@keyframes sf-spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}

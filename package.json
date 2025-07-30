@@ -15,7 +15,7 @@
   "devDependencies": {
     "lit": "^3.3.0",
     "vite": "^6.3.5",
-    "@fmma-npm/http-client": "^1.3.2",
+    "@fmma-npm/http-client": "^1.8.0",
     "@fmma-npm/state": "2.0.2"
   }
 }
