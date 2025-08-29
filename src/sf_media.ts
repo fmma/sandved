@@ -57,7 +57,7 @@ export class sf_media extends LitElement {
 
                 return html`
     <div style="width: 100%;">
-        <video controls playsinline loop style="width: 100%; height: auto; display: block;">
+        <video controls playsinline loop preload="none" style="width: 100%; height: auto; display: block;">
             <source src="https://snesl.dk/media/${file}#t=0.001" type="video/${vtype}">
             Din browser understøtter ikke videoafspilning af denne type.
         </video>
@@ -67,9 +67,12 @@ export class sf_media extends LitElement {
             if( file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png') || file.endsWith('.gif') || file.endsWith('.bmp') || file.endsWith('.webp') || file.endsWith('.svg')) {
                 return html`
                     <div>
-                        <img src="https://snesl.dk/media/${file}" alt="${file}" style="max-width: 100%;">
+                        <img src="https://snesl.dk/media/${file}" alt="${file}" style="max-width: 100%;" loading="lazy">
                     </div>
                 `;
+            }
+            else if( file.endsWith('.HEIC') ) {
+                return html``;
             }
             return html`
                 <div>
@@ -109,8 +112,27 @@ export class sf_media extends LitElement {
             this._load_progress = { max: files.length, loaded: 0 };
             this._loading = true;
             for (const [index, file] of [...files].entries()) {
-                const image_id = await media.put(file, file.name);
-                console.log(`Uploaded ${file.name} with ID: ${image_id}`);
+                let fileToUpload = file;
+                let fileName = file.name;
+                
+                if (file.name.toLowerCase().endsWith('.heic')) {
+                    try {
+                        const { default: heic2any } = await import('heic2any');
+                        const convertedBlob = await heic2any({
+                            blob: file,
+                            toType: 'image/png'
+                        }) as Blob;
+                        fileToUpload = new File([convertedBlob], fileName.replace(/\.heic$/i, '.png'), {
+                            type: 'image/png'
+                        });
+                        fileName = fileName.replace(/\.heic$/i, '.png');
+                    } catch (error) {
+                        console.error('Failed to convert HEIC file:', error);
+                    }
+                }
+                
+                const image_id = await media.put(fileToUpload, fileName);
+                console.log(`Uploaded ${fileName} with ID: ${image_id}`);
                 await db.appendObject<ImageRecord>(DB_KEY, { image_id });
                 this._load_progress = { max: files.length, loaded: index + 1 };
             }
