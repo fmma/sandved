@@ -2,7 +2,7 @@ import { html, LitElement } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
 import { media, db } from '@fmma-npm/http-client';
 
-const DB_KEY = 'sf2025_images';
+const DB_KEY = 'sf2026_images';
 
 type ImageRecord = { image_id: string };
 

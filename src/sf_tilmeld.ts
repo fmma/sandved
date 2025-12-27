@@ -9,7 +9,7 @@ export class sf_tilmeld extends LitElement {
         return html`
             <div class="sf-content">
                 <h3>Pris og tilmelding</h3>
-                <p> Pris: Prisen for de 4 dages festival er 1000 kr pr voksen og 250 kr pr barn og dette indkluderer:</p>
+                <p> Pris: Prisen for de 4 dages festival er 1000 kr pr voksen og 250 kr pr barn og dette inkluderer:</p>
                 <ul>
                     <li>Plads til telt.</li>
                     <li>Toiletfaciliteter.</li>
@@ -19,11 +19,11 @@ export class sf_tilmeld extends LitElement {
                 </ul>
                 <p> Skulle nogen ønske at deltage i en kortere del af festivalen bliver prisen som følger:</p>
                 <ul>
-                    <li>1 døgn: 400kr (børn 100kr)</li>
-                    <li>2 døgn: 750 kr (børn 180kr)</li>
+                    <li>1 døgn: 400 kr (børn 100 kr)</li>
+                    <li>2 døgn: 750 kr (børn 180 kr)</li>
                 </ul>
                 <p>Der vil være frokost og aftensmad, samt morgenmad dagen efter med i en døgnbillet. </p>
-                <p>Der er frist for tilmelding d. 1/5 og bindende tilmelding foregår ved betaling til reg: 6771 konto: 6416752. Skriv gerne jeres tilmelding herinde (eller privat til en af os) også, så vi ved hvor mange, og hvilke dage i kommer.</p>
+                <p>Der er frist for tilmelding d. 1. maj og bindende tilmelding foregår ved betaling til reg: 6771 konto: 6416752. Skriv gerne jeres tilmelding herinde (eller privat til en af os) også, så vi ved hvor mange, og hvilke dage i kommer.</p>
 
             </div>
         `;

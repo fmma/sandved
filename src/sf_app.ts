@@ -4,7 +4,17 @@ import './sf_about.js';
 import './sf_archive.js';
 import './sf_feedback.js';
 import './sf_media.js';
-import './sf_contact.js'
+import './sf_map.js';
+import './sf_program.js';
+import './sf_practical_info.js';
+import './sf_contact.js';
+import './sf_drinks.js';
+import './sf_tilmeld.js';
+import './sf_tjanser.js';
+import './sf_food.js';
+import './sf_merch.js';
+import './sf_film.js';
+import './sf_sang.js';
 
 import { configure } from '@fmma-npm/http-client';
 
@@ -50,9 +60,20 @@ export class sf_app extends LitElement {
 
         const menu_items = [
             { id: 'om', title: 'Om' },
-            { id: 'feedback', title: 'Feedback' },
-            { id: 'media', title: 'Billeder og Videoer' },
-            { id: 'archive', title: 'Arkiv' },
+            // { id: 'feedback', title: 'Feedback' },
+            // { id: 'media', title: 'Billeder og Videoer' },
+            // { id: 'archive', title: 'Arkiv' },
+
+            { id: 'praktisk', title: 'Praktisk Info' },
+            { id: 'kort', title: 'Kort' },
+            { id: 'merch', title: 'Merch' },
+            { id: 'program', title: 'Program' },
+            { id: 'film', title: 'Film' },
+            { id: 'tjanser', title: 'Tjanser' },
+            { id: 'mad', title: 'Mad' },
+            { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
+            { id: 'tilmeld', title: 'Pris og Tilmelding' },
+            { id: 'sang', title: 'Sang' },
             { id: 'kontakt', title: 'Kontakt' },
         ];
         const render_menu = (({id, title}: {id: string, title: string}) => {
@@ -67,6 +88,7 @@ export class sf_app extends LitElement {
                 <h1 @click=${() => window.location.hash = ''} style="cursor:pointer;">Ved Verdens Ende</h1>
                 <img src="https://snesl.dk/media/7f3129d99fb471685992f9bb960868e0.png" alt="Festival Logo" class="sf-logo" />
                 <h2>Der Hvor Himlen Møder Jorden</h2>
+                <h3>22. - 25. juli 2026</h3>
                 <div id="sf-content-anchor"></div>
                 <nav class="sf-nav">
                     <ul>
@@ -74,7 +96,7 @@ export class sf_app extends LitElement {
                     </ul>
                 </nav>
                     ${this.renderPage()}
-                <hr class="sf-footer">Ved Verdens Ende Festival 2025</hr>
+                <footer class="sf-footer">Ved Verdens Ende Festival 2026</footer>
             </div>
         `;
     }

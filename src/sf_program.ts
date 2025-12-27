@@ -98,20 +98,21 @@ export class sf_program extends LitElement {
 
             <div class="sf-content">
                 <p>Her kan du se festivalens program.</p>
-                <p>Programmet er under udvikling, så der kan komme ændringer.</p>
+                <p>Programmet er under udvikling.</p>
             </div>
-            <div class="sf-content-special">
-                <table class="sf-program-table">
-                    <thead>
-                        <tr>
-                            <th colspan="3" class="sf-title">Ved Verdens Ende 2025</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${this.program.map((p) => render_prog_day(p))}
-                    </tbody>
-                </table>
-            </div>
+            
         `;
+        // <div class="sf-content-special">
+        //         <table class="sf-program-table">
+        //             <thead>
+        //                 <tr>
+        //                     <th colspan="3" class="sf-title">Ved Verdens Ende 2026</th>
+        //                 </tr>
+        //             </thead>
+        //             <tbody>
+        //                 ${this.program.map((p) => render_prog_day(p))}
+        //             </tbody>
+        //         </table>
+        //     </div>
   }
 }

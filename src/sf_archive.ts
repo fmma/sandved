@@ -11,7 +11,7 @@ export class sf_archive extends LitElement {
                 <h3>Arkiv</h3>
                 <p>Her kan du finde tidligere års informationer og materialer.</p>
                 <ul>
-                    <li><a href="https://vedverdensende.dk/2025">Sandved Verdens Ende 2025</li>
+                    <li><a href="https://vedverdensende.dk/2025">Ved Verdens Ende 2025</a></li>
                 </ul>
             </div>
         `;

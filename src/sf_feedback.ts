@@ -3,7 +3,7 @@ import { customElement, query, state } from "lit/decorators.js";
 
 import { db } from '@fmma-npm/http-client';
 
-const DB_KEY = 'sf2025_feedback';
+const DB_KEY = 'sf2026_feedback';
 
 type FeedbackRecord = { name: string, feedback: string, hide: boolean, date: Date };
 
@@ -44,7 +44,7 @@ export class sf_feedback extends LitElement {
             await db.appendObject(DB_KEY, {name, feedback, hide, date: new Date()});
             await this._load_feedback();
         } else {
-            alert('Please enter your feedback before submitting.');
+            alert('Skriv venligst din feedback før du sender.');
         }
     }
 
@@ -53,7 +53,7 @@ export class sf_feedback extends LitElement {
         return html`
             <div class="sf-content">
             <h3>Feedback</h3>
-            <p>Vi vil gerne høre din mening om festivalen Ved Verdens Ende 2025. Hvad kunne være bedre? Hvad var godt? Hvad savnede du? Det kan handle om alle aspekter af festivalen og må meget gerne indeholde konkrete forslag til ændringer eller forbedringer.</p>
+            <p>Vi vil gerne høre din mening om festivalen Ved Verdens Ende 2026. Hvad kunne være bedre? Hvad var godt? Hvad savnede du? Det kan handle om alle aspekter af festivalen og må meget gerne indeholde konkrete forslag til ændringer eller forbedringer.</p>
             <p> Mange har allerede givet feedback skriftligt på festivalen, men nu er der mulighed for at supplere, hvis man er kommet I tanke om mere.</p>
             <p> Skjul din feedback, hvis du ønsker det. Så er det kun arrangørerne der ser det.</p> 
             <input type="text" placeholder="Dit navn (valgfrit)" />

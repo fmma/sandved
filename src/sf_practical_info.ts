@@ -10,7 +10,7 @@ export class sf_practical_info extends LitElement {
             <div class="sf-content">
                 <h3>Praktisk Information</h3>
                 
-                <p><em>Festivalen afholdes fra 24.-27. juli 2025 på Møllevej 44 i Sandved.</em></p>
+                <p><em>Festivalen afholdes 22. - 25. juli 2026 på Møllevej 44 i Sandved.</em></p>
                 <h4 id="praktisk:faq"> Ofte stillede spørgsmål </h4>                
                 <nav class="sf-subnav">
                     <ul>
@@ -31,14 +31,7 @@ export class sf_practical_info extends LitElement {
 
                 <h4 id="praktisk:q1"> Hvornår skal jeg komme? </h4>
                 <p>
-Hvornår skal jeg komme?
-Festivalpladsen åbner d. 24. kl 9, hvor man kan sætte telt op og begynde at komme i festivalstemning og efter frokost starter festivalprogrammet med aktiviteter.
-                </p>
-                <p>
-                Kommer man på en 1- eller 2-dages billet, er man velkommen på pladsen fra klokken 9.30 den dag man ankommer og man kan blive indtil kl. 11.30 den dag man tager hjem.
-                </p>
-                <p>
-                Den 27. slutter festivalen og vi regner med at alle bliver og giver en hånd med oprydning og nedpakning inden vi siger “farvel og vi ses til næste år”.
+                Festivalsstart annonceres snart. Ankomsttidspunkt vil blive oplyst i god tid inden festivalen.
                 </p>
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q2"> Hvor kan jeg parkere? </h4>
@@ -56,7 +49,7 @@ Festivalpladsen åbner d. 24. kl 9, hvor man kan sætte telt op og begynde at ko
 Der vil være mulighed for at blive kørt tilbage til festivalen, når man skal hen med sin bil.
                 </p>
                 <img src="https://snesl.dk/media/0f09298878a6bad564503e3ddbc87e22.jpg" alt="Festival Logo" class="sf-logo-inline" />
-                
+
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:offentlig"> Kan man komme dertil med offentlig transport? </h4>
                 <p>
@@ -94,7 +87,7 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
                 <p>
                 I skal medbringe:
                 <ul>
-<li>Egne telte. Såfremt man ønsker at komme i campingvogn, skal man allerede nu kontakte planlægninsgruppen, da der er begrænset mulighed for parkering af campingvogne.</li>
+<li>Egne telte. Såfremt man ønsker at komme i campingvogn, skal man allerede nu kontakte planlægningsgruppen, da der er begrænset mulighed for parkering af campingvogne.</li>
 <li>Alt hvad I skal bruge til at sove.</li>
 <li>Alt hvad I normalt ville have med på campingferie.</li>
 <li>Evt. egne instrumenter, hvis I ønsker at spille.</li>

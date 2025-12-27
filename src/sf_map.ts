@@ -14,7 +14,8 @@ export class sf_map extends LitElement {
         return html`
 
             <div class="sf-content">
-                <p><em>Festivalen afholdes fra 24.-27. juli 2025 på Møllevej 44 i Sandved.</em></p>
+                <p><em>Festivalen afholdes 22. - 25. juli 2026 på Møllevej 44 i Sandved.</em></p>
+                <p><em>Kortet kan ændres.</em></p>
             </div>
             <div class="sf-content-special">
                 <img src="https://snesl.dk/media/${this.kort}" alt="Festivalkort" class="sf-map" />

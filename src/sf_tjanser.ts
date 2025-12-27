@@ -41,559 +41,559 @@ type Program = {
 }[]
 
 @customElement('sf-tjanser')
-export class sf_about extends LitElement {
+export class sf_tjanser extends LitElement {
     renderRoot = this;
 
     @state()
     private _query: string = '';
 
     program: Program = [
-        {
-            day: 'Torsdag',
-            schedule: [
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Reklamemand',
-                        task_time: 'Hele dagen',
-                        participants: [
-                            'Sigurd'
-                        ]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave frokost',
-                        task_time: '11:00',
-                        participants: [
-                            'Sif', 'Pernille'
-                        ],
-                        render_card: [render_frokost, "frokost"]
-                    }, {
-                        task_name: 'Oprydning efter frokost',
-                        task_time: '13:00',
-                        participants: [
-                            'Morten LN', 'Jesper', 'Christian'
-                        ],
-                        render_card: [render_frokost_opr, "frokost-opryd"]
-                    }]
-                },
-                {
-                    activity: 'Festival Kickstart',
-                    tasks: [{
-                        task_name: 'Snitte pinde til snobrød',
-                        task_time: '13:00',
-                        participants: [
-                            'Vincent', 'Nickolei',
-                        ],
-                        render_card: [render_snitte_pinde, "snit"]
-                    },
-                    {
-                        task_name: 'Skrive festivalssangen',
-                        task_time: '13:30',
-                        participants: [
-                            'Anne S', 'Theresa', 'Frederik'
-                        ],
-                        render_card: [render_skriv_sang, "skriv-sang"]
-                    }, {
-                        task_name: 'Lave bannere',
-                        task_time: '13:30',
-                        participants: [
-                            'Joan', 'Jannie',
-                        ],
-                        render_card: [render_lav_banner, "banner"]
-                    }, {
-                        task_name: 'Snobrødsdej',
-                        task_time: '13:30',
-                        participants: [
-                            'Morten B',
-                        ],
-                        render_card: [render_lav_snobroed, "snobrod"]
-                    }, {
-                        task_name: 'Skiltelavning',
-                        task_time: '13:30',
-                        participants: [
-                            'Sif', 'Nikoline'
-                        ],
-                        render_card: [render_lav_skilt, "skilt"]
-                    }]
-                },
+        // {
+        //     day: 'Torsdag',
+        //     schedule: [
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Reklamemand',
+        //                 task_time: 'Hele dagen',
+        //                 participants: [
+        //                     'Sigurd'
+        //                 ]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave frokost',
+        //                 task_time: '11:00',
+        //                 participants: [
+        //                     'Sif', 'Pernille'
+        //                 ],
+        //                 render_card: [render_frokost, "frokost"]
+        //             }, {
+        //                 task_name: 'Oprydning efter frokost',
+        //                 task_time: '13:00',
+        //                 participants: [
+        //                     'Morten LN', 'Jesper', 'Christian'
+        //                 ],
+        //                 render_card: [render_frokost_opr, "frokost-opryd"]
+        //             }]
+        //         },
+        //         {
+        //             activity: 'Festival Kickstart',
+        //             tasks: [{
+        //                 task_name: 'Snitte pinde til snobrød',
+        //                 task_time: '13:00',
+        //                 participants: [
+        //                     'Vincent', 'Nickolei',
+        //                 ],
+        //                 render_card: [render_snitte_pinde, "snit"]
+        //             },
+        //             {
+        //                 task_name: 'Skrive festivalssangen',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Anne S', 'Theresa', 'Frederik'
+        //                 ],
+        //                 render_card: [render_skriv_sang, "skriv-sang"]
+        //             }, {
+        //                 task_name: 'Lave bannere',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Joan', 'Jannie',
+        //                 ],
+        //                 render_card: [render_lav_banner, "banner"]
+        //             }, {
+        //                 task_name: 'Snobrødsdej',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Morten B',
+        //                 ],
+        //                 render_card: [render_lav_snobroed, "snobrod"]
+        //             }, {
+        //                 task_name: 'Skiltelavning',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Sif', 'Nikoline'
+        //                 ],
+        //                 render_card: [render_lav_skilt, "skilt"]
+        //             }]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave aftensmad',
-                        task_time: '16:00',
-                        participants: [
-                            'Michael', 'Rasmus', 'Anne S', 'Theresa'
-                        ],
-                        render_card: [render_aftensmad, "aftensmad"]
-                    }, {
-                        task_name: 'Oprydning efter aftensmad',
-                        task_time: '19:00',
-                        participants: [
-                            'Nikoline', 'Nickolei', 'Aske',
-                        ],
-                        render_card: [render_aftensmad_opr, "aftensmad-opryd"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Bålhygge',
-                        task_time: '19:00',
-                        participants: [
-                            'Jesper', 'Michael',
-                        ],
-                        render_card: [render_baalhygge, "bhaalhygge"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Børnefilm',
-                        task_time: '19:00',
-                        participants: [
-                            'Pernille', 'Morten LN'
-                        ],
-                        render_card: [render_biograf, "bio"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Musikquiz',
-                        task_time: '21:00',
-                        participants: [
-                            'Morten B',
-                        ],
-                        render_card: [render_musikquiz, "musikquiz"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Jam Session',
-                        task_time: '22:00',
-                        participants: [
-                            'Nikoline', 'Frederik'
-                        ]
-                    }]
-                }
-            ]
-        },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave aftensmad',
+        //                 task_time: '16:00',
+        //                 participants: [
+        //                     'Michael', 'Rasmus', 'Anne S', 'Theresa'
+        //                 ],
+        //                 render_card: [render_aftensmad, "aftensmad"]
+        //             }, {
+        //                 task_name: 'Oprydning efter aftensmad',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Nikoline', 'Nickolei', 'Aske',
+        //                 ],
+        //                 render_card: [render_aftensmad_opr, "aftensmad-opryd"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Bålhygge',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Jesper', 'Michael',
+        //                 ],
+        //                 render_card: [render_baalhygge, "bhaalhygge"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Børnefilm',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Pernille', 'Morten LN'
+        //                 ],
+        //                 render_card: [render_biograf, "bio"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Musikquiz',
+        //                 task_time: '21:00',
+        //                 participants: [
+        //                     'Morten B',
+        //                 ],
+        //                 render_card: [render_musikquiz, "musikquiz"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Jam Session',
+        //                 task_time: '22:00',
+        //                 participants: [
+        //                     'Nikoline', 'Frederik'
+        //                 ]
+        //             }]
+        //         }
+        //     ]
+        // },
 
-        {
-            day: 'Fredag',
-            schedule: [
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Reklamemand',
-                        task_time: 'Hele dagen',
-                        participants: [
-                            'Sigurd'
-                        ]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [
-                        {
-                            task_name: 'Lejroprydning',
-                            task_time: 'Før 10:00',
-                            participants: ['Rasmus', 'Jannie'],
-                            render_card: [render_lejroprydning, "lejropryd"]
-                        }
-                    ]
-                },
+        // {
+        //     day: 'Fredag',
+        //     schedule: [
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Reklamemand',
+        //                 task_time: 'Hele dagen',
+        //                 participants: [
+        //                     'Sigurd'
+        //                 ]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [
+        //                 {
+        //                     task_name: 'Lejroprydning',
+        //                     task_time: 'Før 10:00',
+        //                     participants: ['Rasmus', 'Jannie'],
+        //                     render_card: [render_lejroprydning, "lejropryd"]
+        //                 }
+        //             ]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [
-                        {
-                            task_name: 'Toiletter',
-                            task_time: 'Før 10:00',
-                            participants: ['Morten B', 'Pernille'],
-                            render_card: [render_toilet, "toilet"]
-                        }
-                    ]
-                },
+        //         {
+        //             activity: '',
+        //             tasks: [
+        //                 {
+        //                     task_name: 'Toiletter',
+        //                     task_time: 'Før 10:00',
+        //                     participants: ['Morten B', 'Pernille'],
+        //                     render_card: [render_toilet, "toilet"]
+        //                 }
+        //             ]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave morgenmad',
-                        task_time: '07:00',
-                        participants: [
-                            'Anne S', 'Trine'
-                        ],
-                        render_card: [render_morgenmad, "morgenmad"]
-                    }, {
-                        task_name: 'Oprydning efter morgenmad',
-                        task_time: '9:30',
-                        participants: [
-                            'Benjamin', 'Vincent'
-                        ],
-                        render_card: [render_morgenmad_opr, "morgenmad-opryd"]
-                    }
-                    ]
-                },
-                {
-                    activity: 'Musisk Formiddag',
-                    tasks: [{
-                        task_name: 'Børnekor',
-                        task_time: '9:30',
-                        participants: [
-                            'Nikoline'
-                        ],
-                        render_card: [render_boernekor, "bornekor"]
-                    }, {
-                        task_name: 'Begynderguitar',
-                        task_time: '9:30',
-                        participants: [
-                            'Sif'
-                        ],
-                        render_card: [render_begynderguitar, "begynderguitar"]
-                    }, {
-                        task_name: 'Begynderband',
-                        task_time: '9:30',
-                        participants: [
-                            'Frederik'
-                        ],
-                        render_card: [render_begynderband, "begynderband"]
-                    }
-                    ]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave frokost',
-                        task_time: '11:00',
-                        participants: [
-                            'Nickolei', 'Morten LN'
-                        ],
-                        render_card: [render_frokost, "frokost"]
-                    }, {
-                        task_name: 'Oprydning efter frokost',
-                        task_time: '13:00',
-                        participants: [
-                            'Joan', 'Theresa', 'Lara'
-                        ],
-                        render_card: [render_frokost_opr, "frokost-opryd"]
-                    }]
-                },
-                {
-                    activity: 'Våd Eftermiddag',
-                    tasks: [{
-                        task_name: 'Vandpistoler og balloner',
-                        task_time: '13:30',
-                        participants: [
-                            'Vincent', 'Theresa'
-                        ],
-                        render_card: [render_vand, "vand"]
-                    }, {
-                        task_name: 'Glidebane',
-                        task_time: '13:30',
-                        participants: [
-                            'James', 'Benjamin'
-                        ],
-                        render_card: [render_glidebane, "glidebane"]
-                    }, {
-                        task_name: 'Sæbebobler',
-                        task_time: '13:30',
-                        participants: [
-                            'Jannie', 'Rasmus'
-                        ],
-                        render_card: [render_saebebobler, "bobler"]
-                    }
-                    ]
-                },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave morgenmad',
+        //                 task_time: '07:00',
+        //                 participants: [
+        //                     'Anne S', 'Trine'
+        //                 ],
+        //                 render_card: [render_morgenmad, "morgenmad"]
+        //             }, {
+        //                 task_name: 'Oprydning efter morgenmad',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Benjamin', 'Vincent'
+        //                 ],
+        //                 render_card: [render_morgenmad_opr, "morgenmad-opryd"]
+        //             }
+        //             ]
+        //         },
+        //         {
+        //             activity: 'Musisk Formiddag',
+        //             tasks: [{
+        //                 task_name: 'Børnekor',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Nikoline'
+        //                 ],
+        //                 render_card: [render_boernekor, "bornekor"]
+        //             }, {
+        //                 task_name: 'Begynderguitar',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Sif'
+        //                 ],
+        //                 render_card: [render_begynderguitar, "begynderguitar"]
+        //             }, {
+        //                 task_name: 'Begynderband',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Frederik'
+        //                 ],
+        //                 render_card: [render_begynderband, "begynderband"]
+        //             }
+        //             ]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave frokost',
+        //                 task_time: '11:00',
+        //                 participants: [
+        //                     'Nickolei', 'Morten LN'
+        //                 ],
+        //                 render_card: [render_frokost, "frokost"]
+        //             }, {
+        //                 task_name: 'Oprydning efter frokost',
+        //                 task_time: '13:00',
+        //                 participants: [
+        //                     'Joan', 'Theresa', 'Lara'
+        //                 ],
+        //                 render_card: [render_frokost_opr, "frokost-opryd"]
+        //             }]
+        //         },
+        //         {
+        //             activity: 'Våd Eftermiddag',
+        //             tasks: [{
+        //                 task_name: 'Vandpistoler og balloner',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Vincent', 'Theresa'
+        //                 ],
+        //                 render_card: [render_vand, "vand"]
+        //             }, {
+        //                 task_name: 'Glidebane',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'James', 'Benjamin'
+        //                 ],
+        //                 render_card: [render_glidebane, "glidebane"]
+        //             }, {
+        //                 task_name: 'Sæbebobler',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Jannie', 'Rasmus'
+        //                 ],
+        //                 render_card: [render_saebebobler, "bobler"]
+        //             }
+        //             ]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave aftensmad',
-                        task_time: '16:00',
-                        participants: [
-                            'Michael', 'Maja', 'Frederik', 'Jesper'
-                        ],
-                        render_card: [render_aftensmad, "aftensmad"]
-                    }, {
-                        task_name: 'Oprydning efter aftensmad',
-                        task_time: '19:00',
-                        participants: [
-                            'Janne', 'James', 'Sigurd',
-                        ],
-                        render_card: [render_aftensmad_opr, "aftensmad-opryd"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Bålhygge',
-                        task_time: '19:00',
-                        participants: [
-                            'Joan', 'Nickolei',
-                        ],
-                        render_card: [render_baalhygge, "bhaalhygge"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Børnefilm',
-                        task_time: '19:00',
-                        participants: [
-                            'Maja', 'Morten LN'
-                        ],
-                        render_card: [render_biograf, "bio"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Koncert: Arm the Homeless',
-                        task_time: '21:00',
-                        participants: [
-                            'Michael'
-                        ]
-                    }]
-                }
-            ]
-        },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave aftensmad',
+        //                 task_time: '16:00',
+        //                 participants: [
+        //                     'Michael', 'Maja', 'Frederik', 'Jesper'
+        //                 ],
+        //                 render_card: [render_aftensmad, "aftensmad"]
+        //             }, {
+        //                 task_name: 'Oprydning efter aftensmad',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Janne', 'James', 'Sigurd',
+        //                 ],
+        //                 render_card: [render_aftensmad_opr, "aftensmad-opryd"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Bålhygge',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Joan', 'Nickolei',
+        //                 ],
+        //                 render_card: [render_baalhygge, "bhaalhygge"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Børnefilm',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Maja', 'Morten LN'
+        //                 ],
+        //                 render_card: [render_biograf, "bio"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Koncert: Arm the Homeless',
+        //                 task_time: '21:00',
+        //                 participants: [
+        //                     'Michael'
+        //                 ]
+        //             }]
+        //         }
+        //     ]
+        // },
 
-        {
-            day: 'Lørdag',
-            schedule: [
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Reklamemand',
-                        task_time: 'Hele dagen',
-                        participants: [
-                            'Sigurd'
-                        ]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [
-                        {
-                            task_name: 'Lejroprydning',
-                            task_time: 'Før 10:00',
-                            participants: ['James', 'Vincent'],
-                            render_card: [render_lejroprydning, "lejropryd"]
-                        }
-                    ]
-                },
+        // {
+        //     day: 'Lørdag',
+        //     schedule: [
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Reklamemand',
+        //                 task_time: 'Hele dagen',
+        //                 participants: [
+        //                     'Sigurd'
+        //                 ]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [
+        //                 {
+        //                     task_name: 'Lejroprydning',
+        //                     task_time: 'Før 10:00',
+        //                     participants: ['James', 'Vincent'],
+        //                     render_card: [render_lejroprydning, "lejropryd"]
+        //                 }
+        //             ]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [
-                        {
-                            task_name: 'Toiletter',
-                            task_time: 'Før 10:00',
-                            participants: ['Nikoline', 'Trine'],
-                            render_card: [render_toilet, "toilet"]
-                        }
-                    ]
-                },
+        //         {
+        //             activity: '',
+        //             tasks: [
+        //                 {
+        //                     task_name: 'Toiletter',
+        //                     task_time: 'Før 10:00',
+        //                     participants: ['Nikoline', 'Trine'],
+        //                     render_card: [render_toilet, "toilet"]
+        //                 }
+        //             ]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave morgenmad',
-                        task_time: '07:00',
-                        participants: [
-                            'Jannie', 'Janne'
-                        ],
-                        render_card: [render_morgenmad, "morgenmad"]
-                    }, {
-                        task_name: 'Oprydning efter morgenmad',
-                        task_time: '9:30',
-                        participants: [
-                            'Rasmus', 'Maja',
-                        ],
-                        render_card: [render_morgenmad_opr, "morgenmad-opryd"]
-                    }
-                    ]
-                },
-                {
-                    activity: 'OL formiddag',
-                    tasks: [{
-                        task_name: 'Tovtrækning',
-                        task_time: '9:30',
-                        participants: [
-                            'Theresa', 'Sif'
-                        ],
-                        render_card: [render_tovtraek, "tov"]
-                    }, {
-                        task_name: 'Human-bowling glidebane',
-                        task_time: '9:30',
-                        participants: [
-                            'Jannie', 'Benjamin'
-                        ],
-                        render_card: [render_human_bowling, "human-bowling"]
-                    }, {
-                        task_name: 'Kongespil',
-                        task_time: '9:30',
-                        participants: [
-                            'James', 'Tina'
-                        ],
-                        render_card: [render_kongespil, "kongespil"]
-                    }
-                    ]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave frokost',
-                        task_time: '11:00',
-                        participants: [
-                            'Morten B', 'Jesper'
-                        ],
-                        render_card: [render_frokost, "frokost"]
-                    }, {
-                        task_name: 'Oprydning efter frokost',
-                        task_time: '13:00',
-                        participants: [
-                            'Sif', 'Nickolei', 'Frigg'
-                        ],
-                        render_card: [render_frokost_opr, "frokost-opryd"]
-                    }]
-                },
-                {
-                    activity: 'OL eftermiddag',
-                    tasks: [{
-                        task_name: 'Synkronsvømning',
-                        task_time: '13:30',
-                        participants: [
-                            'Janne', 'Pernille'
-                        ],
-                        render_card: [render_synkron, "synkron"]
-                    }, {
-                        task_name: 'Petang',
-                        task_time: '13:30',
-                        participants: [
-                            'Tina', 'Maja'
-                        ],
-                        render_card: [render_petang, "petang"]
-                    }, {
-                        task_name: 'Band for øvede',
-                        task_time: '13:30',
-                        participants: [
-                            'Frederik'
-                        ]
-                    }
-                    ]
-                },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave morgenmad',
+        //                 task_time: '07:00',
+        //                 participants: [
+        //                     'Jannie', 'Janne'
+        //                 ],
+        //                 render_card: [render_morgenmad, "morgenmad"]
+        //             }, {
+        //                 task_name: 'Oprydning efter morgenmad',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Rasmus', 'Maja',
+        //                 ],
+        //                 render_card: [render_morgenmad_opr, "morgenmad-opryd"]
+        //             }
+        //             ]
+        //         },
+        //         {
+        //             activity: 'OL formiddag',
+        //             tasks: [{
+        //                 task_name: 'Tovtrækning',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Theresa', 'Sif'
+        //                 ],
+        //                 render_card: [render_tovtraek, "tov"]
+        //             }, {
+        //                 task_name: 'Human-bowling glidebane',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Jannie', 'Benjamin'
+        //                 ],
+        //                 render_card: [render_human_bowling, "human-bowling"]
+        //             }, {
+        //                 task_name: 'Kongespil',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'James', 'Tina'
+        //                 ],
+        //                 render_card: [render_kongespil, "kongespil"]
+        //             }
+        //             ]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave frokost',
+        //                 task_time: '11:00',
+        //                 participants: [
+        //                     'Morten B', 'Jesper'
+        //                 ],
+        //                 render_card: [render_frokost, "frokost"]
+        //             }, {
+        //                 task_name: 'Oprydning efter frokost',
+        //                 task_time: '13:00',
+        //                 participants: [
+        //                     'Sif', 'Nickolei', 'Frigg'
+        //                 ],
+        //                 render_card: [render_frokost_opr, "frokost-opryd"]
+        //             }]
+        //         },
+        //         {
+        //             activity: 'OL eftermiddag',
+        //             tasks: [{
+        //                 task_name: 'Synkronsvømning',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Janne', 'Pernille'
+        //                 ],
+        //                 render_card: [render_synkron, "synkron"]
+        //             }, {
+        //                 task_name: 'Petang',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Tina', 'Maja'
+        //                 ],
+        //                 render_card: [render_petang, "petang"]
+        //             }, {
+        //                 task_name: 'Band for øvede',
+        //                 task_time: '13:30',
+        //                 participants: [
+        //                     'Frederik'
+        //                 ]
+        //             }
+        //             ]
+        //         },
 
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave aftensmad',
-                        task_time: '16:00',
-                        participants: [
-                            'Michael', 'Mathias', 'Benjamin', 'Kasper M', 'Pernille'
-                        ],
-                        render_card: [render_aftensmad, "aftensmad"]
-                    }, {
-                        task_name: 'Oprydning efter aftensmad',
-                        task_time: '19:00',
-                        participants: [
-                            'Tina', 'Sif', 'Gro',
-                        ],
-                        render_card: [render_aftensmad_opr, "aftensmad-opryd"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Bålhygge',
-                        task_time: '19:00',
-                        participants: [
-                            'Rasmus', 'Mathias',
-                        ],
-                        render_card: [render_baalhygge, "bhaalhygge"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Børnefilm',
-                        task_time: '19:00',
-                        participants: [
-                            'Jesper', 'Kasper M'
-                        ],
-                        render_card: [render_biograf, "bio"]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Koncert: Begynderband',
-                        task_time: '21:00',
-                        participants: [
-                            'Frederik'
-                        ]
-                    }, {
-                        task_name: 'Koncert: Festivalsband',
-                        task_time: '22:00',
-                        participants: [
-                            'Frederik'
-                        ]
-                    }]
-                }
-            ]
-        },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave aftensmad',
+        //                 task_time: '16:00',
+        //                 participants: [
+        //                     'Michael', 'Mathias', 'Benjamin', 'Kasper M', 'Pernille'
+        //                 ],
+        //                 render_card: [render_aftensmad, "aftensmad"]
+        //             }, {
+        //                 task_name: 'Oprydning efter aftensmad',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Tina', 'Sif', 'Gro',
+        //                 ],
+        //                 render_card: [render_aftensmad_opr, "aftensmad-opryd"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Bålhygge',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Rasmus', 'Mathias',
+        //                 ],
+        //                 render_card: [render_baalhygge, "bhaalhygge"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Børnefilm',
+        //                 task_time: '19:00',
+        //                 participants: [
+        //                     'Jesper', 'Kasper M'
+        //                 ],
+        //                 render_card: [render_biograf, "bio"]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Koncert: Begynderband',
+        //                 task_time: '21:00',
+        //                 participants: [
+        //                     'Frederik'
+        //                 ]
+        //             }, {
+        //                 task_name: 'Koncert: Festivalsband',
+        //                 task_time: '22:00',
+        //                 participants: [
+        //                     'Frederik'
+        //                 ]
+        //             }]
+        //         }
+        //     ]
+        // },
 
-        {
-            day: 'Søndag',
-            schedule: [
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Reklamemand',
-                        task_time: 'Hele dagen',
-                        participants: [
-                            'Sigurd'
-                        ]
-                    }]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave morgenmad',
-                        task_time: '07:00',
-                        participants: [
-                            'Vincent', 'Frederik'
-                        ],
-                        render_card: [render_morgenmad, "morgenmad"]
-                    }, {
-                        task_name: 'Oprydning efter morgenmad',
-                        task_time: '9:30',
-                        participants: [
-                            'Trine', 'Jannie',
-                        ],
-                        render_card: [render_morgenmad_opr, "morgenmad-opryd"]
-                    }
-                    ]
-                },
-                {
-                    activity: '',
-                    tasks: [{
-                        task_name: 'Lave frokost',
-                        task_time: '11:00',
-                        participants: [
-                            'Joan', 'Nikoline'
-                        ],
-                        render_card: [render_frokost, "frokost"]
-                    }]
-                }
-            ]
-        }
+        // {
+        //     day: 'Søndag',
+        //     schedule: [
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Reklamemand',
+        //                 task_time: 'Hele dagen',
+        //                 participants: [
+        //                     'Sigurd'
+        //                 ]
+        //             }]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave morgenmad',
+        //                 task_time: '07:00',
+        //                 participants: [
+        //                     'Vincent', 'Frederik'
+        //                 ],
+        //                 render_card: [render_morgenmad, "morgenmad"]
+        //             }, {
+        //                 task_name: 'Oprydning efter morgenmad',
+        //                 task_time: '9:30',
+        //                 participants: [
+        //                     'Trine', 'Jannie',
+        //                 ],
+        //                 render_card: [render_morgenmad_opr, "morgenmad-opryd"]
+        //             }
+        //             ]
+        //         },
+        //         {
+        //             activity: '',
+        //             tasks: [{
+        //                 task_name: 'Lave frokost',
+        //                 task_time: '11:00',
+        //                 participants: [
+        //                     'Joan', 'Nikoline'
+        //                 ],
+        //                 render_card: [render_frokost, "frokost"]
+        //             }]
+        //         }
+        //     ]
+        // }
     ]
 
     private _participants() {
@@ -700,7 +700,7 @@ export class sf_about extends LitElement {
             <div class="sf-content-special">
 
                 <p><label for="search-input-id">Vælg dit navn eller skriv navnet på en opgave:</label></p>
-                <input type="search" list="browsers" name="search-input-id" id="search-input-id" class="search-input" @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} type="text" placeholder="Søg i tjanser" class="sf-search-input" />
+                <input type="search" list="browsers" name="search-input-id" id="search-input-id" class="search-input sf-search-input" @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} placeholder="Søg i tjanser" />
 
 
 <datalist id="browsers">
@@ -709,7 +709,7 @@ ${this._participants().map(p => html`<option value="${p}"></option>`)}
                 <table class="sf-program-table">
                     <thead>
                         <tr>
-                            <th colspan="4" class="sf-title">Ved Verdens Ende 2025</th>
+                            <th colspan="4" class="sf-title">Ved Verdens Ende 2026</th>
                         </tr>
                     </thead>
                     <tbody>

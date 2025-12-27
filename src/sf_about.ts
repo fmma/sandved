@@ -63,7 +63,7 @@ export class sf_about extends LitElement {
                 box-shadow: 0 2px 12px #d7266040;
                 text-shadow: 2px 2px 8px #d7266040;
             ">
-            Tak for denne gang! Vi ses igen i 2026! 👋
+            2026 annonceres snart!
             </div>
         `;
 
@@ -73,10 +73,11 @@ export class sf_about extends LitElement {
 
             ${countdownBanner}
             
-                <p> Festivalen er slut for i år. <p>
-                <p> Feedback kan afleveres på <a href="#feedback">feedback fanen</a>.</p>
-                <p> Hvis man har billeder eller videoer man gerne vil dele, kan man uploade dem på <a href="#media">Billeder og Videoer</a>.</p>
-                <p> I <a href="#archive">arkivet</a> kan man finde den oprindelige hjemmeside for 2025.</p>
+                <p><em>Festivalen afholdes 22. - 25. juli 2026 på Møllevej 44 i Sandved.</em></p>
+                <p>Vi håber I vil komme og være med til at lave en fantastisk non-profit sommerfestival for børn og voksne i Sandved. Sif og Michael bor på et stort landsted med masser af plads til musik, aktiviteter, telte, sjov og ballade. Vi strikker et fedt program sammen, så alle aldre og typer kan få de mest hyggelige dage sammen.</p>
+
+                <p> Der kommer til at være musikscene, pool, bålsted og hyggeligt samvær. Vi opfordrer alle til at bidrage med indslag og ideer. Vores håb er nogle skønne dage med højt til loftet og solskin i fantastisk selskab med hyggelige og sjove aktiviteter. Så kom og slå teltet op og nyd 4 dage i de bedste omgivelser.</p>
+
                 <img src="https://snesl.dk/media/7f3129d99fb471685992f9bb960868e0.png" alt="Festival Logo" class="sf-logo-inline" />
             </div>
         `;
