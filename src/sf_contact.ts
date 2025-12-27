@@ -32,7 +32,7 @@ export class sf_contact extends LitElement {
                     ${this.render_contacts()}
                 </ul>
 
-                    <img alt="" src="https://snesl.dk/media/${this.im_highway_sign}" style="width: 100%;" title=""> 
+                    <img alt="Vejskilt til Ved Verdens Ende" src="https://snesl.dk/media/${this.im_highway_sign}" style="width: 100%;"> 
             </div>
         `;
     }
