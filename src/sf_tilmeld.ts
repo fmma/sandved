@@ -25,6 +25,8 @@ export class sf_tilmeld extends LitElement {
                 <p>Der vil være frokost og aftensmad, samt morgenmad dagen efter med i en døgnbillet. </p>
                 <p>Der er frist for tilmelding d. 1. maj og bindende tilmelding foregår ved betaling til reg: 6771 konto: 6416752. Skriv gerne jeres tilmelding herinde (eller privat til en af os) også, så vi ved hvor mange, og hvilke dage i kommer.</p>
 
+                <p>Det forventes, at man er klar til at deltage i tjanser kl. 15 den dag man ankommer, så kom gerne i god tid og slå telt op, så du er klar til at deltage kl. 15.</p>
+                <p>Hvis man på forhånd ved, at man ikke kan nå at være klar kl. 15, skal det meldes til arrangørerne ved tilmelding.</p>
             </div>
         `;
     }

@@ -696,6 +696,8 @@ export class sf_tjanser extends LitElement {
                 <p> Her er oversigten over alle deltagertjanser - en vagtplan om man vil. Skriv dit navn i søgefeltet for at se hvad dine tjanser er.</p>
                 <p> Tjanserne er under udarbejdelse, og der kan forekomme ændringer. </p>
                 <p> Kontakt Nikoline hvis der er ønsker om ændringer. </p>
+                <p>Det forventes, at man er klar til at deltage i tjanser kl. 15 den dag man ankommer, så kom gerne i god tid og slå telt op, så du er klar til at deltage kl. 15.</p>
+                <p>Hvis man på forhånd ved, at man ikke kan nå at være klar kl. 15, skal det meldes til arrangørerne ved tilmelding.</p>
             </div>
             <div class="sf-content-special">
 

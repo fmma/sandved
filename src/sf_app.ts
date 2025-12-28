@@ -59,22 +59,22 @@ export class sf_app extends LitElement {
     render() {
 
         const menu_items = [
+            { id: 'tilmeld', title: 'Pris og Tilmelding' },
             { id: 'om', title: 'Om' },
+            { id: 'praktisk', title: 'Praktisk Info' },
+            { id: 'kort', title: 'Kort' },
+            { id: 'sang', title: 'Sang' },
+            { id: 'kontakt', title: 'Kontakt' },
+            // Skjult indtil indhold er klar:
+            // { id: 'program', title: 'Program' },
+            // { id: 'film', title: 'Film' },
+            // { id: 'merch', title: 'Merch' },
+            // { id: 'tjanser', title: 'Tjanser' },
+            // { id: 'mad', title: 'Mad' },
+            // { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
             // { id: 'feedback', title: 'Feedback' },
             // { id: 'media', title: 'Billeder og Videoer' },
             // { id: 'archive', title: 'Arkiv' },
-
-            { id: 'praktisk', title: 'Praktisk Info' },
-            { id: 'kort', title: 'Kort' },
-            { id: 'merch', title: 'Merch' },
-            { id: 'program', title: 'Program' },
-            { id: 'film', title: 'Film' },
-            { id: 'tjanser', title: 'Tjanser' },
-            { id: 'mad', title: 'Mad' },
-            { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
-            { id: 'tilmeld', title: 'Pris og Tilmelding' },
-            { id: 'sang', title: 'Sang' },
-            { id: 'kontakt', title: 'Kontakt' },
         ];
         const render_menu = (({id, title}: {id: string, title: string}) => {
             const class_names = this.page === id ? "sf-active" : ""

@@ -12,7 +12,7 @@ export class sf_drinks extends LitElement {
                 <p>
                     Køb foregår med et stregsystem, hvor man tager en drikkevare og sætter en streg på et ark. Afregning sker i slutningen af festivalen.
                 </p>
-               <p> Drikkevarer og priser bliver annonceret snart. </p>
+               <p> Drikkevarer og priser meldes ud før festivalens start. </p>
             </div>
         `;
     }
