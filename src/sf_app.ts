@@ -30,6 +30,12 @@ export class sf_app extends LitElement {
     @state()
     private page: string = this.get_page();
 
+    @state()
+    private showLanding: boolean = true;
+
+    @state()
+    private videoPlaying: boolean = false;
+
     constructor() {
         super();
         if ('scrollRestoration' in window.history) {
@@ -56,7 +62,56 @@ export class sf_app extends LitElement {
         window.location.hash = target.getAttribute('href')!;
     }
 
+    private enterSite() {
+        this.showLanding = false;
+        window.scrollTo(0, 0);
+    }
+
+    private playVideo() {
+        const video = this.querySelector('.sf-landing-video') as HTMLVideoElement;
+        if (video) {
+            video.play();
+            this.videoPlaying = true;
+        }
+    }
+
+    private handleVideoClick() {
+        const video = this.querySelector('.sf-landing-video') as HTMLVideoElement;
+        if (video) {
+            if (video.paused) {
+                video.play();
+                this.videoPlaying = true;
+            } else {
+                video.pause();
+                this.videoPlaying = false;
+            }
+        }
+    }
+
     render() {
+        if (this.showLanding) {
+            return html`
+                <div class="sf-landing">
+                    <h1>Ved Verdens Ende</h1>
+                    <h2>Der Hvor Himlen Møder Jorden</h2>
+                    <h3>22. - 25. juli 2026</h3>
+                    <div class="sf-video-container" @click=${() => this.handleVideoClick()}>
+                        <video loop playsinline class="sf-landing-video"
+                            @ended=${() => this.videoPlaying = false}
+                            @pause=${() => this.videoPlaying = false}
+                            @play=${() => this.videoPlaying = true}>
+                            <source src="landing_video.mp4" type="video/mp4">
+                        </video>
+                        ${!this.videoPlaying ? html`
+                            <button class="sf-play-btn" @click=${(e: Event) => { e.stopPropagation(); this.playVideo(); }}>
+                                ▶ Afspil video
+                            </button>
+                        ` : ''}
+                    </div>
+                    <button class="sf-enter-btn" @click=${() => this.enterSite()}>Kom ind</button>
+                </div>
+            `;
+        }
 
         const menu_items = [
             { id: 'tilmeld', title: 'Pris og Tilmelding' },
