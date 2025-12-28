@@ -36,6 +36,9 @@ export class sf_app extends LitElement {
     @state()
     private videoPlaying: boolean = false;
 
+    @state()
+    private curtainsOpening: boolean = false;
+
     constructor() {
         super();
         if ('scrollRestoration' in window.history) {
@@ -63,8 +66,11 @@ export class sf_app extends LitElement {
     }
 
     private enterSite() {
-        this.showLanding = false;
-        window.scrollTo(0, 0);
+        this.curtainsOpening = true;
+        setTimeout(() => {
+            this.showLanding = false;
+            window.scrollTo(0, 0);
+        }, 1000);
     }
 
     private playVideo() {
@@ -91,24 +97,28 @@ export class sf_app extends LitElement {
     render() {
         if (this.showLanding) {
             return html`
-                <div class="sf-landing">
-                    <h1>Ved Verdens Ende</h1>
-                    <h2>Der Hvor Himlen Møder Jorden</h2>
-                    <h3>22. - 25. juli 2026</h3>
-                    <div class="sf-video-container" @click=${() => this.handleVideoClick()}>
-                        <video loop playsinline class="sf-landing-video"
-                            @ended=${() => this.videoPlaying = false}
-                            @pause=${() => this.videoPlaying = false}
-                            @play=${() => this.videoPlaying = true}>
-                            <source src="landing_video.mp4" type="video/mp4">
-                        </video>
-                        ${!this.videoPlaying ? html`
-                            <button class="sf-play-btn" @click=${(e: Event) => { e.stopPropagation(); this.playVideo(); }}>
-                                ▶ Afspil video
-                            </button>
-                        ` : ''}
+                <div class="sf-landing ${this.curtainsOpening ? 'curtains-opening' : ''}">
+                    <div class="sf-curtain sf-curtain-left"></div>
+                    <div class="sf-curtain sf-curtain-right"></div>
+                    <div class="sf-landing-content">
+                        <h1 class="sf-landing-title">Ved Verdens Ende</h1>
+                        <h2 class="sf-landing-subtitle">Der Hvor Himlen Møder Jorden</h2>
+                        <h3 class="sf-landing-date">22. - 25. juli 2026</h3>
+                        <div class="sf-video-container" @click=${() => this.handleVideoClick()}>
+                            <video loop playsinline class="sf-landing-video"
+                                @ended=${() => this.videoPlaying = false}
+                                @pause=${() => this.videoPlaying = false}
+                                @play=${() => this.videoPlaying = true}>
+                                <source src="landing_video.mp4" type="video/mp4">
+                            </video>
+                            ${!this.videoPlaying ? html`
+                                <button class="sf-play-btn" @click=${(e: Event) => { e.stopPropagation(); this.playVideo(); }}>
+                                    ▶ Afspil video
+                                </button>
+                            ` : ''}
+                        </div>
+                        <button class="sf-enter-btn" @click=${() => this.enterSite()}>Kom ind</button>
                     </div>
-                    <button class="sf-enter-btn" @click=${() => this.enterSite()}>Kom ind</button>
                 </div>
             `;
         }
