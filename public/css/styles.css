@@ -626,58 +626,60 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .sf-landing {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 2em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
     font-family: 'Montserrat', 'Arial', sans-serif;
     text-align: center;
-    background: #111;
-    overflow: hidden;
+    background: rgba(0,0,0,0.01);
+    overflow-y: scroll;
+    z-index: 1000;
+    -webkit-overflow-scrolling: touch;
 }
 
 .sf-landing-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 5;
+    padding: 2em 1em 3em 1em;
+}
+
+/* Titles hidden behind curtains - positioned absolutely so they don't affect layout */
+.sf-landing-title,
+.sf-landing-subtitle,
+.sf-landing-date {
+    position: absolute;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    z-index: 1000;
 }
 
 .sf-landing-title {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 0.3em 0.8em;
-    border-radius: 0.5em;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    top: 15%;
 }
 
 .sf-landing-subtitle {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 0.3em 0.8em;
-    border-radius: 0.5em;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    top: 25%;
+    color: #fcb69f;
 }
 
 .sf-landing-date {
-    background: rgba(255, 255, 255, 0.85);
-    color: #111;
-    padding: 0.3em 0.8em;
-    border-radius: 0.5em;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    top: 33%;
 }
 
-/* Curtains */
+/* Curtains - start closed, behind landing content but above main site */
 .sf-curtain {
     position: fixed;
     top: 0;
     width: 50%;
     height: 100vh;
     background: linear-gradient(180deg, #8B0000 0%, #5C0000 50%, #3D0000 100%);
-    z-index: 100;
-    transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 1001;
     box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+    pointer-events: none;
 }
 
 .sf-curtain::before {
@@ -697,29 +699,27 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .sf-curtain-left {
     left: 0;
-    transform: translateX(-100%);
+    transform: translateX(0);
     border-right: 4px solid #4a0000;
 }
 
 .sf-curtain-right {
     right: 0;
-    transform: translateX(100%);
+    transform: translateX(0);
     border-left: 4px solid #4a0000;
 }
 
-/* Curtains opening animation */
+/* Curtains opening animation - curtains slide away to reveal site */
 .sf-landing.curtains-opening .sf-curtain-left {
-    transform: translateX(-100%);
     animation: curtain-open-left 1s forwards;
 }
 
 .sf-landing.curtains-opening .sf-curtain-right {
-    transform: translateX(100%);
     animation: curtain-open-right 1s forwards;
 }
 
 .sf-landing.curtains-opening .sf-landing-content {
-    animation: fade-out 0.8s forwards;
+    animation: fade-out 0.5s forwards;
 }
 
 @keyframes curtain-open-left {
@@ -737,21 +737,14 @@ input[type="search"]::-webkit-search-cancel-button {
     100% { opacity: 0; }
 }
 
-/* Initial state - curtains closed */
-.sf-landing:not(.curtains-opening) .sf-curtain-left {
-    transform: translateX(0);
-}
-
-.sf-landing:not(.curtains-opening) .sf-curtain-right {
-    transform: translateX(0);
-}
-
+/* Video and button go in front of curtains */
 .sf-video-container {
     position: relative;
     width: 90%;
     max-width: 500px;
-    margin: 1.5em 0;
+    margin: 1em 0;
     cursor: pointer;
+    z-index: 1002;
 }
 
 .sf-landing-video {
@@ -806,6 +799,8 @@ input[type="search"]::-webkit-search-cancel-button {
     box-shadow: 0 4px 24px #d7266040;
     transition: transform 0.2s, box-shadow 0.2s;
     font-family: 'Montserrat', 'Arial', sans-serif;
+    position: relative;
+    z-index: 1002;
 }
 
 .sf-enter-btn:hover,
