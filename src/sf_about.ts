@@ -8,12 +8,8 @@ export class sf_about extends LitElement {
 
 
     private getCountdown() {
-        const target = new Date(new Date().getFullYear(), 6, 24, 9, 0, 0, 0); // July is month 6 (0-based)
+        const target = new Date(2026, 6, 22, 9, 0, 0, 0); // July 22, 2026
         const now = new Date();
-        // If today is after July 24, count down to next year
-        if (now > target) {
-            target.setFullYear(target.getFullYear() + 1);
-        }
         const diff = target.getTime() - now.getTime();
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -63,7 +59,7 @@ export class sf_about extends LitElement {
                 box-shadow: 0 2px 12px #d7266040;
                 text-shadow: 2px 2px 8px #d7266040;
             ">
-            2026 annonceres snart!
+            ${days}d ${hours}t ${minutes}m ${seconds}s
             </div>
         `;
 

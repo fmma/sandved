@@ -96,8 +96,8 @@ export class sf_app extends LitElement {
 
     render() {
         const menu_items = [
-            { id: 'tilmeld', title: 'Pris og Tilmelding' },
             { id: 'om', title: 'Om' },
+            { id: 'tilmeld', title: 'Pris og Tilmelding' },
             { id: 'praktisk', title: 'Praktisk Info' },
             { id: 'kort', title: 'Kort' },
             { id: 'sang', title: 'Sang' },
@@ -163,7 +163,7 @@ export class sf_app extends LitElement {
     }
 
     private get_page() {
-        const page = window.location.hash.replace('#', '') || 'tilmeld';
+        const page = window.location.hash.replace('#', '') || 'om';
         return page.split(':')[0]; // Return the first part of the hash (e.g., 'om', 'kort', etc.)
     }
 
