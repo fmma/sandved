@@ -59,7 +59,7 @@ export class sf_about extends LitElement {
                 box-shadow: 0 2px 12px #d7266040;
                 text-shadow: 2px 2px 8px #d7266040;
             ">
-            ${days}d ${hours}t ${minutes}m ${seconds}s
+            ${days} dage ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}
             </div>
         `;
 
