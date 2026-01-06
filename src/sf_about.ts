@@ -71,6 +71,7 @@ export class sf_about extends LitElement {
             ${countdownBanner}
             
                 <p><em>Festivalen afholdes 22. - 25. juli 2026 på Møllevej 44 i Sandved.</em></p>
+                <p><strong>Efter en fantastisk debut i 2025 gentager vi successen! Dette er andet år festivalen afholdes, og vi glæder os til endnu en omgang med god stemning, musik og fællesskab.</strong></p>
                 <p>Vi håber I vil komme og være med til at lave en fantastisk non-profit sommerfestival for børn og voksne i Sandved. Sif og Michael bor på et stort landsted med masser af plads til musik, aktiviteter, telte, sjov og ballade. Vi strikker et fedt program sammen, så alle aldre og typer kan få de mest hyggelige dage sammen.</p>
 
                 <p> Der kommer til at være musikscene, pool, bålsted og hyggeligt samvær. Vi opfordrer alle til at bidrage med indslag og ideer. Vores håb er nogle skønne dage med højt til loftet og solskin i fantastisk selskab med hyggelige og sjove aktiviteter. Så kom og slå teltet op og nyd 4 dage i de bedste omgivelser.</p>
