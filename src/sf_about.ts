@@ -49,6 +49,7 @@ export class sf_about extends LitElement {
             <div style="
                 font-size: 2.2em;
                 font-weight: bold;
+                font-variant-numeric: tabular-nums;
                 color: #fff;
                 background: linear-gradient(90deg, #d72660 0%, #1b998b 100%);
                 text-align: center;
