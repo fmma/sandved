@@ -148,7 +148,7 @@ export class sf_app extends LitElement {
                                 @ended=${() => this.videoPlaying = false}
                                 @pause=${() => this.videoPlaying = false}
                                 @play=${() => this.videoPlaying = true}>
-                                <source src="landing_video.mp4" type="video/mp4">
+                                <source src="https://snesl.dk/media/3933c70c0ccadacb044c112cba08202a.mp4" type="video/mp4">
                             </video>
                             ${!this.videoPlaying ? html`
                                 <button class="sf-play-btn" @click=${(e: Event) => { e.stopPropagation(); this.playVideo(); }}>
