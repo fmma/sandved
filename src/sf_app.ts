@@ -31,7 +31,7 @@ export class sf_app extends LitElement {
     private page: string = this.get_page();
 
     @state()
-    private showLanding: boolean = true;
+    private showLanding: boolean = !window.location.hash;
 
     @state()
     private videoPlaying: boolean = false;
