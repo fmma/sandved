@@ -37,7 +37,7 @@ export class sf_drinks extends LitElement {
                         </tr>
                         <tr>
                             <td style="padding-left:2em;"><em>Cola, Cola Zero, Pepsi Max, Faxe Kondi, Faxe Kondi 0 kal., Fanta Lemon Zero, Danskvand</em></td>
-                            <td nowrap>4 kr</td>
+                            <td nowrap>5 kr</td>
                         </tr>
                         <tr>
                             <td><strong>Vin</strong></td>
