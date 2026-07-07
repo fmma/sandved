@@ -26,7 +26,7 @@ export function render_baalhygge() {
     return html`
     <h4>Lokation: Bålhytten</h4>
     <p><strong>Beskrivelse:</strong><br>
-    Vi samles omkring det knitrende bål, hvor der hygges, snakkes og grines. Der laves lækkert snobrød over gløderne og ristes skumfiduser, som kan puttes mellem Mariekiks til hjemmelavede s'mores. En rigtig klassiker med varme og stemning i luften!
+    Vi starter kl. 19. Vi samles omkring det knitrende bål, hvor der hygges, snakkes og grines. Der laves lækkert snobrød over gløderne og ristes skumfiduser, som kan puttes mellem Mariekiks til hjemmelavede s'mores. En rigtig klassiker med varme og stemning i luften!
     </p>
     <p><strong>Der skal bruges:</strong></p>
     <ul>

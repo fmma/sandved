@@ -3,7 +3,7 @@ import { html } from "lit";
 export function render_lejroprydning() {
     return html`
      <p>
-            Vi kender os selv godt nok til at vide, at der om natten sker ting og sager, derfor har vi brug for to daglige Lejr Ordens Personer, som har ansvaret for at hele festivalområdet spiller. Der gåes en runde i løbet af formiddagen, hvor der skal samles skrald og tomme genstande. Man får udleveret en ordensvest og affaldsopsamler.
+            Vi kender os selv godt nok til at vide, at der om natten sker ting og sager, derfor har vi brug for to daglige Lejr Ordens Personer, som har ansvaret for at hele festivalområdet og toiletterne spiller. Der gåes en runde i løbet af formiddagen, hvor der skal samles skrald og tomme genstande. Man får udleveret en ordensvest og affaldsopsamler.
         </p>
         <p><strong>Opgave:</strong></p>
         <ul>
@@ -23,7 +23,7 @@ export function render_toilet() {
         <p><strong>Opgaver:</strong></p>
         <ul>
             <li>Alle overflader tørres af.</li>
-            <li>Toilettet skrubbes med børsten.</li>
+            <li>Toiletterne skrubbes med børsten.</li>
             <li>Spejle pudses efter behov.</li>
             <li>Rene håndklæder hænges frem.</li>
             <li>Skraldespande tømmes.</li>

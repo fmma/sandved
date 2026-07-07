@@ -16,6 +16,7 @@ export function render_morgenmad() {
             <li>Fylde buffeten op undervejs efter behov</li>
             <li>Morgenmadsholdet laver et snackfad som skal stå fremme mellem måltider (kiks, grønt, osv.)</li>
             <li>Lave snobrødsdej, som stilles klar i køleskabet</li>
+            <li>Drikkevarer på køl</li>
         </ul>
     `;
 }

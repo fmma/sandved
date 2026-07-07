@@ -127,7 +127,7 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q10">Hvad skal jeg drikke?</h4>
                 <p>
-                I baren kan man købe øl, sodavand, cider og vin med stregsystem til indkøbspris. Barmenuen kommer op <a href="#drikkevaremenu">her</a>, så snart den er på plads.
+                I baren kan man købe øl, sodavand, cider og vin med stregsystem til indkøbspris. Se barmenuen <a href="#drikkevaremenu">her</a>.
                 </p>
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q11">Kan jeg lade min telefon op?</h4>

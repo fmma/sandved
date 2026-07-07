@@ -12,49 +12,64 @@ export class sf_drinks extends LitElement {
                 <p>
                     Køb foregår med et stregsystem, hvor man tager en drikkevare og sætter en streg på et ark. Afregning sker i slutningen af festivalen.
                 </p>
-               <p> Drikkevarer og priser meldes ud før festivalens start. </p>
+                <p>Priserne er indkøbspriser.</p>
+                <table class="sf-drinks-table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Øl, dåse</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Pilsner, Classic</em></td>
+                            <td nowrap>4 kr</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>IPA (Juicy)</em></td>
+                            <td nowrap>10 kr</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Brown Ale</em></td>
+                            <td nowrap>10 kr</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sodavand, dåse/flaske</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Cola, Cola Zero, Pepsi Max, Faxe Kondi, Faxe Kondi 0 kal., Fanta Lemon Zero, Danskvand</em></td>
+                            <td nowrap>4 kr</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vin</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Rød, hvid og rosé</em></td>
+                            <td nowrap>43 kr/liter</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cider og Smirnoff, dåse</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Æblecider</em></td>
+                            <td nowrap>10 kr</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Smirnoff Ice (rød og hvid)</em></td>
+                            <td nowrap>10 kr</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Is</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:2em;"><em>Sun lolly</em></td>
+                            <td nowrap>Gratis</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         `;
     }
 }
-
-//  <table class="sf-drinks-table">
-//                     <tbody>
-//                         <tr>
-//                             <td><strong>Sodavand, dåse/flaske</strong></td>
-//                             <td nowrap>5 kr</td>
-//                         </tr>
-//                         <tr>
-//                             <td style="padding-left:2em;"><em>Coca cola, Coca cola zero, Pepsi max, Faxe Kondi, Faxe kondi free, Fanta, abrikosvand, citronvand, rød sodavand, passionsbrus, danskvand</em></td>
-//                             <td></td>
-//                         </tr>
-//                         <tr>
-//                             <td><strong>Øl, dåse</strong></td>
-//                             <td nowrap>5 kr</td>
-//                         </tr>
-//                         <tr>
-//                             <td style="padding-left:2em;"><em>Pilsner, IPA</em></td>
-//                             <td></td>
-//                         </tr>
-//                         <tr>
-//                             <td><strong>Vin, 150cl</strong></td>
-//                             <td nowrap>5 kr</td>
-//                         </tr>
-//                         <tr>
-//                             <td style="padding-left:2em;"><em>Rød, hvid og rosé</em></td>
-//                             <td></td>
-//                         </tr>
-//                         <tr>
-//                             <td><strong>Cider og Smirnoff, dåse</strong></td>
-//                             <td nowrap>13 kr</td>
-//                         </tr>
-//                         <tr>
-//                             <td style="padding-left:2em;"><em>Æble, Smirnoff ice original</em></td>
-//                             <td></td>
-//                         </tr>
-//                         <tr>
-//                             <td><strong>Sun lolly</strong></td>
-//                             <td nowrap>2 kr</td>
-//                         </tr>
-//                     </tbody>
-//                 </table>

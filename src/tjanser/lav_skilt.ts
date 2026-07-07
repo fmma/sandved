@@ -4,7 +4,7 @@ export function render_lav_skilt() {
     return html`
     <h4>Lokation: Værkstedet</h4>
         <p><strong>Beskrivelse:</strong><br>
-        Vi gør festivalen endnu flottere ved at lave farverige skilte af træpile og små plader. Her kan man male, tegne og skrive – det er kun fantasien, der sætter grænser!
+        Vi gør festivalen endnu flottere ved at lave farverige skilte og opdatere de gamle. Laves af træpile og små plader. Her kan man male, tegne og skrive – det er kun fantasien, der sætter grænser!
         </p>
         <p><strong>Der skal bruges:</strong></p>
         <ul>

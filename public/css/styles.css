@@ -72,6 +72,24 @@ body {
     border-radius: 1.5em;
     box-shadow: 0 4px 24px #0001;
 }
+.sf-plakat {
+    display: block;
+    margin: 1em auto 0 auto;
+    width: 100%;
+    max-width: 500px;
+    z-index: 1;
+    position: relative;
+    border-radius: 1.5em;
+    box-shadow: 0 4px 24px #0001;
+}
+.sf-merch-sms {
+    display: block;
+    margin: 1em auto;
+    width: 100%;
+    max-width: 320px;
+    border-radius: 1em;
+    box-shadow: 0 4px 24px #0001;
+}
 
 /* Remove the .sf-logo styles and <img> from your HTML */
 .sf-nav {
@@ -394,6 +412,183 @@ html, body {
     white-space: nowrap;
 }
 
+/* Kalendervisning af tjanser */
+.sf-suggest-btn {
+    background: linear-gradient(90deg, #d72660 0%, #1b998b 100%);
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em 1.2em;
+    margin: 0.3em 0.3em 0 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #d7266040;
+    transition: transform 0.1s;
+}
+.sf-suggest-btn:hover,
+.sf-suggest-btn:focus {
+    transform: scale(1.05);
+    outline: none;
+}
+.sf-suggest-note {
+    font-size: 0.9em;
+    color: #555;
+    max-width: 700px;
+}
+.sf-view-toggle {
+    text-align: center;
+}
+.sf-view-active {
+    outline: 3px solid #1b998b;
+    outline-offset: 1px;
+}
+.sf-calendar-wrap {
+    /* Fuld bredde uafhængigt af den centrerede, smalle kolonne, så den kan scrolles vandret. */
+    width: 100vw;
+    max-width: 100vw;
+    margin-top: 1em;
+    margin-left: calc(50% - 50vw);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5em;
+}
+.sf-cal2 {
+    display: grid;
+    gap: 2px;
+    background: #d72660;
+    border: 3px solid #d72660;
+    box-shadow: 0 4px 24px #d7266015;
+    grid-template-rows: auto;
+    width: max-content;          /* vandret: så bredt som indholdet (kan scrolles) */
+}
+.sf-cal2-v {
+    width: auto;                 /* lodret: dagene deler den tilgængelige bredde */
+    min-width: 600px;
+}
+.sf-cal2-corner,
+.sf-cal2-dayhead,
+.sf-cal2-hcell,
+.sf-cal2-timecol,
+.sf-cal2-hhead,
+.sf-cal2-daycol,
+.sf-cal2-dayrow {
+    background: #fff;
+}
+.sf-cal2-corner {
+    background: #fcb69f;
+}
+.sf-cal2-dayhead {
+    background: #fcb69f;
+    color: #d72660;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.4em 0.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+.sf-cal2-hhead {
+    display: flex;
+    background: #ededed;
+}
+.sf-cal2-timecol {
+    background: #ededed;
+}
+.sf-cal2-hcell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    color: #d72660;
+    font-weight: bold;
+    border: 1px solid #f3dde6;
+    white-space: nowrap;
+}
+/* Kun labelteksten skaleres ned; cellens em-mål må matche kalendergitteret. */
+.sf-cal2-hlabel {
+    font-size: 0.8em;
+}
+.sf-cal2-daycol,
+.sf-cal2-dayrow {
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+}
+.sf-cal2-event {
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+}
+.sf-cal2-event > .sf-cal-card {
+    flex: 1 1 auto;
+    height: 100%;
+    margin: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.sf-cal-card {
+    flex: 0 0 auto;
+    min-width: 0;
+    background: #fff7fa;
+    border: 1.5px solid #d72660;
+    border-radius: 0.4em;
+    padding: 0.35em 0.45em;
+}
+.sf-cal-card-title {
+    font-weight: bold;
+    color: #d72660;
+    margin-bottom: 0.2em;
+    font-size: 0.92em;
+}
+.sf-cal-card-parts {
+    font-size: 0.88em;
+    line-height: 1.25;
+}
+/* Starttidspunkt efter titlen i hvert kort. */
+.sf-cal-time {
+    font-weight: normal;
+    font-size: 0.82em;
+    color: #8a8a8a;
+    white-space: nowrap;
+}
+/* Stablet visning: hver dag som sin egen kalender under hinanden. */
+.sf-cal-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    overflow-x: auto;
+}
+/* Note over whiteboard-skabelonen. */
+.sf-template-note {
+    max-width: 60em;
+    margin: 0 auto 1em;
+    padding: 0.5em 0.9em;
+    background: #fff3e6;
+    border: 1px solid #e8a35c;
+    border-radius: 0.5em;
+    color: #7a4a10;
+    font-size: 0.92em;
+}
+/* Fælles dagsprogram-spor (måltider, flaghejsning) skiller sig ud fra tjanserne. */
+.sf-cal2-eventtrack.sf-cal2-dayhead {
+    background: #ffe4cc;
+    color: #b85c00;
+}
+.sf-cal2-eventtrack.sf-cal2-daycol,
+.sf-cal2-eventtrack.sf-cal2-dayrow {
+    background-color: #fff8f1;
+}
+.sf-cal2-eventtrack .sf-cal-card {
+    background: #ffedd9;
+    border-color: #e8a35c;
+}
+.sf-cal2-eventtrack .sf-cal-card-title {
+    color: #b85c00;
+}
+
 
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -442,6 +637,145 @@ input[type="search"]::-webkit-search-cancel-button {
     text-align: left;
     animation: fadein 0.3s;
     animation: popup-in 0.35s cubic-bezier(.4,2,.6,1);
+}
+/* OL-kort der efterligner slidsene */
+.ol-card {
+    --ol-color: #d72660;
+    width: min(88vw, 980px);
+}
+.ol-hovdingebold { --ol-color: #e74633; }
+.ol-petang      { --ol-color: #9260b1; }
+.ol-daasekast   { --ol-color: #dd9f15; }
+.ol-stafet      { --ol-color: #f38f14; }
+.ol-tovtraek    { --ol-color: #459625; }
+.ol-synkron     { --ol-color: #2789cd; }
+
+.ol-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    margin: 0 0 0.6em;
+}
+.ol-icon {
+    flex: 0 0 auto;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+.ol-head-text { min-width: 0; }
+.ol-title {
+    color: var(--ol-color);
+    font-family: 'Fredoka', 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 2.1em;
+    line-height: 1.05;
+    margin: 0;
+}
+.ol-meta {
+    margin: 0.35em 0 0;
+    line-height: 1.45;
+}
+.ol-clock,
+.ol-star {
+    display: block;
+    font-weight: 600;
+}
+.ol-clock::before { content: "🕐 "; }
+.ol-star {
+    color: #444;
+}
+.ol-star::before {
+    content: "★ ";
+    color: #f5a623;
+}
+
+.ol-loc {
+    margin: 0 0 0.9em;
+    color: #5a5a5a;
+    font-style: italic;
+}
+
+/* To-kolonne-krop: tekst til venstre, illustration til højre (som på sliden) */
+.ol-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4em;
+    align-items: flex-start;
+}
+.ol-main {
+    flex: 1 1 320px;
+    min-width: 260px;
+}
+.ol-main > :first-child { margin-top: 0; }
+
+.ol-figure {
+    flex: 1 1 320px;
+    min-width: 240px;
+    margin: 0;
+}
+.ol-figure img,
+.ol-banner {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.6em;
+    border: 2px solid #00000014;
+    box-shadow: 0 2px 12px #0000001a;
+}
+
+/* Tonet panel i højre kolonne (fx synkronsvømningens pointkategorier) */
+.ol-panel {
+    flex: 1 1 300px;
+    min-width: 250px;
+    align-self: stretch;
+    background: color-mix(in srgb, var(--ol-color) 10%, #fff);
+    border: 2px solid color-mix(in srgb, var(--ol-color) 30%, #fff);
+    border-radius: 0.7em;
+    padding: 0.4em 1.1em 0.9em;
+}
+.ol-panel h5 {
+    color: var(--ol-color);
+    font-size: 1.15em;
+    margin: 0.7em 0 0.4em;
+}
+
+/* Fuldbredde-banner (stafet, tovtrækning) */
+.ol-banner {
+    margin: 1.2em 0 0;
+}
+
+/* Kampprogram-tabel klippet fra slidens skema */
+.ol-sched {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0.9em auto 0.2em;
+    border-radius: 0.5em;
+    border: 1px solid #00000014;
+}
+.ol-figure figcaption,
+.ol-figcap {
+    text-align: center;
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 0.2em;
+}
+
+/* Praktisk fodnote: facilitator + oprydning (ikke en del af sliden) */
+.ol-footer {
+    margin-top: 1.3em;
+    padding-top: 0.9em;
+    border-top: 2px solid color-mix(in srgb, var(--ol-color) 30%, #fff);
+    font-size: 0.93em;
+    color: #444;
+}
+.ol-footer p { margin: 0.5em 0; }
+
+@media (max-width: 520px) {
+    .ol-icon { width: 64px; height: 64px; }
+    .ol-title { font-size: 1.5em; }
+    .ol-head { gap: 0.6em; }
 }
 .close-btn {
     position: absolute;

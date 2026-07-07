@@ -9,7 +9,7 @@ export function render_vand() {
         <p><strong>Der skal bruges:</strong></p>
         <ul>
             <li>Vandpistoler</li>
-            <li>Balloner</li>
+            <li>Genanvendelige vandballoner</li>
             <li>Spande med vand</li>
         </ul>
         <p><strong>Facilitatorens rolle og ansvar:</strong><br>

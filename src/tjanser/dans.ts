@@ -1,18 +1,17 @@
 import { html } from "lit";
 
-export function render_boernekor() {
+export function render_dans() {
     return html`
         <h4>Lokation: Haven</h4>
         <p><strong>Beskrivelse:</strong><br>
-        Alle der elsker at synge – eller bare vil prøve – er velkomne i koret. Vi øver enkle sange og optræder måske endda for de andre.
+        For alle der elsker – eller har brug for at bevæge deres smækre krop til lækre rytmer.
         </p>
         <p><strong>Der skal bruges:</strong></p>
         <ul>
-            <li>Sangtekster</li>
-            <li>Eventuelt instrument (keyboard eller guitar)</li>
+            <li>Musikanlæg</li>
         </ul>
         <p><strong>Facilitatorens rolle og ansvar:</strong><br>
-        Lede sangøvelserne med energi og pædagogik, sikre at alle føler sig velkomne og opmuntre dem til at synge sammen.
+        Facilitere at alle hygger sig i fællesskab om groovy rytmer.
         </p>
         <p><strong>Efter aktiviteten:</strong><br>
         Når aktiviteten er færdig skal I huske at rydde op.

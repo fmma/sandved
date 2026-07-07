@@ -1,33 +1,61 @@
 import { html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { render_frokost, render_frokost_opr } from "./tjanser/frokost";
-import { render_baalhygge, render_snitte_pinde } from "./tjanser/baalhygge";
+import { render_baalhygge } from "./tjanser/baalhygge";
 import { render_lejroprydning, render_toilet } from "./tjanser/lejr";
-import { render_skriv_sang } from "./tjanser/skriv_sang";
-import { render_lav_banner } from "./tjanser/lav_banner";
-import { render_lav_snobroed } from "./tjanser/lav_snobroed";
-import { render_lav_skilt } from "./tjanser/lav_skilt";
 import { render_aftensmad, render_aftensmad_opr } from "./tjanser/aftensmad";
 import { render_biograf } from "./tjanser/biograf";
-import { render_musikquiz } from "./tjanser/musikquiz";
 import { render_morgenmad, render_morgenmad_opr } from "./tjanser/morgenmad";
+import { render_lav_banner } from "./tjanser/lav_banner";
+import { render_lav_skilt } from "./tjanser/lav_skilt";
 import { render_boernekor } from "./tjanser/boernekor";
 import { render_begynderguitar } from "./tjanser/begynderguitar";
-import { render_begynderband } from "./tjanser/begynderband";
+import { render_dans } from "./tjanser/dans";
 import { render_vand } from "./tjanser/vand";
 import { render_glidebane } from "./tjanser/glidebane";
 import { render_saebebobler } from "./tjanser/saebebobler";
-import { render_tovtraek } from "./tjanser/tovtraek";
-import { render_human_bowling } from "./tjanser/human_bowling";
-import { render_kongespil } from "./tjanser/kongespil";
-import { render_synkron } from "./tjanser/synkron";
+import { render_begynderband } from "./tjanser/begynderband";
+import { render_skriv_sang } from "./tjanser/skriv_sang";
+import { render_hovdingebold } from "./tjanser/hovdingebold";
 import { render_petang } from "./tjanser/petang";
+import { render_daasekast } from "./tjanser/daasekast";
+import { render_stafet } from "./tjanser/stafet";
+import { render_tovtraek } from "./tjanser/tovtraek";
+import { render_synkron } from "./tjanser/synkron";
+import { render_boerneaktivitet } from "./tjanser/boerneaktivitet";
+
+// Placeholder participants until the schema is filled in: persons(2) -> ['Person 1', 'Person 2'].
+const persons = (n: number) => Array.from({ length: n }, (_, i) => `Person ${i + 1}`);
+
+// Køkken/oprydnings-tjanser der ligger til venstre; de fylder 1/3 af bredden.
+const LEFT_PINNED = new Set([
+    'Lave morgenmad', 'Oprydning efter morgenmad',
+    'Lave frokost', 'Oprydning efter frokost',
+    'Lave aftensmad', 'Oprydning efter aftensmad',
+]);
+
+// Faste tjanser: fordeles på whiteboardet på dagen, så websitet viser kun "(N personer)".
+// Aktiviteterne (formiddag/eftermiddag) er undtaget og viser deres indhold.
+const FIXED_TJANS = new Set([
+    ...LEFT_PINNED,
+    'Bålhygge', 'Børnefilm',
+    'Lejroprydning', 'Toiletter',
+]);
+
+// Andel af banebredden som de fastgjorte (venstre) tjanser deler; resten deler (1 - denne).
+const PINNED_FRACTION = 1 / 3;
 
 type Tasks = {
     task_name: string;
     task_time: string;
     participants: string[];
     render_card?: [() => unknown, string];
+    // Varighed i timer (hvor mange timer blokken fylder i kalenderen). Standard: 1.
+    duration?: number;
+    // true = fælles dagsprogram (måltider, flaghejsning) der vises i sin egen kolonne.
+    event?: boolean;
+    // kendt bemanding i skabelonen; vises som "(N personer)" efter tidspunktet.
+    people?: number;
 }[]
 
 type Schedule = {
@@ -40,6 +68,19 @@ type Program = {
     schedule: Schedule;
 }[]
 
+// Et udlagt kort i kalenderen: tid, bane og indhold. leftPct/widthPct er den vandrette placering.
+type CalItem = {
+    task: Tasks[number];
+    activity: string;
+    parts: string[];
+    start: number;
+    end: number;
+    lane: number;
+    lanes: number;
+    leftPct: number;
+    widthPct: number;
+};
+
 @customElement('sf-tjanser')
 export class sf_tjanser extends LitElement {
     renderRoot = this;
@@ -47,598 +88,741 @@ export class sf_tjanser extends LitElement {
     @state()
     private _query: string = '';
 
+    // Foreslået fordeling: nøgle er det enkelte task-objekt, værdi er de tildelte navne.
+    @state()
+    private _assignment: Map<object, string[]> = new Map();
+
+    @state()
+    private _view: 'kalender' | 'tabel' = 'kalender';
+
+    // false = tid lodret (hver dag som lodret kalender, stablet); true = tid vandret (dage som rækker).
+    @state()
+    private _flip: boolean = false;
+
+    // Valgt dag i kalenderen. 'Alle' = vis alle dage.
+    @state()
+    private _calDay: string = 'Alle';
+
     program: Program = [
-        // {
-        //     day: 'Torsdag',
-        //     schedule: [
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Reklamemand',
-        //                 task_time: 'Hele dagen',
-        //                 participants: [
-        //                     'Sigurd'
-        //                 ]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave frokost',
-        //                 task_time: '11:00',
-        //                 participants: [
-        //                     'Sif', 'Pernille'
-        //                 ],
-        //                 render_card: [render_frokost, "frokost"]
-        //             }, {
-        //                 task_name: 'Oprydning efter frokost',
-        //                 task_time: '13:00',
-        //                 participants: [
-        //                     'Morten LN', 'Jesper', 'Christian'
-        //                 ],
-        //                 render_card: [render_frokost_opr, "frokost-opryd"]
-        //             }]
-        //         },
-        //         {
-        //             activity: 'Festival Kickstart',
-        //             tasks: [{
-        //                 task_name: 'Snitte pinde til snobrød',
-        //                 task_time: '13:00',
-        //                 participants: [
-        //                     'Vincent', 'Nickolei',
-        //                 ],
-        //                 render_card: [render_snitte_pinde, "snit"]
-        //             },
-        //             {
-        //                 task_name: 'Skrive festivalssangen',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Anne S', 'Theresa', 'Frederik'
-        //                 ],
-        //                 render_card: [render_skriv_sang, "skriv-sang"]
-        //             }, {
-        //                 task_name: 'Lave bannere',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Joan', 'Jannie',
-        //                 ],
-        //                 render_card: [render_lav_banner, "banner"]
-        //             }, {
-        //                 task_name: 'Snobrødsdej',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Morten B',
-        //                 ],
-        //                 render_card: [render_lav_snobroed, "snobrod"]
-        //             }, {
-        //                 task_name: 'Skiltelavning',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Sif', 'Nikoline'
-        //                 ],
-        //                 render_card: [render_lav_skilt, "skilt"]
-        //             }]
-        //         },
+        {
+            day: 'Onsdag',
+            schedule: [
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Frokost',
+                        task_time: '12:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave frokost',
+                        task_time: '11:00',
+                        participants: persons(2),
+                        render_card: [render_frokost, "frokost"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter frokost',
+                        task_time: '13:00',
+                        participants: persons(3),
+                        render_card: [render_frokost_opr, "frokost-opryd"]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave flag og vimpler',
+                        task_time: '14:00',
+                        participants: persons(2),
+                        render_card: [render_lav_banner, "banner"],
+                        duration: 2
+                    }, {
+                        task_name: 'Skiltelavning',
+                        task_time: '14:00',
+                        participants: persons(2),
+                        render_card: [render_lav_skilt, "skilt"],
+                        duration: 2
+                    }, {
+                        task_name: 'Festivalsang',
+                        task_time: '14:00',
+                        participants: persons(2),
+                        render_card: [render_skriv_sang, "festivalsang"],
+                        duration: 2
+                    }, {
+                        task_name: 'Slangeworkshop',
+                        task_time: '14:00',
+                        participants: persons(2),
+                        duration: 2
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Aftensmad',
+                        task_time: '18:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave aftensmad',
+                        task_time: '16:00',
+                        participants: persons(4),
+                        render_card: [render_aftensmad, "aftensmad"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter aftensmad',
+                        task_time: '19:00',
+                        participants: persons(3),
+                        render_card: [render_aftensmad_opr, "aftensmad-opryd"]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Bålhygge',
+                        task_time: '19:00',
+                        participants: persons(2),
+                        render_card: [render_baalhygge, "bhaalhygge"],
+                        duration: 3
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Børnefilm',
+                        task_time: '19:00',
+                        participants: persons(2),
+                        render_card: [render_biograf, "bio"],
+                        duration: 2
+                    }]
+                }
+            ]
+        },
 
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave aftensmad',
-        //                 task_time: '16:00',
-        //                 participants: [
-        //                     'Michael', 'Rasmus', 'Anne S', 'Theresa'
-        //                 ],
-        //                 render_card: [render_aftensmad, "aftensmad"]
-        //             }, {
-        //                 task_name: 'Oprydning efter aftensmad',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Nikoline', 'Nickolei', 'Aske',
-        //                 ],
-        //                 render_card: [render_aftensmad_opr, "aftensmad-opryd"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Bålhygge',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Jesper', 'Michael',
-        //                 ],
-        //                 render_card: [render_baalhygge, "bhaalhygge"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Børnefilm',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Pernille', 'Morten LN'
-        //                 ],
-        //                 render_card: [render_biograf, "bio"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Musikquiz',
-        //                 task_time: '21:00',
-        //                 participants: [
-        //                     'Morten B',
-        //                 ],
-        //                 render_card: [render_musikquiz, "musikquiz"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Jam Session',
-        //                 task_time: '22:00',
-        //                 participants: [
-        //                     'Nikoline', 'Frederik'
-        //                 ]
-        //             }]
-        //         }
-        //     ]
-        // },
+        {
+            day: 'Torsdag',
+            schedule: [
+                {
+                    activity: '',
+                    tasks: [
+                        {
+                            task_name: 'Lejroprydning',
+                            task_time: '07:00',
+                            participants: persons(1),
+                            render_card: [render_lejroprydning, "lejropryd"],
+                            duration: 3
+                        }
+                    ]
+                },
 
-        // {
-        //     day: 'Fredag',
-        //     schedule: [
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Reklamemand',
-        //                 task_time: 'Hele dagen',
-        //                 participants: [
-        //                     'Sigurd'
-        //                 ]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [
-        //                 {
-        //                     task_name: 'Lejroprydning',
-        //                     task_time: 'Før 10:00',
-        //                     participants: ['Rasmus', 'Jannie'],
-        //                     render_card: [render_lejroprydning, "lejropryd"]
-        //                 }
-        //             ]
-        //         },
+                {
+                    activity: '',
+                    tasks: [
+                        {
+                            task_name: 'Toiletter',
+                            task_time: '07:00',
+                            participants: persons(1),
+                            render_card: [render_toilet, "toilet"],
+                            duration: 3
+                        }
+                    ]
+                },
 
-        //         {
-        //             activity: '',
-        //             tasks: [
-        //                 {
-        //                     task_name: 'Toiletter',
-        //                     task_time: 'Før 10:00',
-        //                     participants: ['Morten B', 'Pernille'],
-        //                     render_card: [render_toilet, "toilet"]
-        //                 }
-        //             ]
-        //         },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Morgenmad',
+                        task_time: '08:00',
+                        participants: persons(0),
+                        duration: 1.25,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave morgenmad',
+                        task_time: '07:00',
+                        participants: persons(2),
+                        render_card: [render_morgenmad, "morgenmad"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter morgenmad',
+                        task_time: '9:45',
+                        participants: persons(2),
+                        render_card: [render_morgenmad_opr, "morgenmad-opryd"],
+                        duration: 1.25
+                    }
+                    ]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Flaghejsning',
+                        task_time: '9:00',
+                        participants: persons(1),
+                        duration: 0.5,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Kor',
+                        task_time: '10:00',
+                        participants: persons(2),
+                        render_card: [render_boernekor, "kor"],
+                        duration: 1
+                    }, {
+                        task_name: 'Begynder- og let øvet guitar',
+                        task_time: '10:00',
+                        participants: persons(2),
+                        render_card: [render_begynderguitar, "guitar"],
+                        duration: 2
+                    }, {
+                        task_name: 'Begynderband',
+                        task_time: '10:00',
+                        participants: persons(2),
+                        render_card: [render_begynderband, "begynderband"],
+                        duration: 2
+                    }, {
+                        task_name: 'Dans',
+                        task_time: '11:00',
+                        participants: persons(2),
+                        render_card: [render_dans, "dans"],
+                        duration: 1
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Frokost',
+                        task_time: '12:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave frokost',
+                        task_time: '11:00',
+                        participants: persons(2),
+                        render_card: [render_frokost, "frokost"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter frokost',
+                        task_time: '13:00',
+                        participants: persons(3),
+                        render_card: [render_frokost_opr, "frokost-opryd"]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Vandpistoler og balloner',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_vand, "vand"],
+                        duration: 2
+                    }, {
+                        task_name: 'Glidebane',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_glidebane, "glidebane"],
+                        duration: 2
+                    }, {
+                        task_name: 'Sæbebobler',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_saebebobler, "saebebobler"],
+                        duration: 2
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Aftensmad',
+                        task_time: '18:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Koncerter: Kor og Begynderband',
+                        task_time: '17:30',
+                        participants: persons(2),
+                        duration: 0.5
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave aftensmad',
+                        task_time: '16:00',
+                        participants: persons(4),
+                        render_card: [render_aftensmad, "aftensmad"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter aftensmad',
+                        task_time: '19:00',
+                        participants: persons(3),
+                        render_card: [render_aftensmad_opr, "aftensmad-opryd"]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Bålhygge',
+                        task_time: '19:00',
+                        participants: persons(2),
+                        render_card: [render_baalhygge, "bhaalhygge"],
+                        duration: 3
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Børnefilm',
+                        task_time: '19:00',
+                        participants: persons(2),
+                        render_card: [render_biograf, "bio"],
+                        duration: 2
+                    }]
+                }
+            ]
+        },
 
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave morgenmad',
-        //                 task_time: '07:00',
-        //                 participants: [
-        //                     'Anne S', 'Trine'
-        //                 ],
-        //                 render_card: [render_morgenmad, "morgenmad"]
-        //             }, {
-        //                 task_name: 'Oprydning efter morgenmad',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Benjamin', 'Vincent'
-        //                 ],
-        //                 render_card: [render_morgenmad_opr, "morgenmad-opryd"]
-        //             }
-        //             ]
-        //         },
-        //         {
-        //             activity: 'Musisk Formiddag',
-        //             tasks: [{
-        //                 task_name: 'Børnekor',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Nikoline'
-        //                 ],
-        //                 render_card: [render_boernekor, "bornekor"]
-        //             }, {
-        //                 task_name: 'Begynderguitar',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Sif'
-        //                 ],
-        //                 render_card: [render_begynderguitar, "begynderguitar"]
-        //             }, {
-        //                 task_name: 'Begynderband',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Frederik'
-        //                 ],
-        //                 render_card: [render_begynderband, "begynderband"]
-        //             }
-        //             ]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave frokost',
-        //                 task_time: '11:00',
-        //                 participants: [
-        //                     'Nickolei', 'Morten LN'
-        //                 ],
-        //                 render_card: [render_frokost, "frokost"]
-        //             }, {
-        //                 task_name: 'Oprydning efter frokost',
-        //                 task_time: '13:00',
-        //                 participants: [
-        //                     'Joan', 'Theresa', 'Lara'
-        //                 ],
-        //                 render_card: [render_frokost_opr, "frokost-opryd"]
-        //             }]
-        //         },
-        //         {
-        //             activity: 'Våd Eftermiddag',
-        //             tasks: [{
-        //                 task_name: 'Vandpistoler og balloner',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Vincent', 'Theresa'
-        //                 ],
-        //                 render_card: [render_vand, "vand"]
-        //             }, {
-        //                 task_name: 'Glidebane',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'James', 'Benjamin'
-        //                 ],
-        //                 render_card: [render_glidebane, "glidebane"]
-        //             }, {
-        //                 task_name: 'Sæbebobler',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Jannie', 'Rasmus'
-        //                 ],
-        //                 render_card: [render_saebebobler, "bobler"]
-        //             }
-        //             ]
-        //         },
+        {
+            day: 'Fredag',
+            schedule: [
+                {
+                    activity: '',
+                    tasks: [
+                        {
+                            task_name: 'Lejroprydning',
+                            task_time: '07:00',
+                            participants: persons(1),
+                            render_card: [render_lejroprydning, "lejropryd"],
+                            duration: 3
+                        }
+                    ]
+                },
 
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave aftensmad',
-        //                 task_time: '16:00',
-        //                 participants: [
-        //                     'Michael', 'Maja', 'Frederik', 'Jesper'
-        //                 ],
-        //                 render_card: [render_aftensmad, "aftensmad"]
-        //             }, {
-        //                 task_name: 'Oprydning efter aftensmad',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Janne', 'James', 'Sigurd',
-        //                 ],
-        //                 render_card: [render_aftensmad_opr, "aftensmad-opryd"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Bålhygge',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Joan', 'Nickolei',
-        //                 ],
-        //                 render_card: [render_baalhygge, "bhaalhygge"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Børnefilm',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Maja', 'Morten LN'
-        //                 ],
-        //                 render_card: [render_biograf, "bio"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Koncert: Arm the Homeless',
-        //                 task_time: '21:00',
-        //                 participants: [
-        //                     'Michael'
-        //                 ]
-        //             }]
-        //         }
-        //     ]
-        // },
+                {
+                    activity: '',
+                    tasks: [
+                        {
+                            task_name: 'Toiletter',
+                            task_time: '07:00',
+                            participants: persons(1),
+                            render_card: [render_toilet, "toilet"],
+                            duration: 3
+                        }
+                    ]
+                },
 
-        // {
-        //     day: 'Lørdag',
-        //     schedule: [
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Reklamemand',
-        //                 task_time: 'Hele dagen',
-        //                 participants: [
-        //                     'Sigurd'
-        //                 ]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [
-        //                 {
-        //                     task_name: 'Lejroprydning',
-        //                     task_time: 'Før 10:00',
-        //                     participants: ['James', 'Vincent'],
-        //                     render_card: [render_lejroprydning, "lejropryd"]
-        //                 }
-        //             ]
-        //         },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Morgenmad',
+                        task_time: '08:00',
+                        participants: persons(0),
+                        duration: 1.25,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave morgenmad',
+                        task_time: '07:00',
+                        participants: persons(2),
+                        render_card: [render_morgenmad, "morgenmad"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter morgenmad',
+                        task_time: '9:45',
+                        participants: persons(2),
+                        render_card: [render_morgenmad_opr, "morgenmad-opryd"],
+                        duration: 1.25
+                    }
+                    ]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Flaghejsning',
+                        task_time: '9:00',
+                        participants: persons(1),
+                        duration: 0.5,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'OL: Høvdingebold',
+                        task_time: '10:00',
+                        participants: persons(2),
+                        render_card: [render_hovdingebold, "hovdingebold"],
+                        duration: 2
+                    }, {
+                        task_name: 'OL: Petanque',
+                        task_time: '10:00',
+                        participants: persons(2),
+                        render_card: [render_petang, "petanque"],
+                        duration: 2
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Frokost',
+                        task_time: '12:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave frokost',
+                        task_time: '11:00',
+                        participants: persons(2),
+                        render_card: [render_frokost, "frokost"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter frokost',
+                        task_time: '13:00',
+                        participants: persons(3),
+                        render_card: [render_frokost_opr, "frokost-opryd"]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'OL: Tovtrækning',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_tovtraek, "tovtraek"],
+                        duration: 2
+                    }, {
+                        task_name: 'OL: Dåsekast',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_daasekast, "daasekast"],
+                        duration: 2
+                    }, {
+                        task_name: 'OL: Stafet',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_stafet, "stafet"],
+                        duration: 2
+                    }, {
+                        task_name: 'OL: Synkronsvømning',
+                        task_time: '13:30',
+                        participants: persons(2),
+                        render_card: [render_synkron, "synkron"],
+                        duration: 2
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Aftensmad',
+                        task_time: '18:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave aftensmad',
+                        task_time: '16:00',
+                        participants: persons(4),
+                        render_card: [render_aftensmad, "aftensmad"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter aftensmad',
+                        task_time: '19:00',
+                        participants: persons(3),
+                        render_card: [render_aftensmad_opr, "aftensmad-opryd"]
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Bålhygge',
+                        task_time: '19:00',
+                        participants: persons(2),
+                        render_card: [render_baalhygge, "bhaalhygge"],
+                        duration: 3
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Børnefilm',
+                        task_time: '19:00',
+                        participants: persons(2),
+                        render_card: [render_biograf, "bio"],
+                        duration: 2
+                    }]
+                }
+            ]
+        },
 
-        //         {
-        //             activity: '',
-        //             tasks: [
-        //                 {
-        //                     task_name: 'Toiletter',
-        //                     task_time: 'Før 10:00',
-        //                     participants: ['Nikoline', 'Trine'],
-        //                     render_card: [render_toilet, "toilet"]
-        //                 }
-        //             ]
-        //         },
-
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave morgenmad',
-        //                 task_time: '07:00',
-        //                 participants: [
-        //                     'Jannie', 'Janne'
-        //                 ],
-        //                 render_card: [render_morgenmad, "morgenmad"]
-        //             }, {
-        //                 task_name: 'Oprydning efter morgenmad',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Rasmus', 'Maja',
-        //                 ],
-        //                 render_card: [render_morgenmad_opr, "morgenmad-opryd"]
-        //             }
-        //             ]
-        //         },
-        //         {
-        //             activity: 'OL formiddag',
-        //             tasks: [{
-        //                 task_name: 'Tovtrækning',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Theresa', 'Sif'
-        //                 ],
-        //                 render_card: [render_tovtraek, "tov"]
-        //             }, {
-        //                 task_name: 'Human-bowling glidebane',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Jannie', 'Benjamin'
-        //                 ],
-        //                 render_card: [render_human_bowling, "human-bowling"]
-        //             }, {
-        //                 task_name: 'Kongespil',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'James', 'Tina'
-        //                 ],
-        //                 render_card: [render_kongespil, "kongespil"]
-        //             }
-        //             ]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave frokost',
-        //                 task_time: '11:00',
-        //                 participants: [
-        //                     'Morten B', 'Jesper'
-        //                 ],
-        //                 render_card: [render_frokost, "frokost"]
-        //             }, {
-        //                 task_name: 'Oprydning efter frokost',
-        //                 task_time: '13:00',
-        //                 participants: [
-        //                     'Sif', 'Nickolei', 'Frigg'
-        //                 ],
-        //                 render_card: [render_frokost_opr, "frokost-opryd"]
-        //             }]
-        //         },
-        //         {
-        //             activity: 'OL eftermiddag',
-        //             tasks: [{
-        //                 task_name: 'Synkronsvømning',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Janne', 'Pernille'
-        //                 ],
-        //                 render_card: [render_synkron, "synkron"]
-        //             }, {
-        //                 task_name: 'Petang',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Tina', 'Maja'
-        //                 ],
-        //                 render_card: [render_petang, "petang"]
-        //             }, {
-        //                 task_name: 'Band for øvede',
-        //                 task_time: '13:30',
-        //                 participants: [
-        //                     'Frederik'
-        //                 ]
-        //             }
-        //             ]
-        //         },
-
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave aftensmad',
-        //                 task_time: '16:00',
-        //                 participants: [
-        //                     'Michael', 'Mathias', 'Benjamin', 'Kasper M', 'Pernille'
-        //                 ],
-        //                 render_card: [render_aftensmad, "aftensmad"]
-        //             }, {
-        //                 task_name: 'Oprydning efter aftensmad',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Tina', 'Sif', 'Gro',
-        //                 ],
-        //                 render_card: [render_aftensmad_opr, "aftensmad-opryd"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Bålhygge',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Rasmus', 'Mathias',
-        //                 ],
-        //                 render_card: [render_baalhygge, "bhaalhygge"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Børnefilm',
-        //                 task_time: '19:00',
-        //                 participants: [
-        //                     'Jesper', 'Kasper M'
-        //                 ],
-        //                 render_card: [render_biograf, "bio"]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Koncert: Begynderband',
-        //                 task_time: '21:00',
-        //                 participants: [
-        //                     'Frederik'
-        //                 ]
-        //             }, {
-        //                 task_name: 'Koncert: Festivalsband',
-        //                 task_time: '22:00',
-        //                 participants: [
-        //                     'Frederik'
-        //                 ]
-        //             }]
-        //         }
-        //     ]
-        // },
-
-        // {
-        //     day: 'Søndag',
-        //     schedule: [
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Reklamemand',
-        //                 task_time: 'Hele dagen',
-        //                 participants: [
-        //                     'Sigurd'
-        //                 ]
-        //             }]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave morgenmad',
-        //                 task_time: '07:00',
-        //                 participants: [
-        //                     'Vincent', 'Frederik'
-        //                 ],
-        //                 render_card: [render_morgenmad, "morgenmad"]
-        //             }, {
-        //                 task_name: 'Oprydning efter morgenmad',
-        //                 task_time: '9:30',
-        //                 participants: [
-        //                     'Trine', 'Jannie',
-        //                 ],
-        //                 render_card: [render_morgenmad_opr, "morgenmad-opryd"]
-        //             }
-        //             ]
-        //         },
-        //         {
-        //             activity: '',
-        //             tasks: [{
-        //                 task_name: 'Lave frokost',
-        //                 task_time: '11:00',
-        //                 participants: [
-        //                     'Joan', 'Nikoline'
-        //                 ],
-        //                 render_card: [render_frokost, "frokost"]
-        //             }]
-        //         }
-        //     ]
-        // }
+        {
+            day: 'Lørdag',
+            schedule: [
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Morgenmad',
+                        task_time: '08:00',
+                        participants: persons(0),
+                        duration: 1.25,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave morgenmad',
+                        task_time: '07:00',
+                        participants: persons(2),
+                        render_card: [render_morgenmad, "morgenmad"],
+                        duration: 2
+                    }, {
+                        task_name: 'Oprydning efter morgenmad',
+                        task_time: '9:45',
+                        participants: persons(2),
+                        render_card: [render_morgenmad_opr, "morgenmad-opryd"],
+                        duration: 1.25
+                    }
+                    ]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Flaghejsning',
+                        task_time: '9:00',
+                        participants: persons(1),
+                        duration: 0.5,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Børneaktiviteter under oprydning',
+                        task_time: '10:00',
+                        participants: persons(2),
+                        render_card: [render_boerneaktivitet, "boerneaktivitet"],
+                        duration: 2
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Frokost',
+                        task_time: '12:00',
+                        participants: persons(0),
+                        duration: 1,
+                        event: true
+                    }]
+                },
+                {
+                    activity: '',
+                    tasks: [{
+                        task_name: 'Lave frokost',
+                        task_time: '11:00',
+                        participants: persons(2),
+                        render_card: [render_frokost, "frokost"],
+                        duration: 2
+                    }]
+                }
+            ]
+        }
     ]
+
+    // Antal tilmeldte pr. dag (fra tilmeldingsarket). total = antal unikke tilmeldte.
+    attendance: { per_day: { day: string; count: number }[]; total: number } = {
+        per_day: [
+            { day: 'Onsdag', count: 39 },
+            { day: 'Torsdag', count: 50 },
+            { day: 'Fredag', count: 40 },
+            { day: 'Lørdag', count: 39 },
+        ],
+        total: 51,
+    }
+
+    // Voksne deltagere og hvilke dage de er til stede (fra tilmeldingsarket).
+    // Børn er udeladt, da alle tjanser regnes som voksentjanser.
+    attendees: { name: string; days: string[] }[] = [
+        { name: 'Janne', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Morten', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Sif', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Michael', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Nikoline', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Frederik', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Rasmus', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Mathias', days: ['Onsdag', 'Torsdag'] },
+        { name: 'Tina', days: ['Onsdag', 'Torsdag'] },
+        { name: 'Katja', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Morten 2', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Trine', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Benjamin', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Schulle', days: ['Onsdag', 'Torsdag'] },
+        { name: 'Jesper', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Jannie', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Pernille', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Vincent', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Tess', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Signe', days: ['Torsdag'] },
+        { name: 'Emil', days: ['Torsdag'] },
+        { name: 'Nickolei', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Camilla', days: ['Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Morten 3', days: ['Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Simon', days: ['Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Oahn', days: ['Torsdag', 'Fredag', 'Lørdag'] },
+        { name: 'Joan', days: ['Onsdag', 'Fredag'] },
+    ]
+
+    // Grov tidsblok ud fra starttidspunktet. Ingen kan have to tjanser i samme blok.
+    private _block(task_time: string): string {
+        const m = task_time.match(/\d+/);
+        const hour = m ? parseInt(m[0], 10) : 12;
+        if (hour < 11) return 'morgen';
+        if (hour < 15) return 'middag';
+        if (hour < 18) return 'eftermiddag';
+        return 'aften';
+    }
+
+    private _shuffle<T>(xs: T[]): T[] {
+        const a = xs.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    private _suggest() {
+        const assignment = new Map<object, string[]>();
+        // Hvor mange tjanser hver person har fået i alt (for at fordele jævnt).
+        const load = new Map<string, number>();
+        for (const day of this.program) {
+            const present = this.attendees.filter(a => a.days.includes(day.day));
+            // Hvilke tidsblokke hver person allerede er optaget i denne dag.
+            const busy = new Map<string, Set<string>>();
+            for (const sched of day.schedule) {
+                for (const task of sched.tasks) {
+                    const block = this._block(task.task_time);
+                    const n = task.participants.length;
+                    const eligible = present.filter(a => {
+                        if (busy.get(a.name)?.has(block)) return false;
+                        if (block === 'morgen' && a.days[0] === day.day) return false; // ankommer i dag
+                        if (block === 'aften' && a.days[a.days.length - 1] === day.day) return false; // rejser i dag
+                        return true;
+                    });
+                    // Bland tilfældigt, men foretræk dem med færrest tjanser.
+                    const pool = this._shuffle(eligible)
+                        .sort((a, b) => (load.get(a.name) ?? 0) - (load.get(b.name) ?? 0));
+                    const picked: string[] = [];
+                    for (let k = 0; k < n; k++) {
+                        const person = pool[k];
+                        if (!person) { picked.push('(ledig)'); continue; }
+                        picked.push(person.name);
+                        let taken = busy.get(person.name);
+                        if (!taken) busy.set(person.name, taken = new Set());
+                        taken.add(block);
+                        load.set(person.name, (load.get(person.name) ?? 0) + 1);
+                    }
+                    assignment.set(task, picked);
+                }
+            }
+        }
+        this._assignment = assignment;
+    }
+
+    private _clear_assignment() {
+        this._assignment = new Map();
+    }
+
+    private _effective(task: Tasks[number]): string[] {
+        return this._assignment.get(task) ?? task.participants;
+    }
 
     private _participants() {
         return [
-            ...new Set(this.program.flatMap(x => x.schedule.flatMap(y => y.tasks.flatMap(z => z.participants)))),
-            ...new Set(this.program.flatMap(x => x.schedule.flatMap(y => y.tasks.map(z => z.task_name)))),
-            ...new Set(this.program.map(x => x.day))
+            ...new Set(this.attendees.map(a => a.name)),
+            ...new Set(this.program.flatMap(d => d.schedule.flatMap(s => s.tasks.map(t => t.task_name)))),
+            ...new Set(this.program.map(d => d.day))
         ];
     }
 
-    render_row(day: string, activity: string, schedule_index: number, task_name: string, task_time: string, task_index: number, participant: string, participant_index: number, schedule: Schedule, tasks: Tasks, participants: string[], render_card?: [() => unknown, string]) {
-        const day_td = schedule_index === 0 && task_index === 0 && participant_index === 0
-            ? html`<td class="sf-program-day .sf-shrink-td" rowspan="${schedule.flatMap(s => s.tasks.flatMap(t => t.participants.flatMap(_ => 1))).reduce((a, b) => a + b)}">
+    // Genrender efter en hash-ændring (vi ruter på window.location.hash uden hashchange-lytter).
+    private _rerender = () => setTimeout(() => this.requestUpdate());
+
+    // Opgavenavn med evt. link til info-kort (popup).
+    private _render_task_name(task_name: string, render_card?: [() => unknown, string]) {
+        if (render_card == null) return task_name;
+        const [render_card_body, key] = render_card;
+        if (window.location.hash !== `#tjanser:${key}`) {
+            return html`<a href="#tjanser:${key}" @click=${this._rerender}>${task_name}</a>`;
+        }
+        // Kortet er åbnet via hash: vis navnet som luk-link plus selve popup'en.
+        return html`
+            <a href="#tjanser" @click=${this._rerender}>${task_name}</a>
+            <div class="sf_popup">
+                <button class="close-btn" title="Luk" @click=${() => { window.location.hash = "#tjanser"; this._rerender(); }}>&times;</button>
+                <a href="#tjanser" @click=${this._rerender}>${task_name}</a>
+                ${render_card_body()}
+            </div>`;
+    }
+
+    // Fremhæv søgeord i et navn.
+    private _hl(participant: string) {
+        return this._query && participant.toLocaleLowerCase().includes(this._query.toLocaleLowerCase())
+            ? html`<span class="sf-search-hit">${participant}</span>`
+            : participant;
+    }
+
+    render_row(day: string, day_rowspan: number, first_of_day: boolean, task_name: string, task_time: string, participant: string, participant_index: number, task_count: number, render_card?: [() => unknown, string]) {
+        // Dag-cellen udlægges på dagens første faktiske række. Onsdag og lørdag starter med
+        // et event (persons(0)), som ikke giver rækker, så vi kan ikke binde den til schedule_index 0.
+        const day_td = first_of_day
+            ? html`<td class="sf-program-day sf-shrink-td" rowspan="${day_rowspan}">
                 <span class="sf-program-day">${day}</span>
             </td>`
             : '';
-        // const activity_td = task_index == 0 && participant_index === 0
-        //     ? html`<td class="sf-activity-td" rowspan="${tasks.flatMap(t => t.participants.flatMap(_ => 1)).reduce((a, b) => a + b)}">${activity}</td>`
-        //     : '';
 
-        const rendered_task_name = render_card == null ? task_name :
-            window.location.hash == `#tjanser:${render_card[1]}` ?
-            html`
-            <a href="#tjanser" @click=${() => setTimeout(() => this.requestUpdate())}>${task_name}</a>
-            <div class="sf_popup">
-            <button class="close-btn" @click=${() => { window.location.hash = "#tjanser"; setTimeout(() => this.requestUpdate()); }} title="Luk">&times;</button>
-            <a href="#tjanser" @click=${() => setTimeout(() => this.requestUpdate())}>${task_name}</a>
-            ${render_card[0]()}
-            </div>
-            `
-                :
-                html`
-            <a href="#tjanser:${render_card[1]}" @click=${() => setTimeout(() => this.requestUpdate())}>${task_name}</a>
-        `;
+        const rendered_task_name = this._render_task_name(task_name, render_card);
 
         const task_name_td = participant_index === 0
             ? html`
-                <td class="sf-task-td sf-shrink-td" rowspan="${participants.length}">${task_time.split(' ').map((l, i) => i > 0 ? html`<br>${l}` : html`${l}`)}</td>
-                <td class="sf-task-td" rowspan="${participants.length}">${rendered_task_name}</td>
+                <td class="sf-task-td sf-shrink-td" rowspan="${task_count}">${task_time.split(' ').map((l, i) => i > 0 ? html`<br>${l}` : html`${l}`)}</td>
+                <td class="sf-task-td" rowspan="${task_count}">${rendered_task_name}</td>
             `
             : '';
-        const participant_span = this._query && participant.toLocaleLowerCase().includes(this._query.toLocaleLowerCase())
-            ? html`<span class="sf-search-hit">${participant}<span>`
-            : participant
-        const participant_td = html`<td class="sf-shrink-td">${participant_span}</td>`;
+        const participant_td = html`<td class="sf-shrink-td">${this._hl(participant)}</td>`;
 
         return html`<tr class="sf-program-row">
             ${day_td}
@@ -647,49 +831,308 @@ export class sf_tjanser extends LitElement {
         </tr>`;
     }
 
+    // Sorteringsnøgle for et tidspunkt i timer, fx '9:30' -> 9.5.
+    private _time_key(t: string): number {
+        const m = t.match(/(\d+)(?::(\d+))?/);
+        return m ? parseInt(m[1], 10) + (m[2] ? parseInt(m[2], 10) / 60 : 0) : 0;
+    }
+
+    private _matches(day: string, activity: string, task_name: string, participants: string[]): boolean {
+        const q = this._query.toLowerCase();
+        if (!q) return true;
+        return day.toLowerCase().includes(q)
+            || task_name.toLowerCase().includes(q)
+            || activity.toLowerCase().includes(q)
+            || participants.some(p => p.toLowerCase().includes(q));
+    }
+
+    // Vis tid som HH:MM (fx '9:45' -> '09:45').
+    private _fmt_time(t: string): string {
+        const m = t.match(/^(\d{1,2}):(\d{2})/);
+        return m ? `${m[1].padStart(2, '0')}:${m[2]}` : t;
+    }
+
+    // Sluttidspunkt (start + varighed) som HH:MM.
+    private _end_time(task: Tasks[number]): string {
+        const end = this._time_key(task.task_time) + (task.duration ?? 1);
+        const h = Math.floor(end + 1e-9);
+        const min = Math.round((end - h) * 60);
+        return `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+    }
+
+    private _cal_card(task: Tasks[number], parts: string[]) {
+        // Faste tjanser (og skabelonen) viser antal personer i stedet for navne; aktiviteterne
+        // og andre bokse viser navnene. Antal tages fra task.people eller antal deltagere.
+        const count = task.people != null ? task.people : (FIXED_TJANS.has(task.task_name) ? parts.length : null);
+        const countTxt = count != null ? ` (${count} ${count === 1 ? 'person' : 'personer'})` : '';
+        return html`
+            <div class="sf-cal-card">
+                <div class="sf-cal-card-title">${this._render_task_name(task.task_name, task.render_card)}${task.event ? '' : html` <span class="sf-cal-time">${this._fmt_time(task.task_time)}-${this._end_time(task)}${countTxt}</span>`}</div>
+                <div class="sf-cal-card-parts">
+                    ${count != null ? '' : parts.map((p, i) => html`${i > 0 ? ', ' : ''}${this._hl(p)}`)}
+                </div>
+            </div>`;
+    }
+
+    private _cell(task: Tasks[number], activity: string, parts: string[]): CalItem {
+        const start = this._time_key(task.task_time);
+        return { task, activity, parts, start, end: start + (task.duration ?? 1), lane: 0, lanes: 1, leftPct: 0, widthPct: 100 };
+    }
+
+    // Tildel baner (lanes) til overlappende kort. Fastgjorte tjanser (LEFT_PINNED) får de
+    // venstre/øverste baner, resten pakkes til højre/nedenunder. Grupperes pr. overlap-kæde.
+    private _packLanes(items: CalItem[]): CalItem[] {
+        const sorted = items.slice().sort((a, b) => a.start - b.start || b.end - a.end);
+        let group: CalItem[] = [];
+        let groupEnd = -Infinity;
+        const flush = () => {
+            if (group.length) this._assignLanes(group);
+            group = [];
+            groupEnd = -Infinity;
+        };
+        for (const it of sorted) {
+            if (group.length && it.start >= groupEnd) flush();
+            group.push(it);
+            groupEnd = Math.max(groupEnd, it.end);
+        }
+        flush();
+        return items;
+    }
+
+    // Pak en overlap-gruppe: fastgjorte tjanser i de venstre baner, resten forskudt til højre.
+    private _assignLanes(group: CalItem[]) {
+        const pack = (bucket: CalItem[], offset: number) => {
+            const colEnds: number[] = [];
+            for (const it of bucket) {
+                let lane = colEnds.findIndex(e => e <= it.start);
+                if (lane === -1) { lane = colEnds.length; colEnds.push(it.end); } else { colEnds[lane] = it.end; }
+                it.lane = offset + lane;
+            }
+            return colEnds.length;
+        };
+        const pinned = group.filter(it => LEFT_PINNED.has(it.task.task_name));
+        const rest = group.filter(it => !LEFT_PINNED.has(it.task.task_name));
+        const p = pack(pinned, 0);
+        const r = pack(rest, p);
+        const total = p + r;
+        // Køkken/oprydning (pinned) fylder PINNED_FRACTION til venstre; de øvrige parallelle
+        // tjanser deler resten. Samme regel i skabelonen og på de rigtige dage.
+        const widths: number[] = new Array(total).fill(1 / total);
+        if (p > 0) {
+            for (let l = 0; l < p; l++) widths[l] = PINNED_FRACTION / p;
+            if (r > 0) for (let l = p; l < total; l++) widths[l] = (1 - PINNED_FRACTION) / r;
+        }
+        let acc = 0;
+        const lefts: number[] = [];
+        for (let l = 0; l < total; l++) { lefts[l] = acc; acc += widths[l]; }
+        for (const it of group) {
+            it.lanes = total;
+            it.leftPct = lefts[it.lane] * 100;
+            it.widthPct = widths[it.lane] * 100;
+        }
+    }
+
+    // En dags tjanser (uden de fælles dagsprogram-events).
+    private _dayItems(day: Program[number]): CalItem[] {
+        const items = day.schedule.flatMap(s => s.tasks
+            .filter(t => t.event !== true)
+            .map(t => this._cell(t, s.activity, this._effective(t))))
+            .filter(c => this._matches(day.day, c.activity, c.task.task_name, c.parts));
+        return this._packLanes(items);
+    }
+
+    // En dags fælles dagsprogram (måltider, flaghejsning) til dagens egen Fælles-kolonne.
+    private _dayEvents(day: Program[number]): CalItem[] {
+        const items = day.schedule.flatMap(s => s.tasks
+            .filter(t => t.event === true)
+            .map(t => this._cell(t, s.activity, [])))
+            .filter(c => this._matches(day.day, c.activity, c.task.task_name, []));
+        return this._packLanes(items);
+    }
+
+    // Fælles dagsprogram (morgenmad, flaghejsning, frokost, aftensmad) samlet i én kolonne.
+    // De går igen hver dag, så vi viser hvert unikke event én gang (nøgle: navn + tid).
+    private _sharedItems(days: Program): CalItem[] {
+        const seen = new Set<string>();
+        const items: CalItem[] = [];
+        for (const day of days) {
+            for (const s of day.schedule) {
+                for (const t of s.tasks) {
+                    if (t.event !== true) continue;
+                    const key = `${t.task_name}|${t.task_time}`;
+                    if (seen.has(key) || !this._matches('', s.activity, t.task_name, [])) continue;
+                    seen.add(key);
+                    items.push(this._cell(t, s.activity, []));
+                }
+            }
+        }
+        return this._packLanes(items);
+    }
+
+    // Skabelon til whiteboard: én planlægningscyklus (en dag fra formiddag + næste morgen
+    // til og med "Oprydning efter morgenmad"). Tomme felter, aktiviteter som ét stort felt.
+    private _templateProgram(): Program {
+        const box = (task_name: string, task_time: string, duration: number,
+            opts: { event?: boolean; people?: number } = {}): Tasks[number] =>
+            ({ task_name, task_time, participants: [], duration, event: opts.event ?? false, people: opts.people });
+        const blk = (day: string, tasks: Tasks): Program[number] =>
+            ({ day, schedule: tasks.map(t => ({ activity: '', tasks: [t] })) });
+        return [
+            blk('Dagen', [
+                box('Flaghejsning', '09:00', 0.5, { event: true }),
+                box('Oprydning efter morgenmad', '09:45', 1.25, { people: 2 }),
+                box('Formiddagsaktiviteter', '10:00', 2),
+                box('Lave frokost', '11:00', 2, { people: 2 }),
+                box('Frokost', '12:00', 1, { event: true }),
+                box('Oprydning efter frokost', '13:00', 1, { people: 3 }),
+                box('Eftermiddagsaktiviteter', '13:30', 2),
+                box('Lave aftensmad', '16:00', 2, { people: 4 }),
+                box('Aftensmad', '18:00', 1, { event: true }),
+                box('Oprydning efter aftensmad', '19:00', 1, { people: 3 }),
+                box('Bålhygge', '19:00', 3, { people: 2 }),
+                box('Børnefilm', '19:00', 2, { people: 2 }),
+            ]),
+            blk('Næste morgen', [
+                box('Lave morgenmad', '07:00', 2, { people: 2 }),
+                box('Lejroprydning og Toiletter', '07:00', 3, { people: 2 }),
+                box('Morgenmad', '08:00', 1.25, { event: true }),
+                box('Flaghejsning', '09:00', 0.5, { event: true }),
+                box('Oprydning efter morgenmad', '09:45', 1.25, { people: 2 }),
+                box('Formiddagsaktiviteter', '10:00', 2),
+            ]),
+        ];
+    }
+
+    private _calendar() {
+        // Skabelon-tilstand: én cyklus med tomme felter; ellers alle dage eller en enkelt dag.
+        const isTemplate = this._calDay === 'Skabelon';
+        const days = isTemplate ? this._templateProgram()
+            : this._calDay === 'Alle' ? this.program
+                : this.program.filter(d => d.day === this._calDay);
+        // Fælles dagsprogram (events) samles i egen kolonne; dagene viser kun tjanser.
+        const shared = this._sharedItems(days);
+        const layouts = days.map(d => ({ day: d, items: this._dayItems(d) }));
+
+        // Fælles tidsakse ud fra alt der vises, så rækker/kolonner flugter.
+        const cells = [...shared, ...layouts.flatMap(l => l.items)];
+        const axisStart = cells.length ? Math.floor(Math.min(...cells.map(c => c.start))) : 7;
+        const axisEnd = cells.length ? Math.ceil(Math.max(...cells.map(c => c.end))) : 21;
+        const span = Math.max(1, axisEnd - axisStart);
+        const hours: number[] = [];
+        for (let h = axisStart; h < axisEnd; h++) hours.push(h);
+        const laneCount = (items: CalItem[]) => items.reduce((m, it) => Math.max(m, it.lanes), 1);
+
+        if (this._flip) {
+            // Tid vandret: timer som kolonner, dage (+ fælles) som rækker.
+            const COLW = 6;    // em pr. time
+            const LANEH = 3.6; // em pr. bane
+            const lineBg = `repeating-linear-gradient(to right, transparent, transparent calc(${COLW}em - 1px), #f3dde6 ${COLW}em)`;
+            const track = (label: string, items: CalItem[], cls: string) => html`
+                <div class="sf-cal2-dayhead ${cls}">${label}</div>
+                <div class="sf-cal2-dayrow ${cls}" style="width:${span * COLW}em; height:${laneCount(items) * LANEH}em; background-image:${lineBg};">
+                    ${items.map(it => html`
+                        <div class="sf-cal2-event" style="left:${(it.start - axisStart) * COLW}em; width:calc(${(it.end - it.start) * COLW}em - 2px); top:${it.lane * LANEH}em; height:calc(${LANEH}em - 2px);">
+                            ${this._cal_card(it.task, it.parts)}
+                        </div>`)}
+                </div>`;
+            return html`
+                <div class="sf-calendar-wrap">
+                    <div class="sf-cal2 sf-cal2-h" style="grid-template-columns: auto ${span * COLW}em;">
+                        <div class="sf-cal2-corner"></div>
+                        <div class="sf-cal2-hhead" style="width:${span * COLW}em;">
+                            ${hours.map(h => html`<div class="sf-cal2-hcell" style="width:${COLW}em;"><span class="sf-cal2-hlabel">${String(h).padStart(2, '0')}:00</span></div>`)}
+                        </div>
+                        ${shared.length ? track('Fælles', shared, 'sf-cal2-eventtrack') : ''}
+                        ${layouts.map(({ day, items }) => track(day.day, items, ''))}
+                    </div>
+                </div>
+            `;
+        }
+        // Tid lodret: hver dag som sin egen kalender, stablet under hinanden.
+        // Hver dag beregner sin egen tidsakse, så en dag fylder det samme som når den vises alene.
+        const ROWH = 3.4; // em pr. time
+        const lineBg = `repeating-linear-gradient(to bottom, transparent, transparent calc(${ROWH}em - 1px), #f3dde6 ${ROWH}em)`;
+        // Fælles-kolonnen krymper til at passe det længste event-navn.
+        const evNames = this.program.flatMap(d => d.schedule.flatMap(s => s.tasks.filter(t => t.event === true).map(t => t.task_name)));
+        const evMaxLen = evNames.length ? Math.max(...evNames.map(n => n.length)) : 0;
+        const faellesW = `calc(${evMaxLen}ch + 1.1em)`;
+        const blocks = layouts
+            .map(({ day, items }) => ({ day, items, ev: this._dayEvents(day) }))
+            .filter(b => b.items.length || b.ev.length);
+        const dayBlock = (day: Program[number], items: CalItem[], ev: CalItem[]) => {
+            const dcells = [...ev, ...items];
+            const aS = dcells.length ? Math.floor(Math.min(...dcells.map(c => c.start))) : 7;
+            const aE = dcells.length ? Math.ceil(Math.max(...dcells.map(c => c.end))) : 21;
+            const dSpan = Math.max(1, aE - aS);
+            const dHours: number[] = [];
+            for (let h = aS; h < aE; h++) dHours.push(h);
+            const col = (its: CalItem[], cls: string) => html`
+                <div class="sf-cal2-daycol ${cls}" style="height:${dSpan * ROWH}em; background-image:${lineBg};">
+                    ${its.map(it => html`
+                        <div class="sf-cal2-event" style="top:${(it.start - aS) * ROWH}em; height:calc(${(it.end - it.start) * ROWH}em - 2px); left:calc(${it.leftPct}% + 1px); width:calc(${it.widthPct}% - 2px);">
+                            ${this._cal_card(it.task, it.parts)}
+                        </div>`)}
+                </div>`;
+            const cols = `auto ${ev.length ? faellesW + ' ' : ''}minmax(8em, 1fr)`;
+            return html`
+                <div class="sf-cal2 sf-cal2-v" style="grid-template-columns: ${cols};">
+                    <div class="sf-cal2-corner"></div>
+                    ${ev.length ? html`<div class="sf-cal2-dayhead sf-cal2-eventtrack">Fælles</div>` : ''}
+                    <div class="sf-cal2-dayhead">${day.day}</div>
+                    <div class="sf-cal2-timecol" style="height:${dSpan * ROWH}em;">
+                        ${dHours.map(h => html`<div class="sf-cal2-hcell" style="height:${ROWH}em;"><span class="sf-cal2-hlabel">${String(h).padStart(2, '0')}:00</span></div>`)}
+                    </div>
+                    ${ev.length ? col(ev, 'sf-cal2-eventtrack') : ''}
+                    ${col(items, '')}
+                </div>`;
+        };
+        return html`
+            ${isTemplate ? html`<p class="sf-template-note">Skabelon til whiteboard — udfyld de tomme felter med tusch. De to store felter (formiddag/eftermiddag) er til dagens aktiviteter og hvem der gør hvad. "Oprydning efter morgenmad" planlægges dagen før. Onsdag og lørdag: streg de felter ud, der ikke passer.</p>` : ''}
+            <div class="sf-calendar-wrap sf-cal-stack">
+                ${blocks.map(b => dayBlock(b.day, b.items, b.ev))}
+            </div>
+        `;
+    }
+
     render() {
         const program = this.program.map(day => ({
             ...day,
             schedule: day.schedule.map(sched => ({
                 ...sched,
-                tasks: sched.tasks.filter(task => {
-                    if (day.day.toLowerCase().includes(this._query.toLowerCase())) {
-                        return true;
-                    }
-                    if (task.task_name.toLowerCase().includes(this._query.toLowerCase())) {
-                        return true;
-                    }
-                    if (sched.activity.toLowerCase().includes(this._query.toLowerCase())) {
-                        return true;
-                    }
-                    return task.participants.some(participant => participant.toLowerCase().includes(this._query.toLowerCase()));
-                })
+                tasks: sched.tasks.map(task => ({ ...task, participants: this._effective(task) }))
+                    .filter(task => this._matches(day.day, sched.activity, task.task_name, task.participants))
             })).filter(sched => sched.tasks.length > 0)
         })).filter(day => day.schedule.length > 0);
-        const rendered_rows = program.flatMap(
-            day => day.schedule.flatMap(
-                (sched, schedule_index) => sched.tasks.flatMap(
-                    (task, task_index) =>
-                        task.participants.flatMap(
-                            (participant, participant_index) =>
-                                this.render_row(
-                                    day.day,
-                                    sched.activity,
-                                    schedule_index,
-                                    task.task_name,
-                                    task.task_time ?? '',
-                                    task_index,
-                                    participant,
-                                    participant_index,
-                                    day.schedule,
-                                    sched.tasks,
-                                    task.participants,
-                                    task.render_card
-                                )
-                        )
+        const day_totals = this.program.map(day => ({
+            day: day.day,
+            total: day.schedule.reduce((sum, sched) => sum + sched.tasks.reduce((s, t) => s + t.participants.length, 0), 0)
+        }));
+        const grand_total = day_totals.reduce((sum, d) => sum + d.total, 0);
+        const rendered_rows = program.flatMap(day => {
+            const day_rowspan = day.schedule.reduce((sum, s) => sum + s.tasks.reduce((n, t) => n + t.participants.length, 0), 0);
+            let first_of_day = true;
+            return day.schedule.flatMap(
+                sched => sched.tasks.flatMap(
+                    task => task.participants.map(
+                        (participant, participant_index) => {
+                            const row = this.render_row(
+                                day.day,
+                                day_rowspan,
+                                first_of_day,
+                                task.task_name,
+                                task.task_time ?? '',
+                                participant,
+                                participant_index,
+                                task.participants.length,
+                                task.render_card
+                            );
+                            first_of_day = false;
+                            return row;
+                        }
+                    )
                 )
-            )
-        );
+            );
+        });
 
         return html`
             <div class="sf-content">
@@ -708,16 +1151,39 @@ export class sf_tjanser extends LitElement {
 <datalist id="browsers">
 ${this._participants().map(p => html`<option value="${p}"></option>`)}
 </datalist>
+                <p>
+                    <button class="sf-suggest-btn" @click=${() => this._suggest()}>🎲 Foreslå fordeling</button>
+                    ${this._assignment.size > 0 ? html`<button class="sf-suggest-btn" @click=${() => this._clear_assignment()}>Nulstil</button>` : ''}
+                </p>
+                ${this._assignment.size > 0 ? html`<p class="sf-suggest-note">Forslag til en tilfældig fordeling af de tilmeldte voksne. Ingen får to tjanser i samme tidsrum, ankomstdag giver ingen morgentjans, og afrejsedag giver ingen aftentjans. Tryk igen for et nyt forslag.</p>` : ''}
+                <p>Antal tilmeldte pr. dag:</p>
+                <ul class="sf-day-totals">
+                    ${this.attendance.per_day.map(d => html`<li>${d.day}: ${d.count}</li>`)}
+                    <li><strong>I alt tilmeldte: ${this.attendance.total}</strong></li>
+                </ul>
+                <p>Antal tjanser pr. dag:</p>
+                <ul class="sf-day-totals">
+                    ${day_totals.map(d => html`<li>${d.day}: ${d.total}</li>`)}
+                    <li><strong>I alt: ${grand_total}</strong></li>
+                </ul>
+                <p class="sf-view-toggle">
+                    <button class="sf-suggest-btn ${this._view === 'kalender' ? 'sf-view-active' : ''}" @click=${() => this._view = 'kalender'}>Kalender</button>
+                    <button class="sf-suggest-btn ${this._view === 'tabel' ? 'sf-view-active' : ''}" @click=${() => this._view = 'tabel'}>Tabel</button>
+                    ${this._view === 'kalender' ? html`<button class="sf-suggest-btn" @click=${() => this._flip = !this._flip}>↻ Byt akse</button>` : ''}
+                </p>
+                ${this._view === 'kalender' ? html`
+                <p class="sf-view-toggle">
+                    <button class="sf-suggest-btn ${this._calDay === 'Alle' ? 'sf-view-active' : ''}" @click=${() => this._calDay = 'Alle'}>Alle dage</button>
+                    ${this.program.map(d => html`<button class="sf-suggest-btn ${this._calDay === d.day ? 'sf-view-active' : ''}" @click=${() => this._calDay = d.day}>${d.day}</button>`)}
+                    <button class="sf-suggest-btn ${this._calDay === 'Skabelon' ? 'sf-view-active' : ''}" @click=${() => this._calDay = 'Skabelon'}>Skabelon</button>
+                </p>` : ''}
+                <h3 class="sf-title">Ved Verdens Ende 2026</h3>
+                ${this._view === 'kalender' ? this._calendar() : html`
                 <table class="sf-program-table">
-                    <thead>
-                        <tr>
-                            <th colspan="4" class="sf-title">Ved Verdens Ende 2026</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         ${rendered_rows}
                     </tbody>
-                </table>
+                </table>`}
             </div>
         `;
     }

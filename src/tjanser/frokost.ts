@@ -14,6 +14,7 @@ Skal stilles frem og serveres på kølebordet.</p>
 <li>Finde ting frem til buffeten. </li>
 <li>Fylde buffeten op undervejs efter behov. </li>
 <li>Kontroller snackfad som kan stå fremme mellem måltider (kiks, grønt, osv.) og fyld op efter behov.</li>
+<li>Drikkevarer på køl.</li>
 </ul>
     `
 }

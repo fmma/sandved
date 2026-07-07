@@ -4,11 +4,11 @@ export function render_lav_banner() {
     return html`
     <h4>Lokation: Udendørsbord og græsplænen</h4>
         <p><strong>Beskrivelse:</strong><br>
-        Vi maler og dekorerer et stort banner til festivalpladsen! Farver, pensler og masser af fantasi sætter scenen.
+        Vi maler og dekorerer et stort flag og flotte vimpler til festivalpladsen! Farver, pensler og masser af fantasi sætter scenen.
         </p>
         <p><strong>Der skal bruges:</strong></p>
         <ul>
-            <li>Solsejl</li>
+            <li>Stof</li>
             <li>Maling og pensler</li>
             <li>Tuscher</li>
             <li>Snor/tape til ophæng</li>

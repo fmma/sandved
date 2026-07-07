@@ -14,6 +14,7 @@ import './sf_tjanser.js';
 import './sf_food.js';
 import './sf_merch.js';
 import './sf_film.js';
+import './sf_musik.js';
 import './sf_sang.js';
 
 import { configure } from '@fmma-npm/http-client';
@@ -97,18 +98,19 @@ export class sf_app extends LitElement {
     render() {
         const menu_items = [
             { id: 'om', title: 'Om' },
-            { id: 'tilmeld', title: 'Pris og Tilmelding' },
             { id: 'praktisk', title: 'Praktisk Info' },
             { id: 'kort', title: 'Kort' },
+            { id: 'merch', title: 'Merch' },
+            { id: 'program', title: 'Program' },
+            { id: 'film', title: 'Film' },
+            { id: 'musik', title: 'Musik' },
             { id: 'sang', title: 'Sang' },
+            { id: 'tjanser', title: 'Tjanser' },
+            { id: 'mad', title: 'Mad' },
+            { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
+            { id: 'tilmeld', title: 'Pris og Tilmelding' },
             { id: 'kontakt', title: 'Kontakt' },
             // Skjult indtil indhold er klar:
-            // { id: 'program', title: 'Program' },
-            // { id: 'film', title: 'Film' },
-            // { id: 'merch', title: 'Merch' },
-            // { id: 'tjanser', title: 'Tjanser' },
-            // { id: 'mad', title: 'Mad' },
-            // { id: 'drikkevaremenu', title: 'Drikkevaremenu' },
             // { id: 'feedback', title: 'Feedback' },
             // { id: 'media', title: 'Billeder og Videoer' },
             // { id: 'archive', title: 'Arkiv' },
@@ -196,6 +198,8 @@ export class sf_app extends LitElement {
                 return html`
                     <sf-merch></sf-merch>
                 `;
+            case 'musik':
+                return html`<sf-musik></sf-musik>`;
             case 'sang':
                 return html`<sf-sang></sf-sang>`;
             case 'feedback':
