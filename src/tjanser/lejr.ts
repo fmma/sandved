@@ -15,6 +15,15 @@ export function render_lejroprydning() {
     `;
 }
 
+export function render_lejr_toilet() {
+    return html`
+        <p><strong>Lejroprydning</strong></p>
+        ${render_lejroprydning()}
+        <p><strong>Toiletter</strong></p>
+        ${render_toilet()}
+    `;
+}
+
 export function render_toilet() {
     return html`
     <p>

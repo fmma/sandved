@@ -21,7 +21,7 @@ export class sf_drinks extends LitElement {
                         </tr>
                         <tr>
                             <td style="padding-left:2em;"><em>Pilsner, Classic</em></td>
-                            <td nowrap>4 kr</td>
+                            <td nowrap>5 kr</td>
                         </tr>
                         <tr>
                             <td style="padding-left:2em;"><em>IPA (Juicy)</em></td>
@@ -45,7 +45,7 @@ export class sf_drinks extends LitElement {
                         </tr>
                         <tr>
                             <td style="padding-left:2em;"><em>Rød, hvid og rosé</em></td>
-                            <td nowrap>43 kr/liter</td>
+                            <td nowrap>10 kr pr. glas</td>
                         </tr>
                         <tr>
                             <td><strong>Cider og Smirnoff, dåse</strong></td>

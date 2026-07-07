@@ -90,6 +90,17 @@ body {
     border-radius: 1em;
     box-shadow: 0 4px 24px #0001;
 }
+.sf-task-list {
+    columns: 2;
+    -webkit-columns: 2;
+    margin: 0.3em 0 0 0;
+}
+.sf-task-list li {
+    break-inside: avoid;
+}
+@media (max-width: 500px) {
+    .sf-task-list { columns: 1; -webkit-columns: 1; }
+}
 
 /* Remove the .sf-logo styles and <img> from your HTML */
 .sf-nav {

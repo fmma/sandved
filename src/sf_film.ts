@@ -7,7 +7,7 @@ export class sf_film extends LitElement {
     render() {
         return html`
             <div class="sf-content-special">
-                <img src="${import.meta.env.BASE_URL}ims/filmplakat.webp" alt="Filmplakat" class="sf-plakat" />
+                <img src="https://snesl.dk/media/378bb9d7f99804c637290823957af33d.webp" alt="Filmplakat" class="sf-plakat" />
             </div>
         `;
     }

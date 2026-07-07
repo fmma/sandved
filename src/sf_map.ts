@@ -5,12 +5,7 @@ import { customElement } from "lit/decorators.js";
 export class sf_map extends LitElement {
     renderRoot = this;
 
-    kort = '344140da0c079c53574317950687517e.png';
-
     render() {
-        // return html`
-        //     <img src="${import.meta.env.BASE_URL}ims/kort.png" alt="Festivalkort" class="sf-map" />
-        // `;
         return html`
 
             <div class="sf-content">
@@ -18,7 +13,7 @@ export class sf_map extends LitElement {
                 <p><em>Kortet kan ændres.</em></p>
             </div>
             <div class="sf-content-special">
-                <img src="https://snesl.dk/media/${this.kort}" alt="Festivalkort" class="sf-map" />
+                <img src="https://snesl.dk/media/4eb402498ce388a029615493b0df48cd.webp" alt="Festivalkort" class="sf-map" />
             </div>
         `;
     }

@@ -4,7 +4,7 @@ export function render_hovdingebold() {
     return html`
         <div class="ol-card ol-hovdingebold">
         <div class="ol-head">
-            <img class="ol-icon" src="${import.meta.env.BASE_URL}ims/ol_icon_hovdingebold.webp" alt="">
+            <img class="ol-icon" src="https://snesl.dk/media/c3cbf2873e456a2c765501a939b513dc.webp" alt="">
             <div class="ol-head-text">
                 <h3 class="ol-title">Høvdingebold</h3>
                 <p class="ol-meta">
@@ -34,8 +34,8 @@ export function render_hovdingebold() {
                 </ul>
             </div>
             <figure class="ol-figure">
-                <img src="${import.meta.env.BASE_URL}ims/ol_hovdingebold.webp" alt="Baneopsætning for Høvdingebold" loading="lazy">
-                <img class="ol-sched" src="${import.meta.env.BASE_URL}ims/ol_sched_hovdingebold.webp" alt="Kampprogram for Høvdingebold" loading="lazy">
+                <img src="https://snesl.dk/media/e3205ee20b4113911fdc08d96d0d1280.webp" alt="Baneopsætning for Høvdingebold" loading="lazy">
+                <img class="ol-sched" src="https://snesl.dk/media/59bd14837adb98eb486e66f7b819fb1f.webp" alt="Kampprogram for Høvdingebold" loading="lazy">
                 <figcaption>Kampprogram</figcaption>
             </figure>
         </div>

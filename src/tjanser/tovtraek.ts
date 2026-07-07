@@ -4,7 +4,7 @@ export function render_tovtraek() {
     return html`
         <div class="ol-card ol-tovtraek">
         <div class="ol-head">
-            <img class="ol-icon" src="${import.meta.env.BASE_URL}ims/ol_icon_tovtraek.webp" alt="">
+            <img class="ol-icon" src="https://snesl.dk/media/e75977e4554677718f6d5c55b8dc4c45.webp" alt="">
             <div class="ol-head-text">
                 <h3 class="ol-title">Tovtrækning</h3>
                 <p class="ol-meta">
@@ -35,10 +35,10 @@ export function render_tovtraek() {
                     <li>Afmærkning (kegler eller snor)</li>
                 </ul>
                 <p><strong>Kampprogram</strong> (kl. 13.30-14.00):</p>
-                <img class="ol-sched" src="${import.meta.env.BASE_URL}ims/ol_sched_tovtraek.webp" alt="Kampprogram for Tovtrækning" loading="lazy">
+                <img class="ol-sched" src="https://snesl.dk/media/1005f2ad5f44d7c8bdff737cc527fba6.webp" alt="Kampprogram for Tovtrækning" loading="lazy">
             </div>
         </div>
-        <img class="ol-banner" src="${import.meta.env.BASE_URL}ims/ol_tovtraek.webp" alt="Regler for Tovtrækning" loading="lazy">
+        <img class="ol-banner" src="https://snesl.dk/media/77a37ee012fef93677213fa703cbe968.webp" alt="Regler for Tovtrækning" loading="lazy">
         <div class="ol-footer">
             <p><strong>Facilitatorens rolle og ansvar:</strong><br>
             Lede kampen, sørge for sikkerhed, og sikre fair opdeling og god stemning blandt deltagerne.<br>

@@ -8,7 +8,7 @@ export class sf_merch extends LitElement {
     render() {
         return html`
             <div class="sf-content-special">
-                <img src="${import.meta.env.BASE_URL}ims/merch_plakat.webp" alt="Merchandise-plakat" class="sf-plakat" />
+                <img src="https://snesl.dk/media/92a8d5314b244e391d1d83bb77e357e4.webp" alt="Merchandise-plakat" class="sf-plakat" />
             </div>
             <div class="sf-content">
                 <h4>Sådan bestiller du merch</h4>

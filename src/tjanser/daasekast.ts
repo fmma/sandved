@@ -4,7 +4,7 @@ export function render_daasekast() {
     return html`
         <div class="ol-card ol-daasekast">
         <div class="ol-head">
-            <img class="ol-icon" src="${import.meta.env.BASE_URL}ims/ol_icon_daasekast.webp" alt="">
+            <img class="ol-icon" src="https://snesl.dk/media/6c5f3f27d9fc60db1fb1ad53d9c743ed.webp" alt="">
             <div class="ol-head-text">
                 <h3 class="ol-title">Dåsekast</h3>
                 <p class="ol-meta">
@@ -35,7 +35,7 @@ export function render_daasekast() {
                 </ul>
             </div>
             <figure class="ol-figure">
-                <img src="${import.meta.env.BASE_URL}ims/ol_daasekast.webp" alt="Opsætning og redskaber til Dåsekast" loading="lazy">
+                <img src="https://snesl.dk/media/bb0004bacb9f1b5c0cea8171f117909f.webp" alt="Opsætning og redskaber til Dåsekast" loading="lazy">
             </figure>
         </div>
         <div class="ol-footer">

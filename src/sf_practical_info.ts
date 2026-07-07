@@ -31,7 +31,10 @@ export class sf_practical_info extends LitElement {
 
                 <h4 id="praktisk:q1"> Hvornår skal jeg komme? </h4>
                 <p>
-                Festivalsstart annonceres snart. Ankomsttidspunkt vil blive oplyst i god tid inden festivalen.
+                Festivalen begynder kl. 12.00, hvor vi starter med frokost, som er inkluderet. Man er dog velkommen til at komme allerede fra kl. 10.00.
+                </p>
+                <p>
+                Det forventes, at man er klar til at deltage i tjanser kl. 15, så kom gerne i god tid og få slået telt op.
                 </p>
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q2"> Hvor kan jeg parkere? </h4>
@@ -74,7 +77,7 @@ Der vil blive lagt en <a href="#tjanser">plan</a> op, hvor man kan se sine tjans
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q5"> Hvad skal jeg lave? </h4>
                 <p>
-Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at være tovholder for en aktivitet. Der kommer en <a href="#program">plan</a> over aktiviteter og optrædener. Der vil være rig mulighed for at optræde, hvis man har noget man har lyst til at vise frem, så hold jer endelig ikke tilbage! 
+Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at være tovholder for en aktivitet. Se <a href="#program">programmet</a> over aktiviteter og optrædener. Der vil være rig mulighed for at optræde, hvis man har noget man har lyst til at vise frem, så hold jer endelig ikke tilbage!
                 </p>
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q6"> Hvad har planlægningsgruppen sørget for? </h4>
@@ -111,7 +114,7 @@ Hver dag vil der være flere planlagte aktiviteter. Man kan blive bedt om at væ
                 Der vil være fine toiletfaciliteter.
                 </p>
                 <p>
-                Der er begrænsede muligheder for badning, men der vil være mulighed for et kort brusebad eller alternativt et dyp i poolen.
+                Vi har skaffet ekstra bade, så der er rig mulighed for at tage et bad. Alternativt kan man tage et dyp i poolen.
                 </p>
                 <a href="#praktisk:faq">Tilbage til toppen</a>
                 <h4 id="praktisk:q9">Hvad skal jeg spise?</h4>

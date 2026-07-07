@@ -4,7 +4,7 @@ export function render_synkron() {
     return html`
         <div class="ol-card ol-synkron">
         <div class="ol-head">
-            <img class="ol-icon" src="${import.meta.env.BASE_URL}ims/ol_icon_synkron.webp" alt="">
+            <img class="ol-icon" src="https://snesl.dk/media/4315dc69f12d24d887934111a3e25ef6.webp" alt="">
             <div class="ol-head-text">
                 <h3 class="ol-title">Synkronsvømning</h3>
                 <p class="ol-meta">

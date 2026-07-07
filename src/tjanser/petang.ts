@@ -4,7 +4,7 @@ export function render_petang() {
     return html`
         <div class="ol-card ol-petang">
         <div class="ol-head">
-            <img class="ol-icon" src="${import.meta.env.BASE_URL}ims/ol_icon_petang.webp" alt="">
+            <img class="ol-icon" src="https://snesl.dk/media/12b7235b878fb526f9448f163d1dc0c4.webp" alt="">
             <div class="ol-head-text">
                 <h3 class="ol-title">Petanque</h3>
                 <p class="ol-meta">
@@ -34,8 +34,8 @@ export function render_petang() {
                 </ul>
             </div>
             <figure class="ol-figure">
-                <img src="${import.meta.env.BASE_URL}ims/ol_petang.webp" alt="Bane og redskaber til Petanque" loading="lazy">
-                <img class="ol-sched" src="${import.meta.env.BASE_URL}ims/ol_sched_petanque.webp" alt="Kampprogram for Petanque" loading="lazy">
+                <img src="https://snesl.dk/media/1fc2a1984e6d72ad708f848b68cd84f0.webp" alt="Bane og redskaber til Petanque" loading="lazy">
+                <img class="ol-sched" src="https://snesl.dk/media/64d5f5b1d2a7f32ea3b990ce94ecad5b.webp" alt="Kampprogram for Petanque" loading="lazy">
                 <figcaption>Kampprogram</figcaption>
             </figure>
         </div>

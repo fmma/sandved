@@ -2,7 +2,7 @@ import { html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { render_frokost, render_frokost_opr } from "./tjanser/frokost";
 import { render_baalhygge } from "./tjanser/baalhygge";
-import { render_lejroprydning, render_toilet } from "./tjanser/lejr";
+import { render_lejr_toilet } from "./tjanser/lejr";
 import { render_aftensmad, render_aftensmad_opr } from "./tjanser/aftensmad";
 import { render_biograf } from "./tjanser/biograf";
 import { render_morgenmad, render_morgenmad_opr } from "./tjanser/morgenmad";
@@ -34,12 +34,11 @@ const LEFT_PINNED = new Set([
     'Lave aftensmad', 'Oprydning efter aftensmad',
 ]);
 
-// Faste tjanser: fordeles på whiteboardet på dagen, så websitet viser kun "(N personer)".
-// Aktiviteterne (formiddag/eftermiddag) er undtaget og viser deres indhold.
-const FIXED_TJANS = new Set([
+// Tjanser (pligter) i oversigtslisten: køkken/oprydning + lejr og toiletter.
+// Alt andet (uden fælles events) regnes som en aktivitet.
+const TJANS_NAMES = new Set([
     ...LEFT_PINNED,
-    'Bålhygge', 'Børnefilm',
-    'Lejroprydning', 'Toiletter',
+    'Lejroprydning og Toiletter',
 ]);
 
 // Andel af banebredden som de fastgjorte (venstre) tjanser deler; resten deler (1 - denne).
@@ -84,13 +83,6 @@ type CalItem = {
 @customElement('sf-tjanser')
 export class sf_tjanser extends LitElement {
     renderRoot = this;
-
-    @state()
-    private _query: string = '';
-
-    // Foreslået fordeling: nøgle er det enkelte task-objekt, værdi er de tildelte navne.
-    @state()
-    private _assignment: Map<object, string[]> = new Map();
 
     @state()
     private _view: 'kalender' | 'tabel' = 'kalender';
@@ -214,23 +206,10 @@ export class sf_tjanser extends LitElement {
                     activity: '',
                     tasks: [
                         {
-                            task_name: 'Lejroprydning',
+                            task_name: 'Lejroprydning og Toiletter',
                             task_time: '07:00',
-                            participants: persons(1),
-                            render_card: [render_lejroprydning, "lejropryd"],
-                            duration: 3
-                        }
-                    ]
-                },
-
-                {
-                    activity: '',
-                    tasks: [
-                        {
-                            task_name: 'Toiletter',
-                            task_time: '07:00',
-                            participants: persons(1),
-                            render_card: [render_toilet, "toilet"],
+                            participants: persons(2),
+                            render_card: [render_lejr_toilet, "lejr-toilet"],
                             duration: 3
                         }
                     ]
@@ -412,23 +391,10 @@ export class sf_tjanser extends LitElement {
                     activity: '',
                     tasks: [
                         {
-                            task_name: 'Lejroprydning',
+                            task_name: 'Lejroprydning og Toiletter',
                             task_time: '07:00',
-                            participants: persons(1),
-                            render_card: [render_lejroprydning, "lejropryd"],
-                            duration: 3
-                        }
-                    ]
-                },
-
-                {
-                    activity: '',
-                    tasks: [
-                        {
-                            task_name: 'Toiletter',
-                            task_time: '07:00',
-                            participants: persons(1),
-                            render_card: [render_toilet, "toilet"],
+                            participants: persons(2),
+                            render_card: [render_lejr_toilet, "lejr-toilet"],
                             duration: 3
                         }
                     ]
@@ -662,152 +628,22 @@ export class sf_tjanser extends LitElement {
         }
     ]
 
-    // Antal tilmeldte pr. dag (fra tilmeldingsarket). total = antal unikke tilmeldte.
-    attendance: { per_day: { day: string; count: number }[]; total: number } = {
-        per_day: [
-            { day: 'Onsdag', count: 39 },
-            { day: 'Torsdag', count: 50 },
-            { day: 'Fredag', count: 40 },
-            { day: 'Lørdag', count: 39 },
-        ],
-        total: 51,
-    }
-
-    // Voksne deltagere og hvilke dage de er til stede (fra tilmeldingsarket).
-    // Børn er udeladt, da alle tjanser regnes som voksentjanser.
-    attendees: { name: string; days: string[] }[] = [
-        { name: 'Janne', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Morten', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Sif', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Michael', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Nikoline', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Frederik', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Rasmus', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Mathias', days: ['Onsdag', 'Torsdag'] },
-        { name: 'Tina', days: ['Onsdag', 'Torsdag'] },
-        { name: 'Katja', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Morten 2', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Trine', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Benjamin', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Schulle', days: ['Onsdag', 'Torsdag'] },
-        { name: 'Jesper', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Jannie', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Pernille', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Vincent', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Tess', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Signe', days: ['Torsdag'] },
-        { name: 'Emil', days: ['Torsdag'] },
-        { name: 'Nickolei', days: ['Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Camilla', days: ['Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Morten 3', days: ['Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Simon', days: ['Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Oahn', days: ['Torsdag', 'Fredag', 'Lørdag'] },
-        { name: 'Joan', days: ['Onsdag', 'Fredag'] },
-    ]
-
-    // Grov tidsblok ud fra starttidspunktet. Ingen kan have to tjanser i samme blok.
-    private _block(task_time: string): string {
-        const m = task_time.match(/\d+/);
-        const hour = m ? parseInt(m[0], 10) : 12;
-        if (hour < 11) return 'morgen';
-        if (hour < 15) return 'middag';
-        if (hour < 18) return 'eftermiddag';
-        return 'aften';
-    }
-
-    private _shuffle<T>(xs: T[]): T[] {
-        const a = xs.slice();
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-    }
-
-    private _suggest() {
-        const assignment = new Map<object, string[]>();
-        // Hvor mange tjanser hver person har fået i alt (for at fordele jævnt).
-        const load = new Map<string, number>();
-        for (const day of this.program) {
-            const present = this.attendees.filter(a => a.days.includes(day.day));
-            // Hvilke tidsblokke hver person allerede er optaget i denne dag.
-            const busy = new Map<string, Set<string>>();
-            for (const sched of day.schedule) {
-                for (const task of sched.tasks) {
-                    const block = this._block(task.task_time);
-                    const n = task.participants.length;
-                    const eligible = present.filter(a => {
-                        if (busy.get(a.name)?.has(block)) return false;
-                        if (block === 'morgen' && a.days[0] === day.day) return false; // ankommer i dag
-                        if (block === 'aften' && a.days[a.days.length - 1] === day.day) return false; // rejser i dag
-                        return true;
-                    });
-                    // Bland tilfældigt, men foretræk dem med færrest tjanser.
-                    const pool = this._shuffle(eligible)
-                        .sort((a, b) => (load.get(a.name) ?? 0) - (load.get(b.name) ?? 0));
-                    const picked: string[] = [];
-                    for (let k = 0; k < n; k++) {
-                        const person = pool[k];
-                        if (!person) { picked.push('(ledig)'); continue; }
-                        picked.push(person.name);
-                        let taken = busy.get(person.name);
-                        if (!taken) busy.set(person.name, taken = new Set());
-                        taken.add(block);
-                        load.set(person.name, (load.get(person.name) ?? 0) + 1);
-                    }
-                    assignment.set(task, picked);
-                }
-            }
-        }
-        this._assignment = assignment;
-    }
-
-    private _clear_assignment() {
-        this._assignment = new Map();
-    }
-
-    private _effective(task: Tasks[number]): string[] {
-        return this._assignment.get(task) ?? task.participants;
-    }
-
-    private _participants() {
-        return [
-            ...new Set(this.attendees.map(a => a.name)),
-            ...new Set(this.program.flatMap(d => d.schedule.flatMap(s => s.tasks.map(t => t.task_name)))),
-            ...new Set(this.program.map(d => d.day))
-        ];
-    }
 
     // Genrender efter en hash-ændring (vi ruter på window.location.hash uden hashchange-lytter).
     private _rerender = () => setTimeout(() => this.requestUpdate());
 
-    // Opgavenavn med evt. link til info-kort (popup).
+    // Opgavenavn som link: åbner info-kortet via hash (#tjanser:<key>) eller lukker det igen.
+    // Selve popup'en tegnes ét sted øverst i render() (uden for indholds-kolonnerne), så den
+    // ligger oven på kalender/tabel og ikke fanges i deres stacking-context.
     private _render_task_name(task_name: string, render_card?: [() => unknown, string]) {
         if (render_card == null) return task_name;
-        const [render_card_body, key] = render_card;
-        if (window.location.hash !== `#tjanser:${key}`) {
-            return html`<a href="#tjanser:${key}" @click=${this._rerender}>${task_name}</a>`;
-        }
-        // Kortet er åbnet via hash: vis navnet som luk-link plus selve popup'en.
-        return html`
-            <a href="#tjanser" @click=${this._rerender}>${task_name}</a>
-            <div class="sf_popup">
-                <button class="close-btn" title="Luk" @click=${() => { window.location.hash = "#tjanser"; this._rerender(); }}>&times;</button>
-                <a href="#tjanser" @click=${this._rerender}>${task_name}</a>
-                ${render_card_body()}
-            </div>`;
+        const key = render_card[1];
+        const href = window.location.hash === `#tjanser:${key}` ? '#tjanser' : `#tjanser:${key}`;
+        return html`<a href="${href}" @click=${this._rerender}>${task_name}</a>`;
     }
 
-    // Fremhæv søgeord i et navn.
-    private _hl(participant: string) {
-        return this._query && participant.toLocaleLowerCase().includes(this._query.toLocaleLowerCase())
-            ? html`<span class="sf-search-hit">${participant}</span>`
-            : participant;
-    }
-
-    render_row(day: string, day_rowspan: number, first_of_day: boolean, task_name: string, task_time: string, participant: string, participant_index: number, task_count: number, render_card?: [() => unknown, string]) {
-        // Dag-cellen udlægges på dagens første faktiske række. Onsdag og lørdag starter med
-        // et event (persons(0)), som ikke giver rækker, så vi kan ikke binde den til schedule_index 0.
+    // Én række pr. tjans: dag (rowspan), tidspunkt, tjans og antal personer.
+    render_row(day: string, day_rowspan: number, first_of_day: boolean, task_name: string, task_time: string, count: number, render_card?: [() => unknown, string]) {
         const day_td = first_of_day
             ? html`<td class="sf-program-day sf-shrink-td" rowspan="${day_rowspan}">
                 <span class="sf-program-day">${day}</span>
@@ -816,18 +652,11 @@ export class sf_tjanser extends LitElement {
 
         const rendered_task_name = this._render_task_name(task_name, render_card);
 
-        const task_name_td = participant_index === 0
-            ? html`
-                <td class="sf-task-td sf-shrink-td" rowspan="${task_count}">${task_time.split(' ').map((l, i) => i > 0 ? html`<br>${l}` : html`${l}`)}</td>
-                <td class="sf-task-td" rowspan="${task_count}">${rendered_task_name}</td>
-            `
-            : '';
-        const participant_td = html`<td class="sf-shrink-td">${this._hl(participant)}</td>`;
-
         return html`<tr class="sf-program-row">
             ${day_td}
-            ${task_name_td}
-            ${participant_td}
+            <td class="sf-task-td sf-shrink-td">${task_time.split(' ').map((l, i) => i > 0 ? html`<br>${l}` : html`${l}`)}</td>
+            <td class="sf-task-td">${rendered_task_name}</td>
+            <td class="sf-shrink-td">${count} ${count === 1 ? 'person' : 'personer'}</td>
         </tr>`;
     }
 
@@ -835,15 +664,6 @@ export class sf_tjanser extends LitElement {
     private _time_key(t: string): number {
         const m = t.match(/(\d+)(?::(\d+))?/);
         return m ? parseInt(m[1], 10) + (m[2] ? parseInt(m[2], 10) / 60 : 0) : 0;
-    }
-
-    private _matches(day: string, activity: string, task_name: string, participants: string[]): boolean {
-        const q = this._query.toLowerCase();
-        if (!q) return true;
-        return day.toLowerCase().includes(q)
-            || task_name.toLowerCase().includes(q)
-            || activity.toLowerCase().includes(q)
-            || participants.some(p => p.toLowerCase().includes(q));
     }
 
     // Vis tid som HH:MM (fx '9:45' -> '09:45').
@@ -861,16 +681,13 @@ export class sf_tjanser extends LitElement {
     }
 
     private _cal_card(task: Tasks[number], parts: string[]) {
-        // Faste tjanser (og skabelonen) viser antal personer i stedet for navne; aktiviteterne
-        // og andre bokse viser navnene. Antal tages fra task.people eller antal deltagere.
-        const count = task.people != null ? task.people : (FIXED_TJANS.has(task.task_name) ? parts.length : null);
-        const countTxt = count != null ? ` (${count} ${count === 1 ? 'person' : 'personer'})` : '';
+        // Websitet viser antal personer i stedet for navne; fordelingen laves på dagen.
+        // Måltider/flaghejsning (event) er fælles og viser hverken tid eller antal.
+        const count = task.people ?? parts.length;
+        const countTxt = task.event ? '' : ` (${count} ${count === 1 ? 'person' : 'personer'})`;
         return html`
             <div class="sf-cal-card">
                 <div class="sf-cal-card-title">${this._render_task_name(task.task_name, task.render_card)}${task.event ? '' : html` <span class="sf-cal-time">${this._fmt_time(task.task_time)}-${this._end_time(task)}${countTxt}</span>`}</div>
-                <div class="sf-cal-card-parts">
-                    ${count != null ? '' : parts.map((p, i) => html`${i > 0 ? ', ' : ''}${this._hl(p)}`)}
-                </div>
             </div>`;
     }
 
@@ -936,8 +753,7 @@ export class sf_tjanser extends LitElement {
     private _dayItems(day: Program[number]): CalItem[] {
         const items = day.schedule.flatMap(s => s.tasks
             .filter(t => t.event !== true)
-            .map(t => this._cell(t, s.activity, this._effective(t))))
-            .filter(c => this._matches(day.day, c.activity, c.task.task_name, c.parts));
+            .map(t => this._cell(t, s.activity, t.participants)));
         return this._packLanes(items);
     }
 
@@ -945,8 +761,7 @@ export class sf_tjanser extends LitElement {
     private _dayEvents(day: Program[number]): CalItem[] {
         const items = day.schedule.flatMap(s => s.tasks
             .filter(t => t.event === true)
-            .map(t => this._cell(t, s.activity, [])))
-            .filter(c => this._matches(day.day, c.activity, c.task.task_name, []));
+            .map(t => this._cell(t, s.activity, [])));
         return this._packLanes(items);
     }
 
@@ -960,7 +775,7 @@ export class sf_tjanser extends LitElement {
                 for (const t of s.tasks) {
                     if (t.event !== true) continue;
                     const key = `${t.task_name}|${t.task_time}`;
-                    if (seen.has(key) || !this._matches('', s.activity, t.task_name, [])) continue;
+                    if (seen.has(key)) continue;
                     seen.add(key);
                     items.push(this._cell(t, s.activity, []));
                 }
@@ -1095,77 +910,58 @@ export class sf_tjanser extends LitElement {
     }
 
     render() {
-        const program = this.program.map(day => ({
-            ...day,
-            schedule: day.schedule.map(sched => ({
-                ...sched,
-                tasks: sched.tasks.map(task => ({ ...task, participants: this._effective(task) }))
-                    .filter(task => this._matches(day.day, sched.activity, task.task_name, task.participants))
-            })).filter(sched => sched.tasks.length > 0)
-        })).filter(day => day.schedule.length > 0);
-        const day_totals = this.program.map(day => ({
-            day: day.day,
-            total: day.schedule.reduce((sum, sched) => sum + sched.tasks.reduce((s, t) => s + t.participants.length, 0), 0)
-        }));
-        const grand_total = day_totals.reduce((sum, d) => sum + d.total, 0);
-        const rendered_rows = program.flatMap(day => {
-            const day_rowspan = day.schedule.reduce((sum, s) => sum + s.tasks.reduce((n, t) => n + t.participants.length, 0), 0);
-            let first_of_day = true;
-            return day.schedule.flatMap(
-                sched => sched.tasks.flatMap(
-                    task => task.participants.map(
-                        (participant, participant_index) => {
-                            const row = this.render_row(
-                                day.day,
-                                day_rowspan,
-                                first_of_day,
-                                task.task_name,
-                                task.task_time ?? '',
-                                participant,
-                                participant_index,
-                                task.participants.length,
-                                task.render_card
-                            );
-                            first_of_day = false;
-                            return row;
-                        }
-                    )
-                )
-            );
+        // Unikke tjanser/aktiviteter (uden de fælles events), delt i to grupper og sorteret.
+        // Første forekomst af hvert navn bevares, så info-kortet (render_card) følger med til linket.
+        const uniqueByName = new Map<string, Tasks[number]>();
+        for (const d of this.program)
+            for (const s of d.schedule)
+                for (const t of s.tasks)
+                    if (t.event !== true && !uniqueByName.has(t.task_name)) uniqueByName.set(t.task_name, t);
+        const byName = (a: Tasks[number], b: Tasks[number]) => a.task_name.localeCompare(b.task_name, 'da');
+        const tjanser = [...uniqueByName.values()].filter(t => TJANS_NAMES.has(t.task_name)).sort(byName);
+        const aktiviteter = [...uniqueByName.values()].filter(t => !TJANS_NAMES.has(t.task_name)).sort(byName);
+        // Tabellen: én række pr. tjans med antal personer (dag-cellen spænder over dagens tjanser).
+        const rendered_rows = this.program.flatMap(day => {
+            const tasks = day.schedule.flatMap(s => s.tasks).filter(t => t.event !== true);
+            return tasks.map((task, i) => this.render_row(
+                day.day,
+                tasks.length,
+                i === 0,
+                task.task_name,
+                task.task_time ?? '',
+                task.people ?? task.participants.length,
+                task.render_card
+            ));
         });
+        // Aktivt info-kort (popup) ud fra hash'en, tegnet ét sted uden for indholds-kolonnerne,
+        // så det ligger oven på kalender/tabel (der ellers danner deres egen stacking-context).
+        const cardMatch = window.location.hash.match(/^#tjanser:(.+)$/);
+        const activeTask = cardMatch
+            ? this.program.flatMap(d => d.schedule.flatMap(s => s.tasks)).find(t => t.render_card?.[1] === cardMatch[1])
+            : undefined;
+        const activePopup = activeTask && activeTask.render_card ? html`
+            <div class="sf_popup">
+                <button class="close-btn" title="Luk" @click=${() => { window.location.hash = "#tjanser"; this._rerender(); }}>&times;</button>
+                <a href="#tjanser" @click=${this._rerender}>${activeTask.task_name}</a>
+                ${activeTask.render_card[0]()}
+            </div>` : '';
 
         return html`
+            ${activePopup}
             <div class="sf-content">
-                <p> Her er oversigten over alle deltagertjanser - en vagtplan om man vil. Skriv dit navn i søgefeltet for at se hvad dine tjanser er.</p>
-                <p> Tjanserne er under udarbejdelse, og der kan forekomme ændringer. </p>
-                <p> Kontakt Nikoline hvis der er ønsker om ændringer. </p>
-                <p>Det forventes, at man er klar til at deltage i tjanser kl. 15 den dag man ankommer, så kom gerne i god tid og slå telt op, så du er klar til at deltage kl. 15.</p>
-                <p>Hvis man på forhånd ved, at man ikke kan nå at være klar kl. 15, skal det meldes til arrangørerne ved tilmelding.</p>
+                <p>Her er oversigten over festivalens tjanser og aktiviteter. Du kan se, hvornår de forskellige tjanser og aktiviteter ligger i løbet af dagene, og hvor mange personer der skal bruges til hver.</p>
+                <p>Tjanserne bliver fordelt dagligt ved flaghejsning kl. 9:00 (onsdag kl. 14:00). Deltager man ikke i flaghejsning, får man tildelt en tjans.</p>
+                <p>Man får også tildelt en tjans på den dag, man ankommer, men vi vil tilstræbe en tjans sidst på dagen eller morgenen efter.</p>
+                <p>Tjanser:</p>
+                <ul class="sf-task-list">
+                    ${tjanser.map(t => html`<li>${this._render_task_name(t.task_name, t.render_card)}</li>`)}
+                </ul>
+                <p>Aktiviteter:</p>
+                <ul class="sf-task-list">
+                    ${aktiviteter.map(t => html`<li>${this._render_task_name(t.task_name, t.render_card)}</li>`)}
+                </ul>
             </div>
             <div class="sf-content-special">
-
-                <p><label for="search-input-id">Vælg dit navn eller skriv navnet på en opgave:</label></p>
-                <input type="search" list="browsers" name="search-input-id" id="search-input-id" class="search-input sf-search-input" @input=${(e: Event) => this._query = (e.target as HTMLInputElement).value} placeholder="Søg i tjanser" />
-
-
-<datalist id="browsers">
-${this._participants().map(p => html`<option value="${p}"></option>`)}
-</datalist>
-                <p>
-                    <button class="sf-suggest-btn" @click=${() => this._suggest()}>🎲 Foreslå fordeling</button>
-                    ${this._assignment.size > 0 ? html`<button class="sf-suggest-btn" @click=${() => this._clear_assignment()}>Nulstil</button>` : ''}
-                </p>
-                ${this._assignment.size > 0 ? html`<p class="sf-suggest-note">Forslag til en tilfældig fordeling af de tilmeldte voksne. Ingen får to tjanser i samme tidsrum, ankomstdag giver ingen morgentjans, og afrejsedag giver ingen aftentjans. Tryk igen for et nyt forslag.</p>` : ''}
-                <p>Antal tilmeldte pr. dag:</p>
-                <ul class="sf-day-totals">
-                    ${this.attendance.per_day.map(d => html`<li>${d.day}: ${d.count}</li>`)}
-                    <li><strong>I alt tilmeldte: ${this.attendance.total}</strong></li>
-                </ul>
-                <p>Antal tjanser pr. dag:</p>
-                <ul class="sf-day-totals">
-                    ${day_totals.map(d => html`<li>${d.day}: ${d.total}</li>`)}
-                    <li><strong>I alt: ${grand_total}</strong></li>
-                </ul>
                 <p class="sf-view-toggle">
                     <button class="sf-suggest-btn ${this._view === 'kalender' ? 'sf-view-active' : ''}" @click=${() => this._view = 'kalender'}>Kalender</button>
                     <button class="sf-suggest-btn ${this._view === 'tabel' ? 'sf-view-active' : ''}" @click=${() => this._view = 'tabel'}>Tabel</button>
