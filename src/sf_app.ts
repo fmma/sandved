@@ -31,15 +31,6 @@ export class sf_app extends LitElement {
     @state()
     private page: string = this.get_page();
 
-    @state()
-    private showLanding: boolean = !window.location.hash;
-
-    @state()
-    private videoPlaying: boolean = false;
-
-    @state()
-    private curtainsOpening: boolean = false;
-
     constructor() {
         super();
         if ('scrollRestoration' in window.history) {
@@ -64,35 +55,6 @@ export class sf_app extends LitElement {
         e.preventDefault();
         const target = e.currentTarget as HTMLAnchorElement;
         window.location.hash = target.getAttribute('href')!;
-    }
-
-    private enterSite() {
-        this.curtainsOpening = true;
-        setTimeout(() => {
-            this.showLanding = false;
-            window.scrollTo(0, 0);
-        }, 1000);
-    }
-
-    private playVideo() {
-        const video = this.querySelector('.sf-landing-video') as HTMLVideoElement;
-        if (video) {
-            video.play();
-            this.videoPlaying = true;
-        }
-    }
-
-    private handleVideoClick() {
-        const video = this.querySelector('.sf-landing-video') as HTMLVideoElement;
-        if (video) {
-            if (video.paused) {
-                video.play();
-                this.videoPlaying = true;
-            } else {
-                video.pause();
-                this.videoPlaying = false;
-            }
-        }
     }
 
     render() {
@@ -136,32 +98,7 @@ export class sf_app extends LitElement {
                 </nav>
                     ${this.renderPage()}
                 <footer class="sf-footer">Ved Verdens Ende Festival 2026</footer>
-            </div>
-            ${this.showLanding ? html`
-                <div class="sf-landing ${this.curtainsOpening ? 'curtains-opening' : ''}">
-                    <div class="sf-curtain sf-curtain-left"></div>
-                    <div class="sf-curtain sf-curtain-right"></div>
-                    <div class="sf-landing-content">
-                        <h1 class="sf-landing-title">Ved Verdens Ende</h1>
-                        <h2 class="sf-landing-subtitle">Der Hvor Himlen Møder Jorden</h2>
-                        <h3 class="sf-landing-date">22. - 25. juli 2026</h3>
-                        <div class="sf-video-container" @click=${() => this.handleVideoClick()}>
-                            <video loop playsinline class="sf-landing-video"
-                                @ended=${() => this.videoPlaying = false}
-                                @pause=${() => this.videoPlaying = false}
-                                @play=${() => this.videoPlaying = true}>
-                                <source src="https://snesl.dk/media/3933c70c0ccadacb044c112cba08202a.mp4" type="video/mp4">
-                            </video>
-                            ${!this.videoPlaying ? html`
-                                <button class="sf-play-btn" @click=${(e: Event) => { e.stopPropagation(); this.playVideo(); }}>
-                                    ▶ Afspil video
-                                </button>
-                            ` : ''}
-                        </div>
-                        <button class="sf-enter-btn" @click=${() => this.enterSite()}>Kom ind</button>
-                    </div>
-                </div>
-            ` : ''}`;
+            </div>`;
     }
 
     private get_page() {
