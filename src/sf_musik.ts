@@ -7,7 +7,7 @@ export class sf_musik extends LitElement {
     render() {
         return html`
             <div class="sf-content-special">
-                <img src="https://snesl.dk/media/8a09f20d34289a696e4e576640ff12d7.webp" alt="Musikplakat" class="sf-plakat" />
+                <img src="https://snesl.dk/media/4643995692fc53c714f3d0f28e997241.webp" alt="Musikplakat" class="sf-plakat" />
             </div>
         `;
     }
