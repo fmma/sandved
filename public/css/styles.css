@@ -1154,3 +1154,32 @@ input[type="search"]::-webkit-search-cancel-button {
     box-shadow: 0 6px 32px #d7266060;
     outline: none;
 }
+.sf-song-archive {
+    margin-top: 2.5em;
+    border-top: 1px solid #d7266040;
+    padding-top: 1em;
+}
+
+.sf-song-archive > summary {
+    cursor: pointer;
+    color: #d72660;
+    font-weight: bold;
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    list-style: none;
+    padding: 0.3em 0;
+}
+
+.sf-song-archive > summary::-webkit-details-marker {
+    display: none;
+}
+
+.sf-song-archive > summary::before {
+    content: '\25B8';
+    display: inline-block;
+    margin-right: 0.5em;
+    transition: transform 0.2s;
+}
+
+.sf-song-archive[open] > summary::before {
+    transform: rotate(90deg);
+}
