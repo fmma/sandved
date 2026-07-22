@@ -80,14 +80,17 @@ export class sf_sang extends LitElement {
                         <strong>Melodi</strong>: En Drøm om et menneske
                     </p>
                     <p>
+                    <em>Dans: 1. Sol 2. guitar 3. fridans</em>
+                    </p>
+                    <p>
                         Vi sætter os ned og ser<br>
-                        dybt ind i hinanden.<br><br>
+                        &emsp; dybt ind i hinanden.<br>
                         Festivallen, der kan<br>
-                        få mig ud til enden.<br><br>
+                        &emsp; få mig ud til enden.<br>
                         Hvor mange festivaler kan vi<br>
-                        arrangere sammen,<br><br>
+                        &emsp; arrangere sammen,<br>
                         og ka' Arm-the-homeless få os<br>
-                        til at løfte armen.
+                        &emsp; til at løfte armen.
                     </p>
                     <p>
                         En drøm om et Sandved,<br>
@@ -96,13 +99,19 @@ export class sf_sang extends LitElement {
                         En drøm om koncerter,<br>
                         du elsker at være her,<br>
                         men kun hvis du sætter streger.
+                    </p>
+                    <p>
+                    <em>Dans: 1. Sol 2. guitar 3. fridans</em>
                     </p>
                     <p>
                         Vi opgraderer med bad-<br>
-                        vogne og toiletter.<br><br>
-                        Stregminister, lejrleder med kasketter.<br>
-                        Så længe du har armbånd på og husker din tjaaaans,<br>
-                        så vil Nik og Frede altid spille op til daaaans.
+                        &emsp; vogne og toiletter.<br>
+                        Stregminister, lejr-<br>
+                        &emsp; leder med kasketter.<br>
+                        Så længe du har armbånd på og<br>
+                        &emsp; husker din tjaaaans,<br>
+                        så vil Nik og Frede altid<br>
+                        &emsp; spille op til daaaans.
                     </p>
                     <p>
                         En drøm om et Sandved,<br>
@@ -111,6 +120,12 @@ export class sf_sang extends LitElement {
                         En drøm om koncerter,<br>
                         du elsker at være her,<br>
                         men kun hvis du sætter streger.
+                    </p>
+                    <p>
+                    <em>Dans: 1. Sol 2. guitar 3. fridans</em>
+                    </p>
+                    <p>
+                    <em>Dans: 1. Sol 2. guitar 3. fridans</em>
                     </p>
                 </div>
 
