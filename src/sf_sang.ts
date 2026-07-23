@@ -85,7 +85,7 @@ export class sf_sang extends LitElement {
                     <p>
                         Vi sætter os ned og ser<br>
                         &emsp; dybt ind i hinanden.<br>
-                        Festivallen, der kan<br>
+                        Festivaaallen, der kan<br>
                         &emsp; få mig ud til enden.<br>
                         Hvor mange festivaler kan vi<br>
                         &emsp; arrangere sammen,<br>
@@ -128,6 +128,64 @@ export class sf_sang extends LitElement {
                     <em>Dans: 1. Sol 2. guitar 3. fridans</em>
                     </p>
                 </div>
+
+                <details class="sf-song-archive">
+                    <summary>Talentsang 2026</summary>
+                    <div class="sf-song">
+                        <p>
+                            <strong>Melodi</strong>: Jeg er en glad lille cowboy
+                        </p>
+                        <p>
+                            Jeg bor i Mara-lago<br>
+                            er boligspekulant<br>
+                            begærer magt og penge<br>
+                            Det' det jeg allerbedst kan<br>
+                            Jubijææ jubijææ, det'det jeg allerbedst kan
+                        </p>
+                        <p>
+                            Vil I så høre en sandhed?<br>
+                            Jeg har vundet det valg<br>
+                            Fordi de andre fusked'<br>
+                            Og nu er jeg præsident<br>
+                            Jubijææ...
+                        </p>
+                        <p>
+                            Og hvis I ikke ved det<br>
+                            Så kan jeg li' Grønland<br>
+                            I bruger det ik' til noget<br>
+                            Missilforsvar - vi kan!<br>
+                            Jubijææ...
+                        </p>
+                        <p>
+                            Så fattige og syge<br>
+                            Vi sender hospital<br>
+                            og vær nu bare rolig<br>
+                            Vi skal jer nok betal´<br>
+                            Jubijææ...
+                        </p>
+                        <p>
+                            Jeg bomber mig til fred<br>
+                            og olien er min ven<br>
+                            Hvis I Hormuz blokerer<br>
+                            Blokerer jeg igen<br>
+                            Jubijææ...
+                        </p>
+                        <p>
+                            Min gode ven er Epstein<br>
+                            Vi leger play-mobil<br>
+                            Når det skal vær' lidt sjover'<br>
+                            Så bli'r jeg pædofil<br>
+                            Jubijæææ...
+                        </p>
+                        <p>
+                            Jeg annekterer Grønland,<br>
+                            Iran og Panama<br>
+                            og næst er Verdens Ende<br>
+                            Sandved skal jeg da ha'<br>
+                            Jubijæææ...
+                        </p>
+                    </div>
+                </details>
 
                 <details class="sf-song-archive">
                     <summary>Festivalsang 2025 – Lidt i Fem</summary>
